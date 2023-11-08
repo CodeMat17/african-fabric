@@ -8,6 +8,9 @@ const NewOrder = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const avatarPickerRef = useRef(null);
 
+    const [selectedMaterial, setSelectedMaterial] = useState(null);
+    const materialPickerRef = useRef(null);
+
   const addAvatar = (e) => {
     const reader = new FileReader();
     if (e.target.files[0]) {
@@ -18,6 +21,15 @@ const NewOrder = () => {
     };
   };
 
+   const addFabricMaterial = (e) => {
+     const reader = new FileReader();
+     if (e.target.files[0]) {
+       reader.readAsDataURL(e.target.files[0]);
+     }
+     reader.onload = (readerEvent) => {
+       setSelectedMaterial(readerEvent.target.result);
+     };
+   };
 
   return (
     <div className='px-4 py-8'>
@@ -259,6 +271,36 @@ const NewOrder = () => {
                 placeholder='Enter Waist abv Kneel'
                 className='p-2 text-center border rounded-xl outline-none max-w-[150px]'
               />
+            </div>
+          </div>
+          <div className='pt-8 pb-3 flex flex-col items-center justify-center'>
+            <div
+              onClick={() => materialPickerRef.current.click()}
+              className='flex items-center  px-5 text-[#55c694] bg-[#55c694]/5 shadow rounded-full p-1 cursor-pointer'>
+              <TbCameraPlus className=' text-4xl text-[#55c694]' />
+              <span className='pl-3'>Upload Preferred Material</span>
+              <input
+                type='file'
+                accept='image/*'
+                hidden
+                onChange={addFabricMaterial}
+                ref={materialPickerRef}
+              />
+            </div>
+
+            <div className='py-4'>
+              {selectedMaterial ? (
+                <div className='relative w-52 aspect-video rounded-xl overflow-hidden'>
+                  <Image
+                    alt='customer avatar'
+                    fill
+                    priority
+                    src={selectedMaterial}
+                  />
+                </div>
+              ) : (
+                <div className=''> No material is selected yet.</div>
+              )}
             </div>
           </div>
           <div className=' mt-6 px-4'>
