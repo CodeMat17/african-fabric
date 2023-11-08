@@ -43,7 +43,6 @@ export default function Home() {
       <div className='absolute bottom-[22%] sm:bottom-[19%] left-1/2 -translate-x-1/2 -translate-y-1/2'>
         {/* <button className=' bg-[#55c694] px-5 py-2.5 rounded-xl'>Login</button> */}
         <LoginModal />
-        pppp
         {/* <Button
           auto
           // color='warning'
