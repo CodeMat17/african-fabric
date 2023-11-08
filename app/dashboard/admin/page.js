@@ -8,7 +8,7 @@ const SettingsPage = () => {
     <div className='p-8 w-full'>
       <h1 className='text-center text-xl font-medium'>Admin Dashboard</h1>
 
-      <div className='py-6 grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 sm:max-w-sm lg:max-w-xl mx-auto'>
+      <div className='py-6 grid grid-cols-2 gap-4 sm:gap-8 sm:max-w-sm  mx-auto'>
         <div className='text-center border rounded-xl p-4 shadow-md cursor-pointer'>
           <div className='flex items-center justify-center'>
             <FaUsersGear className='text-5xl text-[#55c694]' />
