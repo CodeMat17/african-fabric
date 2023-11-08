@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation";
 
 
 const LoginModal = () => {
-    const router  = useRouter()
+      const router = useRouter();
+
 let [isOpen, setIsOpen] = useState(false);
 
 function closeModal() {
