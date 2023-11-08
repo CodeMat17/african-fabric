@@ -119,7 +119,7 @@ const NewOrder = () => {
         </button>
         <div className='pt-2 pb-6 my-6 border rounded-xl'>
           <p className='text-center text-lg'>Measurements</p>
-          <div className='pt-4 px-4 text-sm grid grid-cols-2 sm:grid-cols-3 gap-8'>
+          <div className='pt-4 px-4 text-sm grid grid-cols-2 sm:grid-cols-3 gap-x-2 gap-y-4'>
             <div className='flex flex-col'>
               <label className='text-gray-500'>Enter Neck</label>
 
@@ -278,7 +278,7 @@ const NewOrder = () => {
               onClick={() => materialPickerRef.current.click()}
               className='flex items-center  px-5 text-[#55c694] bg-[#55c694]/5 shadow rounded-full p-1 cursor-pointer'>
               <TbCameraPlus className=' text-4xl text-[#55c694]' />
-              <span className='pl-3'>Upload Preferred Material</span>
+              <span className='pl-3 whitespace-nowrap'>Upload Preferred Material</span>
               <input
                 type='file'
                 accept='image/*'
