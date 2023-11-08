@@ -54,7 +54,7 @@ const OrderDetailsPage = async ({ params: { id } }) => {
             Preferred Material
           </p>
           <div className='mt-2 relative aspect-video lg:aspect-auto lg:h-20 w-48 rounded-xl overflow-hidden'>
-            <Image alt='fabric' fill priority src='/images/pix1.jpeg' />
+            <Image alt='fabric' fill priority src={customer.fabric} />
           </div>
         </div>
       </div>
