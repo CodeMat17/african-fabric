@@ -1,10 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-
 // import { TbMailForward, TbShieldLock } from "react-icons/tb";
-
-import LoginModal from "@/components/LoginModal";
 import Image from "next/image";
 
 export default function Home() {
@@ -36,7 +33,7 @@ export default function Home() {
         </div>
       </section>
       <div className='absolute bottom-[22%] sm:bottom-[19%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex w-full max-w-[280px] gap-4  mx-auto'>
-        {/* <LoginModal /> */}
+     
         <button className='bg-[#55c694]/10 hover:bg-[#55c694]/20 text-[#55c694] w-full px-4 py-2 rounded-xl'>
           Sign up
         </button>

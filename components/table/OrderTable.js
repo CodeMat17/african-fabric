@@ -18,11 +18,11 @@ import {
   User,
 } from "@nextui-org/react";
 import NextLink from "next/link";
+import { useRouter } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 import { TbChevronDown, TbSearch, TbShoppingBagPlus } from "react-icons/tb";
 import { columns, statusOptions } from "./data";
 import { capitalize } from "./utils";
-import { useRouter } from "next/navigation";
 
 const statusColorMap = {
   received: "danger",
@@ -40,7 +40,7 @@ const INITIAL_VISIBLE_COLUMNS = [
 ];
 
 const OrderTable = ({ users }) => {
-const router = useRouter()
+  const router = useRouter();
 
   const [filterValue, setFilterValue] = useState("");
   const [selectedKeys, setSelectedKeys] = useState(new Set([]));
@@ -241,7 +241,7 @@ const router = useRouter()
               </DropdownMenu>
             </Dropdown>
             <Button
-              onClick={() => router.push('/dashboard/new-order')}
+              onClick={() => router.push("/dashboard/new-order")}
               className='bg-[#55c694] text-background rounded-xl'
               endContent={<TbShoppingBagPlus className='text-2xl' />}
               size='sm'>
@@ -303,7 +303,7 @@ const router = useRouter()
 
   const classNames = useMemo(
     () => ({
-      wrapper: ["max-h-[382px]", "max-w-3xl", 'mx-auto'],
+      wrapper: ["max-h-[400px]", "max-w-3xl", "mx-auto"],
       th: [
         // "bg-transparent",
         "text-default-500",
@@ -332,14 +332,13 @@ const router = useRouter()
     <Table
       isCompact
       isStriped
-      // removeWrapper
+      removeWrapper
       aria-label='Example table with custom cells, pagination and sorting'
       bottomContent={bottomContent}
       bottomContentPlacement='outside'
       checkboxesProps={{
         classNames: {
-          wrapper:
-            "after:bg-foreground after:text-background text-background ",
+          wrapper: "after:bg-foreground after:text-background text-background ",
         },
       }}
       classNames={classNames}
