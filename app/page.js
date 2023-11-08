@@ -1,19 +1,12 @@
 "use client";
 
-import { Button, Checkbox, Input, Modal, Row, Text } from "@nextui-org/react";
 import { useState } from "react";
-import { TbMailForward, TbShieldLock } from "react-icons/tb";
+// import { TbMailForward, TbShieldLock } from "react-icons/tb";
 
 import LoginModal from "@/components/LoginModal";
 import Image from "next/image";
 
 export default function Home() {
- const [visible, setVisible] = useState(false);
- const handler = () => setVisible(true);
- const closeHandler = () => {
-   setVisible(false);
-   console.log("closed");
- };
 
 
   return (
@@ -41,71 +34,8 @@ export default function Home() {
         </div>
       </section>
       <div className='absolute bottom-[22%] sm:bottom-[19%] left-1/2 -translate-x-1/2 -translate-y-1/2'>
-        {/* <button className=' bg-[#55c694] px-5 py-2.5 rounded-xl'>Login</button> */}
         <LoginModal />
-        {/* <Button
-          auto
-          // color='warning'
-          shadow
-          onPress={handler}
-          className='bg-[#55c694]'>
-          Open modal
-        </Button>
-        <Modal
-          closeButton
-          blur
-          aria-labelledby='modal-title'
-          open={visible}
-          onClose={closeHandler}>
-          <Modal.Header>
-            <Text id='modal-title' size={18}>
-              Welcome to
-              <Text b size={18}>
-                NextUI
-              </Text>
-            </Text>
-          </Modal.Header>
-          <Modal.Body>
-            <Input
-              clearable
-              bordered
-              fullWidth
-              color='primary'
-              size='lg'
-              placeholder='Email'
-              // contentLeft={<TbMailForward fill='currentColor' />}
-            />
-            <Input
-              clearable
-              bordered
-              fullWidth
-              color='primary'
-              size='lg'
-              placeholder='Password'
-              // contentLeft={<TbShieldLock fill='currentColor' />}
-            />
-            <Row justify='space-between'>
-              <Checkbox>
-                <Text size={14}>Remember me</Text>
-              </Checkbox>
-              <Text size={14}>Forgot password?</Text>
-            </Row>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button auto flat color='error' onPress={closeHandler}>
-              Close
-            </Button>
-            <Button auto onPress={closeHandler}>
-              Sign in
-            </Button>
-          </Modal.Footer>
-        </Modal> */}
       </div>
     </div>
-    // <main className='flex min-h-screen flex-col items-center justify-between p-24'>
-    //   <Link href='/dashboard' className='bg-gray-200 rounded-xl px-6 py-2.5'>
-    //     Sign in
-    //   </Link>
-    // </main>
   );
 }
