@@ -90,7 +90,7 @@ const ProfileCard = () => {
                 </div>
               </div>
               <div className='mt-3 flex justify-center items-center text-center text-xs'>
-                <p className=' bg-gray-300/30 px-3 py-1 rounded-full'>
+                <p className='whitespace-nowrap bg-gray-300/30 px-3 py-1 rounded-full'>
                   Upload customer photo
                 </p>
               </div>
@@ -132,7 +132,7 @@ const ProfileCard = () => {
                 </div>
               </div>
               <div className='mt-3 flex justify-center items-center text-center text-xs'>
-                <p className=' bg-gray-300/30 px-3 py-1 rounded-full'>
+                <p className='whitespace-nowrap bg-gray-300/30 px-3 py-1 rounded-full'>
                   Upload preferred fabric
                 </p>
               </div>
@@ -205,8 +205,8 @@ const ProfileCard = () => {
             <button
               onClick={loadProfile}
               disabled={loadingProfile}
-              className='bg-[#55c694] w-full py-2.5 text-white rounded-xl group-invalid:pointer-events-none group-invalid:opacity-30'>
-            {loadingProfile ? <AiOutlineLoading className="text-white text-3xl font-bold" /> : 'SUBMIT'}  
+              className='flex items-center justify-center bg-[#55c694] w-full py-2.5 text-white rounded-xl group-invalid:pointer-events-none group-invalid:opacity-30'>
+            {loadingProfile ? <AiOutlineLoading className="text-white text-3xl font-bold animate-spin" /> : 'SUBMIT'}  
             </button>
           </div>
           </div>
