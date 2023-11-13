@@ -11,7 +11,7 @@ const CustomerCard = ({ id, avatar, name, email, style, fabric }) => {
               <Image alt='fabric' fill priority src={avatar} />
             </div>
             <div className='max-w-[150px] sm:max-w-full md:max-w-[150px] lg:max-w-full  leading-4 ml-2'>
-              <p className='text-[#55c694] truncate'>{name}</p>
+              <p className='text-[#55c694] font-medium truncate'>{name}</p>
               <p className='text-gray-500 truncate'>{email}</p>
             </div>
           </div>
