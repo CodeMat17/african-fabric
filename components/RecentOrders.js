@@ -1,5 +1,6 @@
 import CustomerCard from "./CustomerCard";
 
+
 const RecentOrders = ({ recent, count }) => {
   return (
     <div className='py-12 w-full md:max-w-lg lg:max-w-xl mx-auto'>

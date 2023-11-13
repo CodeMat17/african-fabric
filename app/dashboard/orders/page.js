@@ -1,9 +1,10 @@
-import SearchOrder from "@/components/SearchOrder";
 import OrderTable from "@/components/table/OrderTable";
 import { supabaseClient } from "../../../supabaseClient";
 
+export const revalidate = 0
+
 const OrdersPage = async ({ searchParams }) => {
-  const q = searchParams?.query || "";
+  // const q = searchParams?.query || "";
 
   let { data, error, count } = await supabaseClient
     .from("customers")

@@ -3,6 +3,8 @@ import RecentOrders from "@/components/RecentOrders";
 import Statistics from "@/components/Statistics";
 import { supabaseClient } from "@/supabaseClient";
 
+export const revalidate = 0;
+
 const topCard = [
   { id: 1, tag: "CCs", desc: "Current Customers", value: 982 },
   { id: 2, tag: "CJs", desc: "Completed Jobs", value: 800 },
