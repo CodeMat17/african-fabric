@@ -1,12 +1,10 @@
 "use client";
 
-import { supabaseClient } from "@/supabaseClient";
 import { CldImage, CldUploadWidget } from "next-cloudinary";
 import { useState } from "react";
-import toast from "react-hot-toast";
-import { TbCameraPlus } from "react-icons/tb";
+import { AiOutlineLoading } from "react-icons/ai";
+import { TbCameraPlus, TbPhotoAi } from "react-icons/tb";
 import MeasurementData from "./MeasurementData";
-import {AiOutlineLoading} from 'react-icons/ai'
 
 const ProfileCard = () => {
   const [avatarUrl, setAvatarUrl] = useState(null);
@@ -17,55 +15,41 @@ const ProfileCard = () => {
   const [email, setEmail] = useState("");
   const [tel, setTel] = useState("");
   const [style, setStyle] = useState("");
-  const [loadingProfile, setLoadingProfile] = useState(false);
   const [profileData, setProfileData] = useState(true);
   const [measurementData, setMeasurementData] = useState(false);
 
-  const loadProfile = async (e) => {
-    e.preventDefault()
-    try {
-      setLoadingProfile(true);
 
-      const { error } = await supabaseClient
-        .from("customers")
-        .insert([{ avatar, fabric, name, email, tel, style }])
-        .select();
+ 
 
-      if (error) {
-        alert(`Something went wrong: ${error.message}`);
-      }
-
-      if (!error) {
-      toast.success(`Profile data uploaded successfully`, {
-        duration: 5000,
-        position: "top-center",
-      });
-      setMeasurementData(true);
-      setProfileData(false);
-      }
-    } catch (error) {
-      console.log("ErrorMsg: ", error.message);
-    } finally {
-      setLoadingProfile(false);
-    }
-  };
   return (
     <div>
+      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
       {profileData && (
         <form className='group'>
-          <div className='flex flex-col mx-auto sm:flex-row sm:items-baseline sm:justify-around gap-4 pb-4 rounded-3xl bg-[#55c694]/10'>
+          <div className='flex flex-col mx-auto sm:flex-row sm:items-end sm:justify-around gap-4 pb-4 rounded-3xl bg-[#55c694]/10'>
             <div className='p-4'>
-              <div className='flex items-baseline justify-center -space-x-5'>
+              <div className='flex items-end justify-center -space-x-5'>
                 <div>
                   {avatarUrl ? (
-                    <div className='relative w-[150px] aspect-square rounded-full overflow-hidden'>
-                      <CldImage fill src={avatarUrl} alt='user avatar' />
+                    <div>
+                      <CldImage
+                        width='150'
+                        height='150'
+                        crop='thumb'
+                        gravity='faces'
+                        src={avatarUrl}
+                        alt='user avatar'
+                        loading='lazy'
+                        className='rounded-full'
+                      />
                     </div>
                   ) : (
-                    <div className='w-[150px] h-[150px] bg-black/5 rounded-full'></div>
+                    <div className='flex flex-col items-center justify-center w-[150px] h-[150px] bg-black/5 rounded-full'>
+                      <TbPhotoAi className='text-3xl text-[#55c694]' />
+                    </div>
                   )}
                 </div>
-                <div className='z-30 bg-[#55c694]/30 rounded-full px-1.5 py-1 border-2 border-inherit shadow-md cursor-pointer'>
+                <div className=''>
                   <CldUploadWidget
                     uploadPreset='af_avatars'
                     folder='af_designs/avatars'
@@ -81,7 +65,9 @@ const ProfileCard = () => {
                         open();
                       }
                       return (
-                        <button onClick={handleOnClick}>
+                        <button
+                          onClick={handleOnClick}
+                          className='bg-[#55c694]/30 rounded-full p-2'>
                           <TbCameraPlus className=' text-4xl text-[#55c694]' />
                         </button>
                       );
@@ -101,13 +87,21 @@ const ProfileCard = () => {
                 <div>
                   {fabricUrl ? (
                     <div className='relative w-[180px] aspect-video rounded-3xl overflow-hidden'>
-                      <CldImage fill src={fabricUrl} alt='preferred fabric' />
+                      <CldImage
+                        crop='fill'
+                        width='200'
+                        height='200'
+                        src={fabricUrl}
+                        alt='preferred fabric'
+                        loading='lazy'
+                        className='rounded-xl'
+                      />
                     </div>
                   ) : (
                     <div className='w-[200px] aspect-video bg-black/5 rounded-3xl'></div>
                   )}
                 </div>
-                <div className='z-30 bg-[#55c694]/30 rounded-full px-1.5 py-1 border-2 border-inherit shadow-md cursor-pointer'>
+                <div>
                   <CldUploadWidget
                     uploadPreset='af_fabrics'
                     folder='af_designs/fabrics'
@@ -123,7 +117,9 @@ const ProfileCard = () => {
                         open();
                       }
                       return (
-                        <button onClick={handleOnClick}>
+                        <button
+                          onClick={handleOnClick}
+                          className='bg-[#55c694]/30 rounded-full  p-2'>
                           <TbCameraPlus className=' text-4xl text-[#55c694]' />
                         </button>
                       );
@@ -146,7 +142,7 @@ const ProfileCard = () => {
                 type='text'
                 required
                 value={name}
-                onChange={(e) => setName(e.target.value) }
+                onChange={(e) => setName(e.target.value)}
                 className='peer w-full rounded-xl border bg-inherit py-2 px-3 shadow shadow-gray-100 mt-0.5 appearance-none outline-none text-neutral-800'
                 pattern='.{5,}'
               />
@@ -201,20 +197,28 @@ const ProfileCard = () => {
                 </span>
               </div>
             </div>
-             <div className='pt-6'>
-            <button
-              onClick={loadProfile}
-              disabled={loadingProfile}
-              className='flex items-center justify-center bg-[#55c694] w-full py-2.5 text-white rounded-xl group-invalid:pointer-events-none group-invalid:opacity-30'>
-            {loadingProfile ? <AiOutlineLoading className="text-white text-3xl font-bold animate-spin" /> : 'SUBMIT'}  
-            </button>
+            <div className='pt-6'>
+              <button
+                onClick={(e) => setProfileData(false)}
+                // disabled={loadingProfile}
+                className='flex items-center justify-center bg-[#55c694] w-full py-2.5 text-white rounded-xl group-invalid:pointer-events-none group-invalid:opacity-30'>
+                NEXT
+              </button>
+            </div>
           </div>
-          </div>
-         
         </form>
       )}
 
-      {measurementData && <MeasurementData />}
+      {!profileData && (
+        <MeasurementData
+          name={name}
+          email={email}
+          tel={tel}
+          style={style}
+          avatar={avatar} 
+          fabric={fabric}
+        />
+      )}
     </div>
   );
 };

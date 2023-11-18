@@ -48,7 +48,25 @@ const OrderDetailsPage = async ({ params: { id } }) => {
       </div>
 
       <div className='md:py-6 flex flex-col lg:flex-row items-center lg:items-start lg:justify-around gap-6 mx-auto'>
-        <Measurement />
+        <Measurement
+          neck={customer.neck}
+          o_bust={customer.o_bust}
+          bust={customer.bust}
+          u_bust={customer.u_bust}
+          waist={customer.waist}
+          hips={customer.hips}
+          nk_heel={customer.nk_heel}
+          nk_abov_knee={customer.nk_abov_knee}
+          a_length={customer.a_length}
+          s_seam={customer.s_seam}
+          arm_hole={customer.arm_hole}
+          bicep={customer.bicep}
+          fore_arm={customer.fore_arm}
+          wrist={customer.wrist}
+          v_neck_cut={customer.v_neck_cut}
+          abv_knee_ankle={customer.abv_knee_ankle}
+          w_abv_knee={customer.w_abv_knee}
+        />
         <div className='flex flex-col lg:items-center'>
           <p className='font-medium text-lg sm:text-center lg:text-star'>
             Preferred Material
