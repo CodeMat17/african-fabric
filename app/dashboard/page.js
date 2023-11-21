@@ -19,6 +19,7 @@ const page = async () => {
   } = await supabaseClient
     .from("customers")
     .select("*")
+    // .select("name, id, email")
     .order("created_at", { ascending: false })
     .limit(5);
 
@@ -31,7 +32,7 @@ const page = async () => {
         <Statistics />
         <ConsultantFolders />
       </div>
-      {/* <pre>{ JSON.stringify(recent, null, 2)}</pre> */}
+       {/* <pre>{JSON.stringify(recent, null, 2)}</pre> */}
       <RecentOrders recent={recent} />
     </div>
   );

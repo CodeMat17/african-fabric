@@ -33,9 +33,9 @@ const OrderDetailsPage = async ({ params: { id } }) => {
           <p className='text-gray-500'>{customer.email}</p>
           <p className='text-gray-500'>{customer.tel}</p>
           <div className='flex divide-x-2 divide-gray-300 gap-4 text-sm text-gray-400 mt-2'>
-            <p>{customer.style}</p>
+            <p class>{customer.style}</p>
             <p className='pl-4'>
-              Booked on {dayjs(customer.created_at).format("MMM DD, YYYY")}{" "}
+              booked on {dayjs(customer.created_at).format("MMM DD, YYYY")}{" "}
             </p>
           </div>
         </div>

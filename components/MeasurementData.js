@@ -6,7 +6,21 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineLoading } from "react-icons/ai";
 
-const MeasurementData = ({ name, email, tel, style, avatar, fabric }) => {
+const MeasurementData = ({
+  name,
+  email,
+  tel,
+  style,
+  avatar,
+  fabric,
+  setAvatar,
+  setFabric,
+  setName,
+  setEmail,
+  setTel,
+  setStyle,
+  setProfileData,
+}) => {
   const router = useRouter();
   const [loadingProfile, setLoadingProfile] = useState(false);
 
@@ -73,6 +87,30 @@ const MeasurementData = ({ name, email, tel, style, avatar, fabric }) => {
           duration: 5000,
           position: "top-center",
         });
+        setNeck("");
+        setOBust("");
+        setBust("");
+        setUBust("");
+        setWaist("");
+        setHips("");
+        setNKHeel("");
+        setNKAbvKnee("");
+        setALength("");
+        setSSeam("");
+        setArmHole("");
+        setBicep("");
+        setForeArm("");
+        setWrist("");
+        setVNeckCut("");
+        setAbvKneeAnkle("");
+        setWAbvKnee("");
+        setAvatar(null);
+        setFabric(null);
+        setName("");
+        setEmail("");
+        setTel("");
+        setStyle("");
+        setProfileData(true);
         router.refresh();
       }
     } catch (error) {

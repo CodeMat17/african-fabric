@@ -19,8 +19,6 @@ const ProfileCard = () => {
   const [measurementData, setMeasurementData] = useState(false);
 
 
- 
-
   return (
     <div>
       {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
@@ -30,14 +28,14 @@ const ProfileCard = () => {
             <div className='p-4'>
               <div className='flex items-end justify-center -space-x-5'>
                 <div>
-                  {avatarUrl ? (
+                  {avatar ? (
                     <div>
                       <CldImage
                         width='150'
                         height='150'
                         crop='thumb'
                         gravity='faces'
-                        src={avatarUrl}
+                        src={avatar}
                         alt='user avatar'
                         loading='lazy'
                         className='rounded-full'
@@ -55,8 +53,8 @@ const ProfileCard = () => {
                     folder='af_designs/avatars'
                     onSuccess={(result) => {
                       // handle successful upload
-                      setAvatarUrl(result.info.public_id);
-                      setAvatar(result.info.secure_url);
+                      setAvatar(result.info.public_id);
+                      // setAvatar(result.info.secure_url);
                       // console.log(`result: `, result.info.secure_url);
                     }}>
                     {({ open }) => {
@@ -85,13 +83,13 @@ const ProfileCard = () => {
             <div className='p-4'>
               <div className='flex items-baseline justify-center -space-x-5'>
                 <div>
-                  {fabricUrl ? (
+                  {fabric ? (
                     <div className='relative w-[180px] aspect-video rounded-3xl overflow-hidden'>
                       <CldImage
                         crop='fill'
                         width='200'
                         height='200'
-                        src={fabricUrl}
+                        src={fabric}
                         alt='preferred fabric'
                         loading='lazy'
                         className='rounded-xl'
@@ -107,8 +105,8 @@ const ProfileCard = () => {
                     folder='af_designs/fabrics'
                     onSuccess={(result) => {
                       // handle successful upload
-                      setFabricUrl(result.info.public_id);
-                      setFabric(result.info.secure_url);
+                      setFabric(result.info.public_id);
+                      // setFabric(result.info.secure_url);
                       // console.log(`result: `, result.info.secure_url);
                     }}>
                     {({ open }) => {
@@ -215,8 +213,15 @@ const ProfileCard = () => {
           email={email}
           tel={tel}
           style={style}
-          avatar={avatar} 
+          avatar={avatar}
           fabric={fabric}
+          setAvatar={setAvatar}
+          setFabric={setFabric}
+          setName={setName}
+          setEmail={setEmail}
+          setTel={setTel}
+          setStyle={setStyle}
+          setProfileData={setProfileData}
         />
       )}
     </div>
