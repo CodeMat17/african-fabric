@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { TbSquareRoundedChevronLeftFilled } from "react-icons/tb";
+import { TbSquareRoundedChevronRightFilled } from "react-icons/tb";
 
 const Pagination = ({ count }) => {
   const router = useRouter();
@@ -26,23 +28,23 @@ const Pagination = ({ count }) => {
   };
 
   return (
-    <div className='p-2 bg-green-100 flex items-center justify-between text-sm font-medium'>
-      <p className='text-[#55c694]'>
+    <div className='p-2 bg-green-100 flex items-center justify-between text-sm'>
+      <p className='text-[#55c694] whitespace-nowrap'>
         {noOfPages} <span>page{noOfPages > 1 && <span>s</span>} </span>
       </p>
       <div className='flex items-center gap-x-6'>
         <button
           onClick={handlePrevClick}
           disabled={start === 0}
-          className='tracking-wider bg-[#55c694] text-white px-4 py-2 rounded-xl disabled:opacity-30 disabled:cursor-not-allowed'>
-          PREV
+          className='tracking-wider bg-[#55c694] text-white rounded-xl disabled:opacity-30 disabled:cursor-not-allowed'>
+          <TbSquareRoundedChevronLeftFilled className='text-4xl' />
         </button>
 
         <button
           onClick={handleNextClick}
           disabled={end >= count}
-          className='tracking-wider bg-[#55c694] text-white px-4 py-2 rounded-xl disabled:opacity-30 disabled:cursor-not-allowed'>
-          NEXT
+          className='tracking-wider bg-[#55c694] text-white rounded-xl disabled:opacity-30 disabled:cursor-not-allowed'>
+          <TbSquareRoundedChevronRightFilled className='text-4xl' />
         </button>
       </div>
     </div>
