@@ -28,7 +28,7 @@ const Pagination = ({ count }) => {
   };
 
   return (
-    <div className='p-2 bg-green-100 flex items-center justify-between text-sm'>
+    <div className='p-2 bg-green-100 flex items-center justify-between text-sm rounded-md'>
       <p className='text-[#55c694] whitespace-nowrap'>
         {noOfPages} <span>page{noOfPages > 1 && <span>s</span>} </span>
       </p>
