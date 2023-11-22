@@ -1,6 +1,7 @@
-'use client'
+"use client";
 
 import { CldImage } from "next-cloudinary";
+import Link from "next/link";
 
 const MediumTable = ({ data }) => {
   return (
@@ -19,19 +20,21 @@ const MediumTable = ({ data }) => {
             <tr key={user.id}>
               <td className='flex items-center gap-2 py-2'>
                 {user.avatar ? (
-                  <div>
-                    <CldImage
-                      width='60'
-                      height='60'
-                      crop='thumb'
-                      gravity='faces'
-                      src={user.avatar}
-                      sizes='50vw'
-                      alt='Profile image'
-                      loading='lazy'
-                      className='rounded-full'
-                    />
-                  </div>
+                  <Link href={`/dashboard/orders/${id}`}>
+                    <div>
+                      <CldImage
+                        width='60'
+                        height='60'
+                        crop='thumb'
+                        gravity='faces'
+                        src={user.avatar}
+                        sizes='50vw'
+                        alt='Profile image'
+                        loading='lazy'
+                        className='rounded-full'
+                      />
+                    </div>
+                  </Link>
                 ) : (
                   <div className='bg-gray-200 my-2 w-[70px] h-[70px] rounded-full'></div>
                 )}

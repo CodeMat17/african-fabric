@@ -1,6 +1,7 @@
 "use client";
 
 import { CldImage } from "next-cloudinary";
+import Link from "next/link";
 
 const MobileTable = ({
   id,
@@ -17,19 +18,21 @@ const MobileTable = ({
       <div className='flex items-center gap-3 w-full'>
         <div className='w-20'>
           {avatar ? (
-            <div>
-              <CldImage
-                width='80'
-                height='80'
-                crop='thumb'
-                gravity='faces'
-                src={avatar}
-                sizes='50vw'
-                alt='Profile image'
-                loading='lazy'
-                className='rounded-full'
-              />
-            </div>
+            <Link href={`/dashboard/orders/${id}`}>
+              <div>
+                <CldImage
+                  width='80'
+                  height='80'
+                  crop='thumb'
+                  gravity='faces'
+                  src={avatar}
+                  sizes='50vw'
+                  alt='Profile image'
+                  loading='lazy'
+                  className='rounded-full'
+                />
+              </div>
+            </Link>
           ) : (
             <div className='w-full aspect-square bg-gray-200 rounded-full'></div>
           )}

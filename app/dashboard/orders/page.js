@@ -24,7 +24,8 @@ const OrdersPage = async ({ searchParams }) => {
   }
 
   const { data, count } = await query;
-  console.log("range: ", start, end);
+  // console.log("range: ", start, end);
+  
   return (
     <div className='py-4 px-2'>
       <h1 className='text-center uppercase text-xl font-medium'>
