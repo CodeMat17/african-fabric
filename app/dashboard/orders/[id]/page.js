@@ -1,9 +1,9 @@
+import CdImageComponent from "@/components/CdImageComponent";
 import Gallery from "@/components/Gallery";
 import JobProgressBar from "@/components/JobProgressBar";
 import Measurement from "@/components/Measurement";
 import { supabaseClient } from "@/supabaseClient";
 import dayjs from "dayjs";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 
 export const revalidate = 0;
@@ -26,9 +26,13 @@ const OrderDetailsPage = async ({ params: { id } }) => {
 
       <div className='py-8 flex flex-col lg:flex-row lg:items-center lg:justify-around gap-4 md:max-w-3xl mx-auto'>
         <div className=' w-full '>
-          <div className='relative border-2 border-[#55c694] w-24 h-24 rounded-full overflow-hidden'>
-            <Image alt='customer avatar' fill priority src={customer.avatar} />
-          </div>
+        
+            <CdImageComponent
+              width='96'
+              height='96'
+              image={customer.avatar}
+              radius='rounded-full'
+            />
           <h1 className=' text-xl font-medium truncate'>{customer.name}</h1>
           <p className='text-gray-500'>{customer.email}</p>
           <p className='text-gray-500'>{customer.tel}</p>
@@ -71,8 +75,13 @@ const OrderDetailsPage = async ({ params: { id } }) => {
           <p className='font-medium text-lg sm:text-center lg:text-star'>
             Preferred Material
           </p>
-          <div className='mt-2 relative aspect-video lg:aspect-auto lg:h-20 w-48 rounded-xl overflow-hidden'>
-            <Image alt='fabric' fill priority src={customer.fabric} />
+          <div className='mt-2 rounded-xl w-auto'>
+            <CdImageComponent
+              width='280'
+              height='150'
+              image={customer.fabric}
+              radius='rounded-xl'
+            />{" "}
           </div>
         </div>
       </div>
