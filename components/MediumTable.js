@@ -20,7 +20,7 @@ const MediumTable = ({ data }) => {
             <tr key={user.id}>
               <td className='flex items-center gap-2 py-2'>
                 {user.avatar ? (
-                  <Link href={`/dashboard/orders/${id}`}>
+                  <Link href={`/dashboard/orders/${user.id}`}>
                     <div>
                       <CldImage
                         width='60'
