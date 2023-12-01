@@ -1,4 +1,4 @@
-import ConsultantFolders from "@/components/ConsultantFolders";
+import AgentsFolders from "@/components/AgentsFolders";
 import RecentOrders from "@/components/RecentOrders";
 import Statistics from "@/components/Statistics";
 import { supabaseClient } from "@/supabaseClient";
@@ -30,9 +30,9 @@ const page = async () => {
       <p className='text-lg font-medium'>OVERVIEW</p>
       <div className='lg:flex lg:justify-evenly'>
         <Statistics />
-        <ConsultantFolders />
+        <AgentsFolders />
       </div>
-       {/* <pre>{JSON.stringify(recent, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(recent, null, 2)}</pre> */}
       <RecentOrders recent={recent} />
     </div>
   );

@@ -1,59 +1,46 @@
 import { AiOutlineLoading } from "react-icons/ai";
+import BeaderModal from "./modals/BeaderModal";
+import QualityControlModal from "./modals/QualityControlModal";
+import ReadyModal from "./modals/ReadyModal";
+import TailorModal from "./modals/TailorModal";
 
-const JobProgressBar = ({ value, sewing, qc_checked, ready }) => {
+const JobProgressBar = ({
+  id,
+  tailoring,
+  tailor,
+  assigned_on,
+  finished_on,
+  beading,
+  beader,
+  q_c,
+  ready,
+  beaders,
+}) => {
   return (
     <div className='w-full py-6 max-w-xs mx-auto'>
       <p className='text-sm text-center mb-1'>Job Progress Status</p>
-      {/* <div className='transition-all transform duration-700 relative mb-5 h-5 rounded-full bg-gray-200'>
-        <div
-          className={`transition transform duration-700 h-5 rounded-full bg-[#D76F30] w-${value}`}></div>
-        <span className='absolute inset-0 flex items-center justify-center text-xs font-medium text-gray-900'>
-          {value}%
-          <span className='flex justify-between'>
-            <span>Started</span>
-            <span>Started</span>
-            <span>Started</span>
-            <span>Started</span>
-          </span>
-        </span>
-        <div className='mb-2 flex items-center justify-between text-xs'>
-          <div className='text-gray-600'>Started</div>
-          <div className='text-gray-600'>Done</div>
-        </div>
-      </div> */}
 
       <div className='relative pt-2'>
         <div className='mb-1 flex h-9 overflow-hidden rounded-full bg-gray-200 text-xs'>
-          <div className='w-[25%] flex flex-col justify-center bg-[#55c694] text-white '>
-            <span className='text-center'>Received</span>
-          </div>
-          {sewing ? (
-            <div className='w-[25%] flex flex-col justify-center bg-[#55c694] text-white '>
-              <span className='text-center'>Sewing</span>
-            </div>
-          ) : (
-            <div className='w-[25%] flex items-center justify-center'>
-              <AiOutlineLoading className='animate-spin' />
-            </div>
-          )}
-          {qc_checked ? (
-            <div className='w-[25%] flex flex-col justify-center bg-[#55c694] text-white'>
-              <span className='text-center'>QC checked</span>
-            </div>
-          ) : (
-            <div className='w-[25%] flex items-center justify-center'>
-              <AiOutlineLoading className='animate-spin' />
-            </div>
-          )}
-          {ready ? (
-            <div className='w-[25%] flex flex-col justify-center bg-[#55c694] text-white'>
-              <span className='text-center'>Ready</span>
-            </div>
-          ) : (
-            <div className='w-[25%] flex items-center justify-center'>
-              <AiOutlineLoading className='animate-spin' />
-            </div>
-          )}
+          <TailorModal
+            id={id}
+            tailoring={tailoring}
+            tailor={tailor}
+            assigned_on={assigned_on}
+            finished_on={finished_on}
+          />
+
+          <BeaderModal
+            id={id}
+            tailoring={tailoring}
+            beader={beader}
+            beading={beading}
+            beaders={beaders}
+          />
+
+          <QualityControlModal id={id} beading={beading} q_c={q_c} />
+          <ReadyModal id={id} q_c={q_c} ready={ready} />
+         
         </div>
         <div className='mb-2 flex items-center justify-between text-xs'>
           <div className='text-gray-600'>Progress</div>

@@ -2,10 +2,11 @@
 
 
 
-const Tag = ({item, value}) => (
-  <div className='px-2 text-sm text-[#55c694] bg-[#55c694]/10 h-8 rounded-full flex items-center justify-center gap-2'>
-    <p className="whitespace-nowrap">{item}</p>
+const Tag = ({ item, value }) => (
+  <div className='px-2 text-sm text-black bg-black/10 h-8 rounded-full flex items-center justify-center gap-2'>
+    <p className='whitespace-nowrap'>{item}</p>
     <p>{value}</p>
+    {/* text-[#55c694] */}
   </div>
 );
 
@@ -52,14 +53,14 @@ const Measurement = ({
   ];
 
   return (
-    <Accordion className='lg:mt-9 border w-full md:max-w-md rounded-xl'>
+    <Accordion className='lg:mt-9 border border-[#55c694] w-full rounded-xl'>
       <AccordionItem
         key='1'
         aria-label='Measurements'
         subtitle='Press to open / close'
         title='Measurments'
         className=' px-2  '>
-        <div className='pb-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 gap-y-4 gap-x-2 sm:gap-x-4'>
+        <div className='pb-2 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-y-4 gap-x-2 sm:gap-x-4'>
           {!measurements ? (
             <p>Measurement has not been taken</p>
           ) : (

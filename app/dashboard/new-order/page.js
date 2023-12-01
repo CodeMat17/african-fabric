@@ -1,8 +1,6 @@
 "use client";
 
 import ProfileCard from "@/components/ProfileCard";
-import { useState } from "react";
-import { TbCameraPlus } from "react-icons/tb";
 
 const NewOrder = () => {
 

@@ -2,10 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { TbSearch } from "react-icons/tb";import { useDebounce } from "use-debounce";
+import { TbSearch } from "react-icons/tb";
+import { useDebounce } from "use-debounce";
 
 const SearchOrder = () => {
-
   const router = useRouter();
   const [text, setText] = useState("");
   const [query] = useDebounce(text, 500);
@@ -17,27 +17,6 @@ const SearchOrder = () => {
       router.push(`/dashboard/orders?search=${query}`);
     }
   }, [query, router]);
-
-  // const searchParams = useSearchParams();
-  // const { replace } = useRouter();
-  // const pathname = usePathname();
-
-  // const handleSearch = (e) => {
-  //   const params = new URLSearchParams(searchParams);
-  //   params.set("q", e.target.value);
-  //   replace(`${pathname}?${params}`);
-  // };
-
-    // function handleSearch(term) {
-    //   const params = new URLSearchParams(searchParams);
-    //  params.set("page", "1");
-    //   if (term) {
-    //     params.set("query", term);
-    //   } else {
-    //     params.delete("query");
-    //   }
-    //     replace(`${pathname}?${params.toString()}`);
-    // }
 
   return (
     <>

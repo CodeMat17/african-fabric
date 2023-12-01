@@ -1,10 +1,13 @@
 "use client";
 
 import { supabaseClient } from "@/supabaseClient";
+import { CldUploadWidget } from "next-cloudinary";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineLoading } from "react-icons/ai";
+import { TbCameraPlus } from "react-icons/tb";
+import SketchScreenshotComponent from "./SketchScreenshotComponent";
 
 const MeasurementData = ({
   name,
@@ -41,6 +44,8 @@ const MeasurementData = ({
   const [v_neck_cut, setVNeckCut] = useState("");
   const [abv_knee_ankle, setAbvKneeAnkle] = useState("");
   const [w_abv_knee, setWAbvKnee] = useState("");
+  const [m_on_paper, setMOnPaper] = useState("");
+  const [sketch, setSketch] = useState("");
 
   const loadProfile = async () => {
     // e.preventDefault();
@@ -74,6 +79,8 @@ const MeasurementData = ({
             v_neck_cut,
             abv_knee_ankle,
             w_abv_knee,
+            m_on_paper,
+            sketch,
           },
         ])
         .select();
@@ -110,6 +117,8 @@ const MeasurementData = ({
         setEmail("");
         setTel("");
         setStyle("");
+        setMOnPaper("");
+        setSketch("");
         setProfileData(true);
         router.refresh();
       }
@@ -121,9 +130,9 @@ const MeasurementData = ({
   };
 
   return (
-    <div className='pt-2 pb-6 my-6 rounded-xl'>
+    <div className='pt-2 pb-6 my-6 rounded-xl mx-auto'>
       <p className='text-center text-lg'>Take measurements for {name}.</p>
-      <div className='pt-4 text-sm grid grid-cols-2 sm:grid-cols-3 gap-x-2 gap-y-4'>
+      <div className='pt-4 text-sm grid grid-cols-2 sm:grid-cols-3 gap-x-2 gap-y-4 mx-auto'>
         <div className='flex flex-col'>
           <label className='text-gray-500'>Enter Neck</label>
           <input
@@ -296,10 +305,127 @@ const MeasurementData = ({
         </div>
       </div>
 
+      <div className='py-8 flex flex-col gap-8'>
+        <div className='flex flex-col items-center justify-center'>
+          <p className='mb-4 text-center text-lg font-medium'>
+            Upload measurement on paper
+          </p>
+          <div>
+            {m_on_paper ? (
+              <div>
+                <SketchScreenshotComponent
+                  width='250'
+                  height='700'
+                  image={m_on_paper}
+                  sizes='50vw'
+                  classnames='rounded-xl'
+                />
+              </div>
+            ) : (
+              <div className='border rounded-xl w-[250px] aspect-video bg-gray-200' />
+            )}
+            <div className='pt-2 flex justify-center'>
+              <CldUploadWidget
+                uploadPreset='af_measurements'
+                folder='af_designs/measurements'
+                onSuccess={(result) => {
+                  // handle successful upload
+                  setMOnPaper(result.info.public_id);
+                  // setPix(result.info.secure_url);
+                  // console.log(`result: `, result.info.secure_url);
+                }}>
+                {({ open }) => {
+                  function handleOnClick(e) {
+                    e.preventDefault();
+                    open();
+                  }
+                  return (
+                    <button
+                      onClick={handleOnClick}
+                      className='flex justify-center items-center gap-4 px-6 text-[#55c694] bg-[#55c694]/20 p-2 rounded-full'>
+                      {/* Attach */}
+                      <TbCameraPlus className=' text-2xl' />
+                      <span>Attach</span>
+                    </button>
+                  );
+                }}
+              </CldUploadWidget>
+            </div>
+          </div>
+        </div>
+
+        <div className='flex flex-col items-center justify-center'>
+          <p className='mb-4 text-center text-lg font-medium'>Upload sketch</p>
+          <div>
+            {sketch ? (
+              <div>
+                <SketchScreenshotComponent
+                  width='250'
+                  height='700'
+                  image={sketch}
+                  sizes='50vw'
+                  classnames='rounded-xl'
+                />
+              </div>
+            ) : (
+              <div className='border rounded-xl w-[250px] aspect-video bg-gray-200' />
+            )}
+            <div className='pt-2 flex justify-center'>
+              <CldUploadWidget
+                uploadPreset='af_measurements'
+                folder='af_designs/measurements'
+                onSuccess={(result) => {
+                  // handle successful upload
+                  setSketch(result.info.public_id);
+                  // setPix(result.info.secure_url);
+                  // console.log(`result: `, result.info.secure_url);
+                }}>
+                {({ open }) => {
+                  function handleOnClick(e) {
+                    e.preventDefault();
+                    open();
+                  }
+                  return (
+                    <button
+                      onClick={handleOnClick}
+                      className='flex justify-center items-center gap-4 px-6 text-[#55c694] bg-[#55c694]/20 p-2 rounded-full'>
+                      {/* Attach */}
+                      <TbCameraPlus className=' text-2xl' />
+                      <span>Attach</span>
+                    </button>
+                  );
+                }}
+              </CldUploadWidget>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className=' mt-6 px-4'>
         <button
           onClick={loadProfile}
-          className='bg-[#55c694] w-full py-2.5 text-white rounded-xl group-invalid:pointer-events-none group-invalid:opacity-30'>
+          className='bg-[#55c694] w-full py-2.5 text-white rounded-xl group-invalid:pointer-events-none group-invalid:opacity-30 disabled:bg-[#55c694]/40 disabled:cursor-not-allowed'
+          disabled={
+            !sketch ||
+            !m_on_paper ||
+            !neck ||
+            !o_bust ||
+            !bust ||
+            !u_bust ||
+            !waist ||
+            !hips ||
+            !nk_heel ||
+            !nk_abov_knee ||
+            !a_length ||
+            !s_seam ||
+            !arm_hole ||
+            !bicep ||
+            !fore_arm ||
+            !wrist ||
+            !v_neck_cut ||
+            !abv_knee_ankle ||
+            !w_abv_knee
+          }>
           {loadingProfile ? (
             <section className='flex items-center justify-center gap-3'>
               <AiOutlineLoading className='text-white text-2xl animate-spin' />
@@ -309,6 +435,31 @@ const MeasurementData = ({
             "UPLOAD"
           )}
         </button>
+        {!sketch ||
+        !m_on_paper ||
+        !neck ||
+        !o_bust ||
+        !bust ||
+        !u_bust ||
+        !waist ||
+        !hips ||
+        !nk_heel ||
+        !nk_abov_knee ||
+        !a_length ||
+        !s_seam ||
+        !arm_hole ||
+        !bicep ||
+        !fore_arm ||
+        !wrist ||
+        !v_neck_cut ||
+        !abv_knee_ankle ||
+        !w_abv_knee ? (
+          <p className='text-xs text-red-500 text-center pt-0.5'>
+            Fill all the provided feilds
+          </p>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
