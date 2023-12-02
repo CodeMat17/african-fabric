@@ -1,13 +1,19 @@
 "use client";
 
+import { useState } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import BarProgressiveProvider from "./BarProgressiveProvider";
 
-const CircularProgessBar = () => {
-  const percentage = 91;
-  const completedPercent = 91;
-  const pendingPercent = 9;
+const CircularProgessBar = ({ total, ready }) => {
+  const [completedPercent, setCompletedPercent] = useState(() => {
+    return (ready / total) * 100;
+  });
+  const pending = total - ready;
+
+  const [pendingPercent, setPendingPercent] = useState(() => {
+    return (pending / total) * 100;
+  });
 
   return (
     <div className='py-2 md:py-0 flex flex-col gap-4 items-center justify-center'>

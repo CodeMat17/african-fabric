@@ -42,7 +42,9 @@ const Options = () => {
             </p>
           </button>
 
-          <button className='border rounded-xl shadow-md p-6 flex flex-col items-center justify-center'>
+          <button
+            onClick={() => router.push("/dashboard/consultants")}
+            className='border rounded-xl shadow-md p-6 flex flex-col items-center justify-center'>
             <FaUserTie className='text-3xl text-[#55c694]' />
             <p className='mt-3 text-sm w-[110px] text-center'>
               Update consultants data

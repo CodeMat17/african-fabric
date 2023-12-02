@@ -5,34 +5,43 @@ import { supabaseClient } from "@/supabaseClient";
 
 export const revalidate = 0;
 
-const topCard = [
-  { id: 1, tag: "CCs", desc: "Current Customers", value: 982 },
-  { id: 2, tag: "CJs", desc: "Completed Jobs", value: 800 },
-  { id: 3, tag: "PJs", desc: "Pending Jobs", value: 82 },
-];
-
 const page = async () => {
-  let {
-    data: recent,
-    error,
-    count,
-  } = await supabaseClient
+  let query = supabaseClient;
+  // .from("customers")
+  // .select("name", { count: "exact" });
+
+  let customerQuery = query.from("customers").select("id", { count: "exact" });
+
+  let consultantQuery = query
+    .from("consultants")
+    .select("id", { count: "exact" });
+
+  let tailorQuery = query.from("tailors").select("id", { count: "exact" });
+
+  let recentQuery = query
     .from("customers")
     .select("*")
-    // .select("name, id, email")
     .order("created_at", { ascending: false })
     .limit(5);
 
-  const data = [1000, 600, 20]; // You can replace these with your actual data
+  const { count: total } = await customerQuery;
+  const { count: ready } = await customerQuery.eq("ready", true);
+  const { count: noOfConsultants } = await consultantQuery;
+  const { count: noOfTailors } = await tailorQuery;
+  const { data: recent } = await recentQuery;
 
   return (
     <div className='p-4 bg-[#f8f9fa]'>
       <p className='text-lg font-medium'>OVERVIEW</p>
+
       <div className='lg:flex lg:justify-evenly'>
-        <Statistics />
-        <AgentsFolders />
+        <Statistics total={total} ready={ready} />
+        <AgentsFolders
+          noOfConsultants={noOfConsultants}
+          noOfTailors={noOfTailors}
+        />
       </div>
-      {/* <pre>{JSON.stringify(recent, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(noOfConsultants, null, 2)}</pre> */}
       <RecentOrders recent={recent} />
     </div>
   );

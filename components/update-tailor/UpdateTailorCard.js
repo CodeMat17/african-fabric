@@ -7,7 +7,7 @@ const UpdateTailorCard = ({ data }) => {
   return (
     <div>
       {data && data.length < 1 ? (
-        <p className='text-center py-12'>Invalid name was entered</p>
+        <p className='text-center py-12'>No entry at the moment</p>
       ) : (
         <div className='max-w-xs sm:max-w-xl lg:max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 md:gap-6'>
           {data.map((user) => (

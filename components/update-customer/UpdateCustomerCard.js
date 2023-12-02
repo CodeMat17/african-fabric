@@ -15,7 +15,7 @@ const UpdateCustomerCard = ({ data }) => {
             <Link
               href={`/dashboard/update-customer-info/${user.id}`}
               key={user.id}
-              className='bg-gray-100 odd:bg-gray-200 rounded-xl overflow-hidden'>
+              className='bg-gray-100 odd:bg-[#55c694]/10 rounded-xl overflow-hidden'>
               <div className='w-full flex flex-col items-center justify-center p-6  '>
                 <CldImage
                   width='100'
@@ -38,28 +38,34 @@ const UpdateCustomerCard = ({ data }) => {
                   {dayjs(user.created_at).format("MMM DD, YYYY")}
                 </div>
 
-                <div className='mt-3 flex border w-full h-1.5 overflow-hidden font-sans text-xs font-medium rounded-full bg-red-200 flex-start bg-blue-gray-50'>
+                <div className='mt-3 flex border w-full h-1.5 overflow-hidden font-sans text-xs font-medium rounded-full bg-gray-200 flex-start gap-1'>
+                
+                    <div
+                      className={`w-1/5 flex items-center justify-center h-full overflow-hidden text-white break-all bg-[#55c694] rounded-full`}>
+                      {/* 50% Completed */}
+                    </div>
+                
                   {user.tailoring && (
                     <div
-                      className={`w-1/4 flex items-center justify-center h-full overflow-hidden text-white break-all bg-[#55c694] rounded-full`}>
+                      className={`w-1/5 flex items-center justify-center h-full overflow-hidden text-white break-all bg-[#55c694] rounded-full`}>
                       {/* 50% Completed */}
                     </div>
                   )}
                   {user.beading && (
                     <div
-                      className={`w-1/4 flex items-center justify-center h-full overflow-hidden text-white break-all bg-[#55c694] rounded-full`}>
+                      className={`w-1/5 flex items-center justify-center h-full overflow-hidden text-white break-all bg-[#55c694] rounded-full`}>
                       {/* 50% Completed */}
                     </div>
                   )}
                   {user.q_c && (
                     <div
-                      className={`w-1/4 flex items-center justify-center h-full overflow-hidden text-white break-all bg-[#55c694] rounded-full`}>
+                      className={`w-1/5 flex items-center justify-center h-full overflow-hidden text-white break-all bg-[#55c694] rounded-full`}>
                       {/* 50% Completed */}
                     </div>
                   )}
                   {user.ready && (
                     <div
-                      className={`w-1/4 flex items-center justify-center h-full overflow-hidden text-white break-all bg-[#55c694] rounded-full`}>
+                      className={`w-1/5 flex items-center justify-center h-full overflow-hidden text-white break-all bg-[#55c694] rounded-full`}>
                       {/* 50% Completed */}
                     </div>
                   )}
