@@ -1,8 +1,10 @@
 import MediumTable from "@/components/MediumTable";
 import MobileTable from "@/components/MobileTable";
 import Pagination from "@/components/Pagination";
+import CustomerCard from "@/components/RecentCustomerCard";
 import SearchOrder from "@/components/SearchOrder";
 import { supabaseClient } from "../../../supabaseClient";
+import CustomerOrderCard from "@/components/CustomerOrderCard";
 
 export const revalidate = 0;
 
@@ -13,7 +15,7 @@ const OrdersPage = async ({ searchParams }) => {
 
   let query = supabaseClient
     .from("customers")
-    .select("id, name, email, tel, style, status, avatar, fabric", {
+    .select("id, name, email, tel, style, status, avatar, fabric, tailoring, beading, q_c, ready", {
       count: "exact",
     })
     .order("created_at", { ascending: false })
@@ -24,20 +26,20 @@ const OrdersPage = async ({ searchParams }) => {
   }
 
   const { data, count } = await query;
-  // console.log("range: ", start, end);
-  
+
   return (
     <div className='py-4 px-2'>
       <h1 className='text-center uppercase text-xl font-medium'>
         Order List <span>({count})</span>
       </h1>
       {/* <pre className='text-xs max-w-xs'>{ JSON.stringify(count, null, 2)}</pre> */}
-      <div className='w-full mt-6 max-w-[300px] mx-auto'>
+      <div className='w-full mt-6 max-w-sm mx-auto'>
         <SearchOrder />
       </div>
 
       <div className='py-8'>
-        <div>
+        <CustomerOrderCard data={data} />
+        {/* <div>
           {data && data.length < 1 ? (
             <p className='text-center py-unit-12 text-red-500'>
               Invalid customer name. Try again.
@@ -53,15 +55,11 @@ const OrdersPage = async ({ searchParams }) => {
               </div>
             </>
           )}
-        </div>
-        <div className='py-8 max-w-xl mx-auto'>
+        </div> */}
+        <div className='py-8  mx-auto'>
           <Pagination count={count} />
         </div>
       </div>
-      {/* <div className='w-full py-6 overflow-x-auto max-w-[350px] sm:max-w-xl md:max-w-full mx-auto'> */}
-      {/* <SearchOrder /> */}
-      {/* <OrderTable users={data} /> */}
-      {/* </div> */}
     </div>
   );
 };

@@ -15,7 +15,7 @@ const Pagination = ({ count }) => {
     if (start > 0) {
       setStart(start - 9);
       setEnd(end - 9);
-      router.push(`/dashboard/orders?start=${start - 5}&end=${end - 5}`);
+      router.push(`/dashboard/orders?start=${start - 9}&end=${end - 9}`);
     }
   };
 
@@ -23,7 +23,7 @@ const Pagination = ({ count }) => {
     if (end < count) {
       setStart(start + 9);
       setEnd(end + 9);
-      router.push(`/dashboard/orders?start=${start + 5}&end=${end + 5}`);
+      router.push(`/dashboard/orders?start=${start + 9}&end=${end + 9}`);
     }
   };
 

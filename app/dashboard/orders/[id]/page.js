@@ -34,8 +34,8 @@ const OrderDetailsPage = async ({ params: { id } }) => {
       <p className='uppercase text-center text-xl font-medium'>Order Details</p>
       {/* <pre>{JSON.stringify(gallery, null, 2)}</pre>  */}
 
-      <div className='w-full py-8 flex flex-col lg:flex-row gap-2'>
-        <div className='w-full lg:w-[55%]'>
+      <div className=' w-full py-8 flex flex-col lg:flex-row gap-2'>
+        <div className=' w-full lg:w-[55%]'>
           <CdImageComponent
             width='96'
             height='96'
@@ -52,7 +52,7 @@ const OrderDetailsPage = async ({ params: { id } }) => {
             </p>
           </div>
         </div>
-        <div className='w-full lg:w-[45%]'>
+        <div className=' flex items-center justify-center w-full lg:w-[45%]'>
           {customer.tailor ? (
             <JobProgressBar
               id={customer.id}

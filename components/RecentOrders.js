@@ -1,7 +1,6 @@
-import CustomerCard from "./CustomerCard";
+import RecentCustomerCard from "./RecentCustomerCard";
 
-
-const RecentOrders = ({ recent, count }) => {
+const RecentOrders = ({ recent }) => {
   return (
     <div className='py-12 w-full md:max-w-lg lg:max-w-xl mx-auto'>
       <p className='font-medium mb-2'>Most recent orders ({recent.length}) </p>
@@ -13,7 +12,7 @@ const RecentOrders = ({ recent, count }) => {
         ) : (
           <>
             {recent.map((order) => (
-              <CustomerCard key={order.id} {...order} />
+              <RecentCustomerCard key={order.id} {...order} />
             ))}
           </>
         )}

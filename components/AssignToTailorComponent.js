@@ -129,14 +129,14 @@ const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
             {(user) => (
               <SelectItem key={user.name} textValue={user.name}>
                 {/* <div className='flex gap-2 items-center'> */}
-                  <div className='flex flex-col'>
-                    <span className='text-small'>{user.name}</span>
-                    {user.busy && (
-                      <span className='text-red-500 text-tiny'>
-                        has a job already
-                      </span>
-                    )}
-                  </div>
+                <div className='flex flex-col'>
+                  <span className='text-small'>{user.name}</span>
+                  {user.busy && (
+                    <span className='text-red-500 text-tiny'>
+                      has a job already
+                    </span>
+                  )}
+                </div>
                 {/* </div> */}
               </SelectItem>
             )}
@@ -181,7 +181,7 @@ const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
         </div>
       </div>
       <div className='border w-full sm:w-[30%] rounded-2xl flex flex-col items-center justify-center p-4 bg-gray-100'>
-        <h2 className='text-2xl'>Reference</h2>
+        <h2 className='text-lg font-medium'>Reference</h2>
         <p className='mt-2 text-sm text-center whitespace-nowra'>
           Owner - {name}
         </p>

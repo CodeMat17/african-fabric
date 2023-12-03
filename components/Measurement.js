@@ -3,10 +3,10 @@
 
 
 const Tag = ({ item, value }) => (
-  <div className='px-2 text-sm text-black bg-black/10 h-8 rounded-full flex items-center justify-center gap-2'>
-    <p className='whitespace-nowrap'>{item}</p>
-    <p>{value}</p>
-    {/* text-[#55c694] */}
+  <div className='w-full text-sm flex flex-col items-center justify-center'>
+    <label className='whitespace-nowrap'>{item}</label>
+    <p className='w-full flex items-center justify-center text-black bg-black/10 h-8 rounded-full'>{value}</p>
+   
   </div>
 );
 
@@ -60,7 +60,7 @@ const Measurement = ({
         subtitle='Press to open / close'
         title='Measurments'
         className=' px-2  '>
-        <div className='pb-2 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-y-4 gap-x-2 sm:gap-x-4'>
+        <div className='pb-2 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-4 gap-x-2 sm:gap-x-4'>
           {!measurements ? (
             <p>Measurement has not been taken</p>
           ) : (

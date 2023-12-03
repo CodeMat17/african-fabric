@@ -1,7 +1,7 @@
 import Link from "next/link";
 import CdImageComponent from "./CdImageComponent";
 
-const CustomerCard = ({ id, avatar, name, email, style, fabric }) => {
+const RecentCustomerCard = ({ data, id, name, email, avatar, style, fabric }) => {
   return (
     <div className='text-sm font-light border p-3 rounded-xl'>
       <div className='flex items-center justify-between'>
@@ -43,4 +43,4 @@ const CustomerCard = ({ id, avatar, name, email, style, fabric }) => {
   );
 };
 
-export default CustomerCard;
+export default RecentCustomerCard;

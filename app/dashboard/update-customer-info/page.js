@@ -26,7 +26,6 @@ const UpdateCustomerInfo = async ({ searchParams }) => {
   }
 
   const { data, count } = await query;
-  // console.log("range: ", start, end);
 
   return (
     <div className='px-4 pt-8 pb-12'>
