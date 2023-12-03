@@ -15,7 +15,7 @@ const OrdersPage = async ({ searchParams }) => {
 
   let query = supabaseClient
     .from("customers")
-    .select("id, name, email, tel, style, status, avatar, fabric, tailoring, beading, q_c, ready", {
+    .select("id, created_at, name, email, tel, style, status, avatar, fabric, tailoring, beading, q_c, ready", {
       count: "exact",
     })
     .order("created_at", { ascending: false })

@@ -8,6 +8,7 @@ import LinearProgressBar from "./LinearProgressBar";
 const CustomerOrderCard = ({ data }) => {
   return (
     <div>
+      <pre>{ JSON.stringify(data, null, 2)}</pre>
       {data && data.length < 1 ? (
         <p className='text-center py-12'>Invalid name was entered</p>
       ) : (
