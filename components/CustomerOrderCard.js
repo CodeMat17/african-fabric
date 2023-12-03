@@ -8,7 +8,6 @@ import LinearProgressBar from "./LinearProgressBar";
 const CustomerOrderCard = ({ data }) => {
   return (
     <div>
-      <pre>{ JSON.stringify(data, null, 2)}</pre>
       {data && data.length < 1 ? (
         <p className='text-center py-12'>Invalid name was entered</p>
       ) : (
@@ -35,9 +34,11 @@ const CustomerOrderCard = ({ data }) => {
                 </h1>
                 <p className='text-sm text-center'>{user.email}</p>
                 <p className='text-sm text-center'>{user.tel}</p>
-                <div className=' text-xs text-gray-500 mt-2 capitalize flex items-center justify-center gap-4'>
-                  {user.style} &bull;{" "}
-                  {dayjs(user.created_at).format("MMM DD, YYYY")}
+                <div className='flex md:flex-col xl:flex-row items-center text-xs text-gray-500 mt-2 capitalize flex items-center justify-center gap-2 md:gap-0 xl:gap-2'>
+                  <span> {user.style}</span> <span className="md:hidden xl:block">&bull;</span>
+                  <span>
+                    Booked on {dayjs(user.created_at).format("MMM DD, YYYY")}
+                  </span>
                 </div>
 
                 <div className='mt-3 w-full text-sm'>
