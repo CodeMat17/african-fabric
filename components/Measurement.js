@@ -5,8 +5,7 @@
 const Tag = ({ item, value }) => (
   <div className='w-full text-sm flex flex-col items-center justify-center'>
     <label className='whitespace-nowrap'>{item}</label>
-    <p className='w-full flex items-center justify-center text-black bg-black/10 h-8 rounded-full'>{value}</p>
-   
+    <p className='w-full flex items-center justify-center text-black bg-black/10 h-8 rounded-full'>{value}</p> 
   </div>
 );
 

@@ -3,7 +3,9 @@
 import { supabaseClient } from "@/supabaseClient";
 import { CldUploadWidget } from "next-cloudinary";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import toast from "react-hot-toast";
 import { AiOutlineLoading } from "react-icons/ai";
 import { TbCameraPlus } from "react-icons/tb";
@@ -46,6 +48,26 @@ const MeasurementData = ({
   const [w_abv_knee, setWAbvKnee] = useState("");
   const [m_on_paper, setMOnPaper] = useState("");
   const [sketch, setSketch] = useState("");
+  const [due_date, setDueDate] = useState();
+  const [three_days_2_due_date, setThreeDays] = useState();
+  const [two_days_2_due_date, setTwoDays] = useState();
+  const [a_day_2_due_date, setADay] = useState();
+
+  useEffect(() => {
+    if (due_date) {
+      const threeDaysTo = new Date(due_date);
+      threeDaysTo.setDate(due_date.getDate() - 3);
+      setThreeDays(threeDaysTo);
+
+      const twoDaysTo = new Date(due_date);
+      twoDaysTo.setDate(due_date.getDate() - 2);
+      setTwoDays(twoDaysTo);
+
+      const aDayTo = new Date(due_date);
+      aDayTo.setDate(due_date.getDate() - 1);
+      setADay(aDayTo);
+    }
+  }, [due_date]);
 
   const loadProfile = async () => {
     // e.preventDefault();
@@ -81,6 +103,10 @@ const MeasurementData = ({
             w_abv_knee,
             m_on_paper,
             sketch,
+            due_date,
+            three_days_2_due_date,
+            two_days_2_due_date,
+            a_day_2_due_date,
           },
         ])
         .select();
@@ -119,6 +145,7 @@ const MeasurementData = ({
         setStyle("");
         setMOnPaper("");
         setSketch("");
+        setDueDate();
         setProfileData(true);
         router.refresh();
       }
@@ -132,7 +159,7 @@ const MeasurementData = ({
   return (
     <div className='pt-2 pb-6 my-6 rounded-xl mx-auto'>
       <p className='text-center text-lg'>Take measurements for {name}.</p>
-      <div className='pt-4 text-sm grid grid-cols-2 sm:grid-cols-3 gap-x-2 gap-y-4 mx-auto'>
+      <div className='pt-4 text-sm grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-5 gap-x-2 gap-y-4 mx-auto'>
         <div className='flex flex-col'>
           <label className='text-gray-500'>Enter Neck</label>
           <input
@@ -305,9 +332,23 @@ const MeasurementData = ({
         </div>
       </div>
 
-      <div className='py-8 flex flex-col gap-8'>
+      <div className='pb-6 pt-12'>
+        <p className='mb-4 text-center font-medium'>Due date</p>
+        <div className='flex justify-center'>
+          <DatePicker
+            // showIcon
+            placeholderText='Click to add finish date'
+            selected={due_date}
+            onChange={(date) => setDueDate(date)}
+            dateFormat='MMM dd, yyyy'
+            className='bg-inherit outline-none text-center text-gray-500 border p-4 w-full rounded-xl'
+          />
+        </div>
+      </div>
+
+      <div className='py-8 flex flex-col items-center justify-center sm:flex-row gap-8'>
         <div className='flex flex-col items-center justify-center'>
-          <p className='mb-4 text-center text-lg font-medium'>
+          <p className='mb-4 text-center font-medium'>
             Upload measurement on paper
           </p>
           <div>
@@ -355,7 +396,7 @@ const MeasurementData = ({
         </div>
 
         <div className='flex flex-col items-center justify-center'>
-          <p className='mb-4 text-center text-lg font-medium'>Upload sketch</p>
+          <p className='mb-4 text-center font-medium'>Upload sketch</p>
           <div>
             {sketch ? (
               <div>
@@ -424,7 +465,8 @@ const MeasurementData = ({
             !wrist ||
             !v_neck_cut ||
             !abv_knee_ankle ||
-            !w_abv_knee
+            !w_abv_knee ||
+            !due_date
           }>
           {loadingProfile ? (
             <section className='flex items-center justify-center gap-3'>
@@ -453,7 +495,8 @@ const MeasurementData = ({
         !wrist ||
         !v_neck_cut ||
         !abv_knee_ankle ||
-        !w_abv_knee ? (
+        !w_abv_knee ||
+        !due_date ? (
           <p className='text-xs text-red-500 text-center pt-0.5'>
             Fill all the provided feilds
           </p>

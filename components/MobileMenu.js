@@ -6,12 +6,12 @@ import { usePathname } from "next/navigation";
 import { Fragment } from "react";
 import { BiMenuAltRight } from "react-icons/bi";
 import { FaPowerOff } from "react-icons/fa";
+import { GiClothes } from "react-icons/gi";
 import { ImManWoman } from "react-icons/im";
 import { LuLayoutDashboard } from "react-icons/lu";
-import { MdOutlineClose } from "react-icons/md";
+import { MdOutlineClose, MdOutlineNotificationsActive } from "react-icons/md";
 import { PiGearFill } from "react-icons/pi";
-import { TbShoppingBagCheck, TbShoppingBagPlus } from "react-icons/tb";
-import {GiClothes} from 'react-icons/gi'
+import { TbShoppingBagCheck } from "react-icons/tb";
 
 const MobileMenu = () => {
   const pathname = usePathname();
@@ -70,6 +70,18 @@ const MobileMenu = () => {
                           : "bg-white text-gray-500"
                       }`}>
                       <TbShoppingBagCheck className='text-3xl' />
+                    </Link>
+                  </Menu.Item>
+
+                  <Menu.Item as={Fragment}>
+                    <Link
+                      href='/dashboard/notifications'
+                      className={` flex justify-center py-2.5 rounded-full ${
+                        pathname.includes("/dashboard/notifications")
+                          ? "bg-[#6BB77B] text-white"
+                          : "bg-white text-gray-500"
+                      }`}>
+                      <MdOutlineNotificationsActive className='text-3xl' />
                     </Link>
                   </Menu.Item>
 

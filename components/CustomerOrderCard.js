@@ -16,8 +16,8 @@ const CustomerOrderCard = ({ data }) => {
             <Link
               href={`/dashboard/orders/${user.id}`}
               key={user.id}
-              className='bg-gray-100 odd:bg-[#55c694]/10 rounded-xl overflow-hidden'>
-              <div className='w-full flex flex-col items-center justify-center p-6  '>
+              className='bg-amber-600/5 odd:bg-gradient-to-tr from-[#55c694]/20 to-amber-600/5 rounded-xl overflow-hidden shadow'>
+              <div className='w-full flex flex-col items-center justify-center p-6'>
                 <CldImage
                   width='100'
                   height='100'
@@ -34,8 +34,9 @@ const CustomerOrderCard = ({ data }) => {
                 </h1>
                 <p className='text-sm text-center'>{user.email}</p>
                 <p className='text-sm text-center'>{user.tel}</p>
-                <div className='flex md:flex-col xl:flex-row items-center text-xs text-gray-500 mt-2 capitalize flex items-center justify-center gap-2 md:gap-0 xl:gap-2'>
-                  <span> {user.style}</span> <span className="md:hidden xl:block">&bull;</span>
+                <div className='flex md:flex-col xl:flex-row items-center text-xs text-gray-500 mt-2 capitalize justify-center gap-2 md:gap-0 xl:gap-2'>
+                  <span> {user.style}</span>{" "}
+                  <span className='md:hidden xl:block'>&bull;</span>
                   <span>
                     Booked on {dayjs(user.created_at).format("MMM DD, YYYY")}
                   </span>

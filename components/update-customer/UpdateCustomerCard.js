@@ -15,7 +15,7 @@ const UpdateCustomerCard = ({ data }) => {
             <Link
               href={`/dashboard/update-customer-info/${user.id}`}
               key={user.id}
-              className='bg-gray-100 odd:bg-[#55c694]/10 rounded-xl overflow-hidden'>
+              className='bg-amber-600/5 odd:bg-gradient-to-tr from-[#55c694]/20 to-amber-600/5 rounded-xl overflow-hidden shadow'>
               <div className='w-full flex flex-col items-center justify-center p-6  '>
                 <CldImage
                   width='100'
@@ -39,12 +39,11 @@ const UpdateCustomerCard = ({ data }) => {
                 </div>
 
                 <div className='mt-3 flex border w-full h-1.5 overflow-hidden font-sans text-xs font-medium rounded-full bg-gray-200 flex-start gap-1'>
-                
-                    <div
-                      className={`w-1/5 flex items-center justify-center h-full overflow-hidden text-white break-all bg-[#55c694] rounded-full`}>
-                      {/* 50% Completed */}
-                    </div>
-                
+                  <div
+                    className={`w-1/5 flex items-center justify-center h-full overflow-hidden text-white break-all bg-[#55c694] rounded-full`}>
+                    {/* 50% Completed */}
+                  </div>
+
                   {user.tailoring && (
                     <div
                       className={`w-1/5 flex items-center justify-center h-full overflow-hidden text-white break-all bg-[#55c694] rounded-full`}>

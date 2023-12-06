@@ -8,7 +8,9 @@ import { GiClothes } from "react-icons/gi";
 import { ImManWoman } from "react-icons/im";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { PiGearFill } from "react-icons/pi";
-import { TbShoppingBagCheck, TbShoppingBagPlus } from "react-icons/tb";
+import { TbShoppingBagCheck } from "react-icons/tb";
+import { VscCalendar } from "react-icons/vsc";
+import { MdOutlineNotificationsActive } from "react-icons/md";
 
 const Nav = () => {
   const pathname = usePathname();
@@ -44,6 +46,17 @@ const Nav = () => {
               }`}>
               <TbShoppingBagCheck className='text-2xl' />
               <span>Orders</span>
+            </Link>
+
+            <Link
+              href='/dashboard/notifications'
+              className={`w-full flex items-center gap-3 p-2 rounded-l-xl text-lg font-medium md:rounded-xl hover:bg-black/5 hover:text-gray-500 transition-all duration-500 ${
+                pathname.includes("/dashboard/notifications")
+                  ? "shadow-md bg-[#55c694] text-white"
+                  : "text-gray-700"
+              }`}>
+              <MdOutlineNotificationsActive className='text-2xl' />
+              <span>Notifications</span>
             </Link>
 
             {/* <Link

@@ -12,30 +12,33 @@ import { notFound } from "next/navigation";
 export const revalidate = 0;
 
 const OrderDetailsPage = async ({ params: { id } }) => {
-  let {
-    data: customer,
-    error,
-    count,
-  } = await supabaseClient.from("customers").select("*").match({ id }).single();
+  let query = supabaseClient;
+
+  let { data: customer } = await query
+    .from("customers")
+    .select("*")
+    .match({ id })
+    .single();
+
+  let { data: beaders } = await query.from("beaders").select("*");
+
+  let { data: gallery } = await query
+    .from("gallery")
+    .select("id, gallery_url")
+    .eq("user_id", id);
 
   if (!customer) {
     notFound;
   }
 
-  let { data: beaders } = await supabaseClient.from("beaders").select("*");
-
-  let { data: gallery } = await supabaseClient
-    .from("gallery")
-    .select("id, gallery_url")
-    .eq("user_id", id);
-
   return (
     <div className='px-4 pt-4 pb-24 w-full bg-gray-50'>
       <p className='uppercase text-center text-xl font-medium'>Order Details</p>
-      {/* <pre>{JSON.stringify(gallery, null, 2)}</pre>  */}
-
-      <div className=' w-full py-8 flex flex-col lg:flex-row gap-2'>
-        <div className=' w-full lg:w-[55%]'>
+      {/* <pre>{JSON.stringify(date, null, 2)}</pre> */}
+     
+     
+      <div className=' w-full py-8 flex flex-col lg:flex-row gap-8 lg:gap-2'>
+        <div className='flex flex-col items-center justify-center lg:items-start w-full lg:w-[55%]'>
           <CdImageComponent
             width='96'
             height='96'

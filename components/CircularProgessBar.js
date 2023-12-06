@@ -7,12 +7,12 @@ import BarProgressiveProvider from "./BarProgressiveProvider";
 
 const CircularProgessBar = ({ total, ready }) => {
   const [completedPercent, setCompletedPercent] = useState(() => {
-    return (ready / total) * 100;
+    return parseFloat(((ready / total) * 100).toFixed(1));
   });
   const pending = total - ready;
 
   const [pendingPercent, setPendingPercent] = useState(() => {
-    return (pending / total) * 100;
+    return parseFloat(((pending / total) * 100).toFixed(1))
   });
 
   return (
