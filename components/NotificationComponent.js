@@ -35,7 +35,7 @@ const NotificationComponent = ({ notifications }) => {
                 <p className='text-sm text-gray-500  whitespace-nowrap'>
                   {due.tel}
                 </p>
-                <div className='my-3 flex flex-col items-center justify-center text-sm text-gray-500'>
+                <div className='mt-3 flex flex-col items-center justify-center text-sm text-gray-500'>
                   <p className='text-center whitespace-nowrap'>
                     Booked on {dayjs(due.created_at).format("MMM DD, YYYY")}
                   </p>
@@ -45,19 +45,15 @@ const NotificationComponent = ({ notifications }) => {
                 </div>
                 <div className='text-red-600 font-medium text-center'>
                   {today === due.due_date && (
-                    <p className=' whitespace-nowrap'>
+                    <p className='text-center'>
                       This job is due for collection today
                     </p>
                   )}
                   {today === due.two_days_2_due_date && (
-                    <p className=' whitespace-nowrap'>
-                      3 more days to due date
-                    </p>
+                    <p className='text-center '>3 more days to due date</p>
                   )}
                   {today === due.three_days_2_due_date && (
-                    <p className=' whitespace-nowrap'>
-                      2 more days to due date
-                    </p>
+                    <p className='text-center'>2 more days to due date</p>
                   )}
                 </div>
               </div>
