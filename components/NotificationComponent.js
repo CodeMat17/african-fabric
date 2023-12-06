@@ -51,12 +51,12 @@ const NotificationComponent = ({ notifications }) => {
                   )}
                   {today === due.two_days_2_due_date && (
                     <p className=' whitespace-nowrap'>
-                      2 more days to due date
+                      3 more days to due date
                     </p>
                   )}
                   {today === due.three_days_2_due_date && (
                     <p className=' whitespace-nowrap'>
-                      3 more days to due date
+                      2 more days to due date
                     </p>
                   )}
                 </div>
