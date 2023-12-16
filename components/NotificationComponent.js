@@ -43,7 +43,7 @@ const NotificationComponent = ({ notifications }) => {
                     Due on {dayjs(due.due_date).format("MMM DD, YYYY")}
                   </p>
                 </div>
-                <div className='text-red-600 font-medium text-center'>
+                <div className='text-red-600 font-medium'>
                   {today === due.due_date && (
                     <p className='text-center'>
                       This job is due for collection today

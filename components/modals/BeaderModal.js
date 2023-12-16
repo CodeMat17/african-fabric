@@ -48,7 +48,7 @@ const BeaderModal = ({ id, beader, beading, beaders, tailoring }) => {
       }
       if (!error) {
         const { error: error_2 } = await supabaseClient
-          .from("beaders")
+          .from("staffers")
           .update({ status: true })
           .eq("name", selectedBeader)
           .select();
@@ -88,7 +88,7 @@ const BeaderModal = ({ id, beader, beading, beaders, tailoring }) => {
       if (!error) {
         if (enabled) {
           const { error: error_2 } = await supabaseClient
-            .from("beaders")
+            .from("staffers")
             .update({ status: false })
             .eq("name", beader)
             .select();
@@ -105,7 +105,7 @@ const BeaderModal = ({ id, beader, beading, beaders, tailoring }) => {
           }
         } else {
           await supabaseClient
-            .from("beaders")
+            .from("staffers")
             .update({ status: true })
             .eq("name", beader)
             .select();

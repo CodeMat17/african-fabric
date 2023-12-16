@@ -1,24 +1,26 @@
-import AddTailor from "@/components/update-tailor/AddTailor";
-import UpdateTailorCard from "@/components/update-tailor/UpdateTailorCard";
+import UpdateTailorCard from "@/components/profile-staff/EditStaff";
+import TailorCard from "@/components/update-consultants/TailorCard";
 import { supabaseClient } from "@/supabaseClient";
 
-export const revalidate = 0
+export const revalidate = 0;
 
 const Tailors = async () => {
   let { data: tailors, error } = await supabaseClient
-    .from("tailors")
+    .from("staffers")
     .select("*")
-    .order("name", { ascending: true });
+    .order("name", { ascending: true })
+    .eq("position", "Tailor");
+
   if (error) {
-    throw new Error("Somethingwent wrong: ", error.message);
+    throw new Error(`Somethingwent wrong: ${error.message}`);
   }
 
   return (
     <div className='py-6 px-4'>
       <p className='text-center text-xl uppercase font-medium'>Tailors</p>
-      <AddTailor />
+      {/* <AddTailor /> */}
       <div className='py-10'>
-        <UpdateTailorCard data={tailors} />
+        <TailorCard data={tailors} />
       </div>
     </div>
   );

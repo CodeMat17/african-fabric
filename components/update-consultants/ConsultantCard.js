@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
 
-const UpdateConsultantCard = ({data}) => {
+const ConsultantCard = ({data}) => {
   return (
     <div>
       {data && data.length < 1 ? (
@@ -10,8 +9,7 @@ const UpdateConsultantCard = ({data}) => {
       ) : (
         <div className='max-w-xs sm:max-w-xl lg:max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 md:gap-6'>
           {data.map((user) => (
-            <Link
-              href={`/dashboard/consultants/${user.id}`}
+            <div
               key={user.id}
               className='border shadow-md bg-gray-100 odd:bg-gray-200 rounded-xl overflow-hidden'>
               <div className='w-full flex flex-col items-center justify-center p-6  '>
@@ -19,9 +17,8 @@ const UpdateConsultantCard = ({data}) => {
                   {user.name}
                 </h1>
                 <p className='text-sm text-center'>{user.tel}</p>
-            
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       )}
@@ -29,4 +26,4 @@ const UpdateConsultantCard = ({data}) => {
   );
 };
 
-export default UpdateConsultantCard;
+export default ConsultantCard;

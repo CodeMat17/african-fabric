@@ -2,18 +2,33 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { FaPowerOff } from "react-icons/fa";
 import { GiClothes } from "react-icons/gi";
 import { ImManWoman } from "react-icons/im";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { PiGearFill } from "react-icons/pi";
 import { TbShoppingBagCheck } from "react-icons/tb";
-import { VscCalendar } from "react-icons/vsc";
 import { MdOutlineNotificationsActive } from "react-icons/md";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 const Nav = () => {
+    const supabase = createClientComponentClient();
+    const router = useRouter();
   const pathname = usePathname();
+
+   const signoutFn = async () => {
+     // Check if we have a session
+     const {
+       data: { session },
+     } = await supabase.auth.getSession();
+
+     if (session) {
+       await supabase.auth.signOut();
+     }
+
+     router.push("/");
+   };
 
   return (
     <aside className='fixed top-0 left-0 h-screen hidden md:flex transition-all transform duration-500'>
@@ -71,14 +86,14 @@ const Nav = () => {
             </Link> */}
 
             <Link
-              href='/dashboard/agents'
+              href='/dashboard/consultants'
               className={`w-full flex items-center gap-3 p-2 rounded-l-xl text-lg font-medium md:rounded-xl hover:bg-black/5 hover:text-gray-500 transition-all duration-500 ${
-                pathname.includes("/dashboard/agents")
+                pathname.includes("/dashboard/consultants")
                   ? "shadow-md bg-[#55c694] text-white"
                   : "text-gray-700"
               }`}>
               <ImManWoman className='text-2xl' />
-              <span>Agents</span>
+              <span>Consultants</span>
             </Link>
 
             <Link
@@ -102,11 +117,14 @@ const Nav = () => {
               <PiGearFill className='text-2xl' />
               <span>Admin</span>
             </Link>
-            <button
-              className={`w-full flex items-center gap-3 p-2 rounded-xl text-lg bg-red-800/5 text-red-600 font-medium transition-all duration-500 `}>
-              <FaPowerOff className='text-xl' />
-              <span>Logout</span>
-            </button>
+            <div className='flex justify-start w-full'>
+              <button
+                onClick={signoutFn}
+                className={`w-full flex items-center justify-start gap-3 py-2 px-3 rounded-xl text-lg bg-red-800/5 text-red-600 font-medium transition-all duration-500 `}>
+                <FaPowerOff className='text-xl' />
+                <span>Logout</span>
+              </button>
+            </div>
           </nav>
         </div>
       </div>

@@ -1,15 +1,23 @@
 "use client";
 
 import { supabaseClient } from "@/supabaseClient";
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, RadioGroup, Transition } from "@headlessui/react";
 import { useRouter } from "next/navigation";
 import { Fragment, useState } from "react";
 import toast from "react-hot-toast";
 import { BsPersonAdd } from "react-icons/bs";
 import { CgSpinnerAlt } from "react-icons/cg";
 
-const AddTailor = () => {
+const staff = [
+  { id: 1, position: "Tailor" },
+  { id: 2, position: "Consultant" },
+  { id: 3, position: "Others" },
+];
+
+const AddStaff = () => {
   const router = useRouter();
+
+  const [selected, setSelected] = useState(staff[0]);
 
   const [name, setName] = useState("");
   const [tel, setTel] = useState("");
@@ -30,12 +38,12 @@ const AddTailor = () => {
       setLoading(true);
 
       const { error } = await supabaseClient
-        .from("tailors")
-        .insert([{ name, tel }])
+        .from("staffers")
+        .insert([{ name, tel, position: selected.position }])
         .select();
 
       if (error) {
-        throw new Error("Something went wrong: ", error.message);
+        throw new Error(`Something went wrong: ${error.message}`, );
       }
       if (!error) {
         toast.success("Added successfully", {
@@ -61,12 +69,12 @@ const AddTailor = () => {
 
   return (
     <>
-      <div className='flex justify-center items-center mt-2'>
+      <div className='flex flex-col justify-center items-center mt-2'>
         <button
           type='button'
           onClick={openModal}
           className='flex items-center justify-center gap-3 rounded-xl text-[#55c694] bg-black/5 px-4 py-2 text-sm font-medium hover:bg-black/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75'>
-          <BsPersonAdd className='text-2xl' /> <span>Add Tailor</span>
+          <BsPersonAdd className='text-2xl' /> <span>Add Staff</span>
         </button>
       </div>
 
@@ -97,8 +105,9 @@ const AddTailor = () => {
                   <Dialog.Title
                     as='h3'
                     className='text-lg text-center font-medium leading-6 text-gray-900'>
-                    Add Tailor
+                    Add Staff
                   </Dialog.Title>
+
                   <div className='mt-4 text-sm flex flex-col gap-3'>
                     <div>
                       <label>Name</label>
@@ -119,6 +128,58 @@ const AddTailor = () => {
                         placeholder='Enter tailor contact number here'
                         className='w-full py-2 px-3 outline-none border rounded-xl'
                       />
+                    </div>
+                    <div>
+                      <label>Position</label>
+                      <RadioGroup value={selected} onChange={setSelected}>
+                        <RadioGroup.Label className='sr-only'>
+                          Server size
+                        </RadioGroup.Label>
+                        <div className='flex items-center justify-between gap-2'>
+                          {staff.map((staf) => (
+                            <RadioGroup.Option
+                              key={staf.position}
+                              value={staf}
+                              className={({ active, checked }) =>
+                                `w-1/3  ${
+                                  active
+                                    ? "ring-2 ring-white/60 ring-offset-2 ring-offset-sky-300"
+                                    : ""
+                                }
+                  ${checked ? "bg-sky-900/75 text-white" : "bg-white"}
+                    relative flex cursor-pointer rounded-lg px-3 py-1 border focus:outline-none`
+                              }>
+                              {({ active, checked }) => (
+                                <>
+                                  <div className='flex w-full items-center justify-center'>
+                                    <div className='flex items-center'>
+                                      <div className='text-sm'>
+                                        <RadioGroup.Label
+                                          as='p'
+                                          className={`  ${
+                                            checked
+                                              ? "text-white"
+                                              : "text-gray-900"
+                                          }`}>
+                                          {staf.position}
+                                        </RadioGroup.Label>
+                                        <RadioGroup.Description
+                                          as='span'
+                                          className={`inline ${
+                                            checked
+                                              ? "text-sky-100"
+                                              : "text-gray-500"
+                                          }`}></RadioGroup.Description>
+                                      </div>
+                                    </div>
+                                  
+                                  </div>
+                                </>
+                              )}
+                            </RadioGroup.Option>
+                          ))}
+                        </div>
+                      </RadioGroup>
                     </div>
                   </div>
 
@@ -154,4 +215,4 @@ const AddTailor = () => {
   );
 };
 
-export default AddTailor;
+export default AddStaff;

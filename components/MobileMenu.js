@@ -1,8 +1,9 @@
 "use client";
 
 import { Menu, Transition } from "@headlessui/react";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Fragment } from "react";
 import { BiMenuAltRight } from "react-icons/bi";
 import { FaPowerOff } from "react-icons/fa";
@@ -14,7 +15,22 @@ import { PiGearFill } from "react-icons/pi";
 import { TbShoppingBagCheck } from "react-icons/tb";
 
 const MobileMenu = () => {
+  const supabase = createClientComponentClient();
+  const router = useRouter();
   const pathname = usePathname();
+
+  const signoutFn = async () => {
+    // Check if we have a session
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (session) {
+      await supabase.auth.signOut();
+    }
+
+    router.push("/");
+  };
 
   return (
     <div className='md:hidden'>
@@ -99,9 +115,9 @@ const MobileMenu = () => {
 
                   <Menu.Item as={Fragment}>
                     <Link
-                      href='/dashboard/agents'
+                      href='/dashboard/consultants'
                       className={` flex justify-center py-2.5 rounded-full ${
-                        pathname.includes("/dashboard/agents")
+                        pathname.includes("/dashboard/consultants")
                           ? "bg-[#6BB77B] text-white"
                           : "bg-white text-gray-500"
                       }`}>
@@ -135,7 +151,8 @@ const MobileMenu = () => {
 
                   <Menu.Item as={Fragment}>
                     <button
-                      className={` flex justify-center py-2.5 rounded-full `}>
+                      onClick={signoutFn}
+                      className={`flex justify-center py-2.5 rounded-full `}>
                       <FaPowerOff className='text-2xl text-red-600' />
                     </button>
                   </Menu.Item>

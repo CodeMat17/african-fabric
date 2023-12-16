@@ -1,6 +1,6 @@
 import { supabaseClient } from "@/supabaseClient";
 import { notFound } from "next/navigation";
-import UpdateTailorComponent from "../../../../components/update-tailor/UpdateTailorComponent";
+import UpdateTailorComponent from "../../../../components/profile-staff/ProfileStaff";
 
 export const revalidate = 0;
 

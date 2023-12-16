@@ -20,7 +20,7 @@ const OrderDetailsPage = async ({ params: { id } }) => {
     .match({ id })
     .single();
 
-  let { data: beaders } = await query.from("beaders").select("*");
+  let { data: beaders } = await query.from("staffers").select("id, name, status").eq('position', 'Beader');
 
   let { data: gallery } = await query
     .from("gallery")

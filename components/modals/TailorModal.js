@@ -41,7 +41,7 @@ const TailorModal = ({ id, tailoring, tailor, assigned_on, finished_on }) => {
       if (!error) {
         if (enabled) {
           const { error: error_2 } = await supabaseClient
-            .from("tailors")
+            .from("staffers")
             .update({ busy: false, assigned_on: null, to_finish_on: null })
             .eq("name", tailor)
             .select();
@@ -58,7 +58,7 @@ const TailorModal = ({ id, tailoring, tailor, assigned_on, finished_on }) => {
           }
         } else {
           const { error: error_3 } = await supabaseClient
-            .from("tailors")
+            .from("staffers")
             .update({
               busy: true,
               assigned_on: assigned_on,

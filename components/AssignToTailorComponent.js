@@ -43,7 +43,7 @@ const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
       }
       if (!error) {
         const { error: error_2 } = await supabaseClient
-          .from("tailors")
+          .from("staffers")
           .update({
             busy: true,
             assigned_on: new Date(),

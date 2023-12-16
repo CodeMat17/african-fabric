@@ -2,15 +2,16 @@
 
 import { useRouter } from "next/navigation";
 // import { TbMailForward, TbShieldLock } from "react-icons/tb";
+import SigninComponent from "@/components/SigninComponent";
+import SignupComponent from "@/components/SignupComponent";
 import Image from "next/image";
 
 export default function Home() {
-    const router = useRouter();
-
+  const router = useRouter();
 
   return (
-    <div className='relative bg-gradient-to-tr from-purple-950 via-green-800 to-green-900'>
-      <div className='relative w-full h-screen mix-blend-overlay'>
+    <div className='min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-to-tr from-purple-950 via-green-800 to-green-900'>
+      <div className='absolute inset-0 w-full h-full bg-cover bg-center  mix-blend-overlay'>
         <Image
           alt='BG'
           // placeholder='blur'
@@ -22,27 +23,53 @@ export default function Home() {
           style={{ objectFit: "cover" }}
         />
       </div>
-      <section className='absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center'>
-        <div className='relative w-[290px] h-[290px] sm:w-[330px] sm:h-[330px] animate-spin-slower'>
-          <Image alt='logo' fill priority src='/logo/logo_name.webp' />
-        </div>
-        <div className='absolute bg-white/50 rounded-full overflow-hidden'>
-          <div className='relative w-[160px] sm:w-[190px] aspect-video'>
-            <Image alt='logo' fill priority src='/logo/logo_tag.webp' />
+
+      <div className='z-10 text-white text-center'>
+        <div className='flex flex-col items-center justify-center '>
+          <div className='relative w-[290px] h-[290px] sm:w-[330px] sm:h-[330px] animate-spin-slower'>
+            <Image alt='logo' fill priority src='/logo/logo_name.webp' />
+          </div>
+          <div className='absolute bg-white/50 rounded-full overflow-hidden'>
+            <div className='relative w-[160px] sm:w-[190px] aspect-video'>
+              <Image alt='logo' fill priority src='/logo/logo_tag.webp' />
+            </div>
           </div>
         </div>
-      </section>
-      <div className='absolute bottom-[22%] sm:bottom-[19%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex w-full max-w-[280px] gap-4  mx-auto'>
-     
-        <button className='bg-[#55c694]/10 hover:bg-[#55c694]/20 text-[#55c694] w-full px-4 py-2 rounded-xl'>
-          Sign up
-        </button>
-        <button
-          onClick={() => router.push("/dashboard")}
-          className='bg-[#55c694] hover:bg-[#55c694]/80 text-white w-full px-4 py-2 rounded-xl'>
-          Sign in
-        </button>
+
+        <div className='flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-12'>
+          <SignupComponent />
+          <SigninComponent />
+        </div>
       </div>
     </div>
+    // <div className=' flex items-center justify-center bg-cover bg-center bg-gradient-to-tr from-purple-950 via-green-800 to-green-900'>
+    //   <div className=' w-full h-screen bg-cover bg-center mix-blend-overlay'>
+    //     <Image
+    //       alt='BG'
+    //       // placeholder='blur'
+    //       quality={100}
+    //       priority
+    //       fill
+    //       // sizes='100vw'
+    //       src='/bg/bg_4.webp'
+    //       style={{ objectFit: "cover" }}
+    //     />
+
+    //     <section className='absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center'>
+    //       <div className='relative w-[290px] h-[290px] sm:w-[330px] sm:h-[330px] animate-spin-slower'>
+    //         <Image alt='logo' fill priority src='/logo/logo_name.webp' />
+    //       </div>
+    //       <div className='absolute bg-white/50 rounded-full overflow-hidden'>
+    //         <div className='relative w-[160px] sm:w-[190px] aspect-video'>
+    //           <Image alt='logo' fill priority src='/logo/logo_tag.webp' />
+    //         </div>
+    //       </div>
+    //     </section>
+    //     <div className='absolute bottom-[22%] sm:bottom-[19%] left-1/2 -translate-x-1/2 -translate-y-1/2 flex w-full max-w-[280px] gap-4  mx-auto'>
+    //       <SignupComponent />
+    //       <SigninComponent />
+    //     </div>
+    //   </div>
+    // </div>
   );
 }

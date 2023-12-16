@@ -6,29 +6,33 @@ import { supabaseClient } from "@/supabaseClient";
 export const revalidate = 0;
 
 const page = async () => {
-  let query = supabaseClient;
-  // .from("customers")
-  // .select("name", { count: "exact" });
-
-  let customerQuery = query.from("customers").select("id", { count: "exact" });
-
-  let consultantQuery = query
-    .from("consultants")
+  const queryOrderCount = supabaseClient
+    .from("customers")
     .select("id", { count: "exact" });
 
-  let tailorQuery = query.from("tailors").select("id", { count: "exact" });
+  const { count: total } = await queryOrderCount;
 
-  let recentQuery = query
+  const { count: ready } = await queryOrderCount.eq("ready", true);
+
+  const { data: recent } = await supabaseClient
     .from("customers")
-    .select("*")
+    .select("id, name, avatar, email, style, fabric")
     .order("created_at", { ascending: false })
     .limit(5);
 
-  const { count: total } = await customerQuery;
-  const { count: ready } = await customerQuery.eq("ready", true);
-  const { count: noOfConsultants } = await consultantQuery;
-  const { count: noOfTailors } = await tailorQuery;
-  const { data: recent } = await recentQuery;
+  const queryAgentsCount = supabaseClient
+    .from("staffers")
+    .select("id", { count: "exact" });
+
+  const { count: noOfTailors } = await queryAgentsCount.eq(
+    "position",
+    "Tailor"
+  );
+
+  const { count: noOfConsultants } = await queryAgentsCount.eq(
+    "position",
+    "Consultant"
+  );
 
   return (
     <div className='p-4 bg-[#f8f9fa]'>
@@ -41,7 +45,7 @@ const page = async () => {
           noOfTailors={noOfTailors}
         />
       </div>
-      {/* <pre>{JSON.stringify(noOfConsultants, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(recent, null, 2)}</pre> */}
       <RecentOrders recent={recent} />
     </div>
   );
