@@ -11,7 +11,7 @@ export default function Home() {
 
   return (
     <div className='min-h-screen flex items-center justify-center bg-cover bg-center bg-gradient-to-tr from-purple-950 via-green-800 to-green-900'>
-      <div className='absolute inset-0 w-full h-full bg-cover bg-center  mix-blend-overlay'>
+      <div className='absolute inset-0 w-full h-full bg-cover bg-center mix-blend-overlay'>
         <Image
           alt='BG'
           // placeholder='blur'
