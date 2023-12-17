@@ -28,7 +28,7 @@ const OrdersPage = async ({ searchParams }) => {
   const { data, count } = await query;
 
   return (
-    <div className='py-4 px-2'>
+    <div className='px-4 py-8'>
       <h1 className='text-center uppercase text-xl font-medium'>
         Order List <span>({count})</span>
       </h1>

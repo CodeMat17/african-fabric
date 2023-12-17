@@ -34,9 +34,9 @@ const CustomerOrderCard = ({ data }) => {
                 </h1>
                 <p className='text-sm text-center'>{user.email}</p>
                 <p className='text-sm text-center'>{user.tel}</p>
-                <div className='flex md:flex-col xl:flex-row items-center text-xs text-gray-500 mt-2 capitalize justify-center gap-2 md:gap-0 xl:gap-2'>
+                <div className='flex flex-col xl:flex-row items-center text-xs text-gray-500 mt-2 capitalize justify-center gap-0 xl:gap-2'>
                   <span> {user.style}</span>{" "}
-                  <span className='md:hidden xl:block'>&bull;</span>
+                  <span className='hidden xl:block'>&bull;</span>
                   <span>
                     Booked on {dayjs(user.created_at).format("MMM DD, YYYY")}
                   </span>
