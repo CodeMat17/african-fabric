@@ -35,8 +35,7 @@ const OrderDetailsPage = async ({ params: { id } }) => {
     <div className='px-4 pt-4 pb-24 w-full bg-gray-50'>
       <p className='uppercase text-center text-xl font-medium'>Order Details</p>
       {/* <pre>{JSON.stringify(date, null, 2)}</pre> */}
-     
-     
+
       <div className=' w-full py-8 flex flex-col lg:flex-row gap-8 lg:gap-2'>
         <div className='flex flex-col items-center justify-center lg:items-start w-full lg:w-[55%]'>
           <CdImageComponent
@@ -50,7 +49,7 @@ const OrderDetailsPage = async ({ params: { id } }) => {
           <p className='text-gray-500'>{customer.tel}</p>
           <div className='flex divide-x-2 divide-gray-300 gap-2 text-sm text-gray-400 mt-2'>
             <p className='capitalize'> {customer.style}</p>
-            <p className='pl-4 whitespace-nowrap'>
+            <p className='pl-2 whitespace-nowrap'>
               booked on {dayjs(customer.created_at).format("MMM DD, YYYY")}{" "}
             </p>
           </div>
