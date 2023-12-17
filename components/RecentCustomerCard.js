@@ -12,7 +12,7 @@ const RecentCustomerCard = ({
 }) => {
   return (
     <Link href={`/dashboard/orders/${id}`}>
-      <div className='text-sm font-light border p-3 rounded-xl'>
+      <div className='bg-white shadow text-sm font-light p-3 rounded-xl'>
         <div className='flex items-center justify-between'>
           <div className='flex items-center w-[90%] sm:w-[70%]'>
             <CdImageComponent
@@ -26,7 +26,8 @@ const RecentCustomerCard = ({
               <p className='text-[#55c694] font-medium truncate'>{name}</p>
               <p className='text-gray-500 truncate'>{email}</p>
               <p className='sm:hidden pt-1 truncate uppercase'>
-                &bull; {style}
+                {/* &bull; */}
+                {style}
               </p>
             </div>
           </div>
