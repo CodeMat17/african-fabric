@@ -35,14 +35,14 @@ const CustomerOrderCard = ({ data }) => {
                 <p className='text-sm text-center'>{user.email}</p>
                 <p className='text-sm text-center'>{user.tel}</p>
                 <div className='flex flex-col xl:flex-row items-center text-xs text-gray-500 mt-2 capitalize justify-center gap-0 xl:gap-2'>
-                  <span> {user.style}</span>{" "}
+                  <span className='w-full text-center'> {user.style}</span>{" "}
                   <span className='hidden xl:block'>&bull;</span>
-                  <span>
+                  <span className='w-full text-center whitespace-nowrap'>
                     Booked on {dayjs(user.created_at).format("MMM DD, YYYY")}
                   </span>
                 </div>
 
-                <div className='mt-3 w-full text-sm'>
+                <div className='mt-3 w-full text-sm flex items-center justify-center'>
                   <LinearProgressBar
                     tailoring={user.tailoring}
                     beading={user.beading}
