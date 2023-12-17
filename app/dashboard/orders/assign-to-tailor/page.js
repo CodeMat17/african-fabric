@@ -10,8 +10,8 @@ const AssignToTailor = async ({ searchParams }) => {
 
   const { data: tailors } = await supabaseClient
     .from("staffers")
-    .select("name, id, position")
-    .eq("position", "Tailors");
+    .select("id, name, position, busy")
+    .eq("position", "Tailor");
 
   return (
     <div className='px-4 py-8'>
