@@ -106,7 +106,6 @@ const MeasurementData = ({
             due_date,
             three_days_2_due_date,
             two_days_2_due_date,
-            a_day_2_due_date,
           },
         ])
         .select();
