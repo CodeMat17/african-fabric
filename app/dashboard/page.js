@@ -6,13 +6,14 @@ import { supabaseClient } from "@/supabaseClient";
 export const revalidate = 0;
 
 const page = async () => {
-  const queryOrderCount = supabaseClient
+  const { count: total } = await supabaseClient
     .from("customers")
     .select("id", { count: "exact" });
 
-  const { count: total } = await queryOrderCount;
-
-  const { count: ready } = await queryOrderCount.eq("ready", true);
+  const { count: ready } = await supabaseClient
+    .from("customers")
+    .select("id", { count: "exact" })
+    .eq("ready", true);
 
   const { data: recent } = await supabaseClient
     .from("customers")
@@ -20,19 +21,20 @@ const page = async () => {
     .order("created_at", { ascending: false })
     .limit(5);
 
-  const queryAgentsCount = supabaseClient
+  const { count: noOfTailors } = await supabaseClient
     .from("staffers")
-    .select("id", { count: "exact" });
+    .select("id", { count: "exact" })
+    .eq("position", "Tailor");
 
-  const { count: noOfTailors } = await queryAgentsCount.eq(
-    "position",
-    "Tailor"
-  );
-
-  const { count: noOfConsultants } = await queryAgentsCount.eq(
-    "position",
-    "Consultant"
-  );
+  const { count: noOfConsultants } = await supabaseClient
+    .from("staffers")
+    .select("id", { count: "exact" })
+    .eq("position", "Consultant");
+  
+  const { count: noOfBeaders } = await supabaseClient
+    .from("staffers")
+    .select("id", { count: "exact" })
+    .eq("position", "Beader");
 
   return (
     <div className='p-4 bg-[#f8f9fa]'>
@@ -40,12 +42,15 @@ const page = async () => {
 
       <div className='lg:flex lg:justify-evenly'>
         <Statistics total={total} ready={ready} />
+        {/* <pre>{JSON.stringify(noOfConsultants, null, 2)}</pre> */}
+        {/* <pre>{JSON.stringify(noOfTailors, null, 2)}</pre> */}
+
         <AgentsFolders
           noOfConsultants={noOfConsultants}
           noOfTailors={noOfTailors}
+          noOfBeaders={noOfBeaders}
         />
       </div>
-      {/* <pre>{JSON.stringify(recent, null, 2)}</pre> */}
       <RecentOrders recent={recent} />
     </div>
   );

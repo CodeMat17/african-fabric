@@ -67,7 +67,7 @@ const StaffDetail = async ({ params: { id } }) => {
             </p>
           </div>
         </div>
-        <div className='mt-6 flex flex-col sm:flex-row gap-3'>
+        <div className='mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3'>
           <DeleteStaff id={staff.id} name={staff.name} />
           <EditStaff
             id={staff.id}
