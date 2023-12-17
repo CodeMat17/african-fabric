@@ -11,7 +11,7 @@ import { GiCheckMark } from "react-icons/gi";
 
 const QualityControlModal = ({ id, beading, q_c }) => {
   const router = useRouter()
-    const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [enabled, setEnabled] = useState(false);
 
@@ -66,7 +66,7 @@ const QualityControlModal = ({ id, beading, q_c }) => {
       <button
         type='button'
         onClick={openModal}
-        className={`relative ${
+        className={`relative whitespace-nowrap ${
           q_c ? "bg-[#55c694]" : "bg-[#55c694]/40"
         } w-[25%] mx-auto flex items-center justify-center  text-white`}>
         Q-ctrl
