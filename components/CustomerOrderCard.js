@@ -18,17 +18,19 @@ const CustomerOrderCard = ({ data }) => {
               key={user.id}
               className='bg-amber-600/5 odd:bg-gradient-to-tr from-[#55c694]/20 to-amber-600/5 rounded-xl overflow-hidden shadow'>
               <div className='w-full flex flex-col items-center justify-center p-6'>
-                <CldImage
-                  width='100'
-                  height='100'
-                  crop='thumb'
-                  gravity='faces'
-                  src={user.avatar}
-                  sizes='50vw'
-                  alt='Profile image'
-                  loading='lazy'
-                  className='rounded-full'
-                />
+                {user.avatar &&
+                  <CldImage
+                    width='100'
+                    height='100'
+                    crop='thumb'
+                    gravity='faces'
+                    src={user.avatar}
+                    sizes='50vw'
+                    alt='Profile image'
+                    loading='lazy'
+                    className='rounded-full'
+                  />
+                }
                 <h1 className='text font-medium mt-2 text-center'>
                   {user.name}
                 </h1>
@@ -41,7 +43,6 @@ const CustomerOrderCard = ({ data }) => {
                     Booked on {dayjs(user.created_at).format("MMM DD, YYYY")}
                   </span>
                 </div>
-
                 <div className='mt-3 w-full text-sm flex items-center justify-center'>
                   <LinearProgressBar
                     tailoring={user.tailoring}

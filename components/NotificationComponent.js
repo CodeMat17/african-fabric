@@ -18,7 +18,7 @@ const NotificationComponent = ({ notifications }) => {
           {notifications.map((due) => (
             <Link key={due.id} href={`/dashboard/orders/${due.id}`}>
               <div className='border p-6 rounded-xl flex flex-col items-center bg-red-600/10'>
-                <CldImage
+                {due.avatar && <CldImage
                   width='80'
                   height='80'
                   crop='thumb'
@@ -29,6 +29,7 @@ const NotificationComponent = ({ notifications }) => {
                   loading='lazy'
                   className='rounded-full'
                 />
+                }
                 <p className='font-medium text-center mt-1 whitespace-nowrap'>
                   {due.name}
                 </p>

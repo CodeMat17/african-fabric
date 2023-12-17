@@ -38,12 +38,14 @@ const OrderDetailsPage = async ({ params: { id } }) => {
 
       <div className=' w-full py-8 flex flex-col lg:flex-row gap-8 lg:gap-2'>
         <div className='flex flex-col items-center justify-center lg:items-start w-full lg:w-[55%]'>
-          <CdImageComponent
-            width='96'
-            height='96'
-            image={customer.avatar}
-            radius='rounded-full'
-          />
+          {customer.avatar &&
+            <CdImageComponent
+              width='96'
+              height='96'
+              image={customer.avatar}
+              radius='rounded-full'
+            />
+          }
           <h1 className=' text-xl font-medium truncate'>{customer.name}</h1>
           <p className='text-gray-500'>{customer.email}</p>
           <p className='text-gray-500'>{customer.tel}</p>
@@ -106,12 +108,14 @@ const OrderDetailsPage = async ({ params: { id } }) => {
           <div className='flex flex-col lg:items-center '>
             <p className='font-medium text-lg text-center'>Preferred Fabric</p>
             <div className='mt-2 rounded-xl w-auto'>
-              <CdImageComponent
-                width='280'
-                height='150'
-                image={customer.fabric}
-                radius='rounded-xl'
-              />
+              {customer.fabric &&
+                <CdImageComponent
+                  width='280'
+                  height='150'
+                  image={customer.fabric}
+                  radius='rounded-xl'
+                />
+              }
             </div>
           </div>
           <div className='w-full flex flex-col max-w-xs sm:max-w-sm mx-auto'>

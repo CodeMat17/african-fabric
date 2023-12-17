@@ -51,7 +51,6 @@ const MeasurementData = ({
   const [due_date, setDueDate] = useState();
   const [three_days_2_due_date, setThreeDays] = useState();
   const [two_days_2_due_date, setTwoDays] = useState();
-  const [a_day_2_due_date, setADay] = useState();
 
   useEffect(() => {
     if (due_date) {
@@ -62,10 +61,6 @@ const MeasurementData = ({
       const twoDaysTo = new Date(due_date);
       twoDaysTo.setDate(due_date.getDate() - 2);
       setTwoDays(twoDaysTo);
-
-      const aDayTo = new Date(due_date);
-      aDayTo.setDate(due_date.getDate() - 1);
-      setADay(aDayTo);
     }
   }, [due_date]);
 
