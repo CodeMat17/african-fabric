@@ -133,7 +133,7 @@ const ProfileCard = () => {
             </div>
           </div>
 
-          <div className='py-6 flex flex-col space-y-1'>
+          <div className='py-6 flex flex-col gap-3'>
             <div className='flex flex-col '>
               <label>Fullname</label>
               <input
@@ -141,7 +141,7 @@ const ProfileCard = () => {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className='peer w-full rounded-xl border bg-inherit py-2 px-3 shadow shadow-gray-100 mt-0.5 appearance-none outline-none text-neutral-800'
+                className='bg-slate-100 peer w-full rounded-xl border bg-inherit py-2 px-3 shadow shadow-gray-100 mt-0.5 appearance-none outline-none text-neutral-800'
                 pattern='.{5,}'
               />
               <span className='hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block'>
@@ -156,7 +156,7 @@ const ProfileCard = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className='peer w-full rounded-xl border bg-inherit py-2 px-3 shadow shadow-gray-100 mt-0.5 appearance-none outline-none text-neutral-800 '
+                className='bg-slate-100 peer w-full rounded-xl border bg-inherit py-2 px-3 shadow shadow-gray-100 mt-0.5 appearance-none outline-none text-neutral-800 '
                 pattern='[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$'
               />
               <span className='hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block'>
@@ -172,7 +172,7 @@ const ProfileCard = () => {
                   required
                   value={tel}
                   onChange={(e) => setTel(e.target.value)}
-                  className='peer w-full rounded-xl border bg-inherit py-2 px-3 shadow shadow-gray-100 mt-0.5 appearance-none outline-none text-neutral-800'
+                  className='bg-slate-100 peer w-full rounded-xl border bg-inherit py-2 px-3 shadow shadow-gray-100 mt-0.5 appearance-none outline-none text-neutral-800'
                   pattern='.{7,}'
                 />
                 <span className='hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block'>
@@ -187,7 +187,7 @@ const ProfileCard = () => {
                   required
                   value={style}
                   onChange={(e) => setStyle(e.target.value)}
-                  className='peer w-full rounded-xl border bg-inherit py-2 px-3 shadow shadow-gray-100 mt-0.5 appearance-none outline-none text-neutral-800'
+                  className='bg-slate-100 peer w-full rounded-xl border bg-inherit py-2 px-3 shadow shadow-gray-100 mt-0.5 appearance-none outline-none text-neutral-800'
                   pattern='.{3,}'
                 />
                 <span className='hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block'>
