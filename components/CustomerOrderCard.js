@@ -48,6 +48,7 @@ const CustomerOrderCard = ({ data }) => {
                     tailoring={user.tailoring}
                     beading={user.beading}
                     q_c={user.q_c}
+                    status={user.status}
                     ready={user.ready}
                   />
                 </div>

@@ -140,7 +140,7 @@ const SigninComponent = () => {
                     </button>
                     <button
                       disabled={!email || !password}
-                      className={`inline-flex justify-center gap-4 rounded-xl border border-transparent bg-[#55c694] px-4 py-2 font-medium text-white hover:bg-[#55c694]/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 disabled:bg-red-600/30 disabled:cursor-not-allowed ${
+                      className={`whitespace-nowrap inline-flex justify-center gap-4 rounded-xl border border-transparent bg-[#55c694] px-4 py-2 font-medium text-white hover:bg-[#55c694]/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 disabled:bg-red-600/30 disabled:cursor-not-allowed ${
                         loading ? "cursor-not-allowed" : ""
                       }`}
                       onClick={signIn}>

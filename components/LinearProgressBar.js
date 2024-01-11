@@ -3,24 +3,28 @@
 import { Progress } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 
-const LinearProgressBar = ({ tailoring, beading, q_c, ready }) => {
+const LinearProgressBar = ({ tailoring, beading, q_c, status, ready }) => {
   const [label, setLabel] = useState("processing");
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState(0);
 
   useEffect(() => {
     if (tailoring) {
       setLabel("Tailoring");
-      setValue(25);
+      setValue(20);
     }
     if (tailoring && beading) {
       setLabel("Beading");
-      setValue(50);
+      setValue(40);
     }
     if (tailoring && beading && q_c) {
       setLabel("Q-Controll Checked");
-      setValue(75);
+      setValue(60);
     }
-    if (tailoring && beading && q_c && ready) {
+    if (tailoring && beading && q_c && status) {
+      setLabel("Fitting");
+      setValue(80);
+    }
+    if (tailoring && beading && q_c && status && ready) {
       setLabel("Ready");
       setValue(100);
     }

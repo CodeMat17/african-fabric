@@ -1,6 +1,7 @@
 "use client";
 
 import { supabaseClient } from "@/supabaseClient";
+import { Tab } from "@headlessui/react";
 import { CldUploadWidget } from "next-cloudinary";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -10,6 +11,10 @@ import toast from "react-hot-toast";
 import { AiOutlineLoading } from "react-icons/ai";
 import { TbCameraPlus } from "react-icons/tb";
 import SketchScreenshotComponent from "./SketchScreenshotComponent";
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(" ");
+}
 
 const MeasurementData = ({
   name,
@@ -153,177 +158,239 @@ const MeasurementData = ({
   return (
     <div className='pt-2 pb-6 my-6 rounded-xl mx-auto'>
       <p className='text-center text-lg'>Take measurements for {name}.</p>
-      <div className='pt-4 text-sm grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-5 gap-x-2 gap-y-4 mx-auto'>
-        <div className='flex flex-col'>
-          <label className='text-gray-500'>Enter Neck</label>
-          <input
-            type='text'
-            value={neck}
-            onChange={(e) => setNeck(e.target.value)}
-            placeholder='Enter Neck'
-            className='p-2 text-center border rounded-xl outline-none max-w-[150px]'
-          />
-        </div>
-        <div className='flex flex-col'>
-          <label className='text-gray-500'>Enter O-Bust</label>
-          <input
-            type='text'
-            value={o_bust}
-            onChange={(e) => setOBust(e.target.value)}
-            placeholder='Enter O-Bust'
-            className='p-2 text-center border rounded-xl outline-none max-w-[150px]'
-          />
-        </div>
-        <div className='flex flex-col'>
-          <label className='text-gray-500'>Enter Bust</label>
-          <input
-            type='text'
-            value={bust}
-            onChange={(e) => setBust(e.target.value)}
-            placeholder='Enter Bust'
-            className='p-2 text-center border rounded-xl outline-none max-w-[150px]'
-          />
-        </div>
-        <div className='flex flex-col'>
-          <label className='text-gray-500'>Enter U-Bust</label>
-          <input
-            type='text'
-            value={u_bust}
-            onChange={(e) => setUBust(e.target.value)}
-            placeholder='Enter U-Bust'
-            className='p-2 text-center border rounded-xl outline-none max-w-[150px]'
-          />
-        </div>
-        <div className='flex flex-col'>
-          <label className='text-gray-500'>Enter Waist</label>
-          <input
-            type='text'
-            value={waist}
-            onChange={(e) => setWaist(e.target.value)}
-            placeholder='Enter Waist'
-            className='p-2 text-center border rounded-xl outline-none max-w-[150px]'
-          />
-        </div>
-        <div className='flex flex-col'>
-          <label className='text-gray-500'>Enter Hips</label>
-          <input
-            type='text'
-            value={hips}
-            onChange={(e) => setHips(e.target.value)}
-            placeholder='Enter Hips'
-            className='p-2 text-center border rounded-xl outline-none max-w-[150px]'
-          />
-        </div>
-        <div className='flex flex-col'>
-          <label className='text-gray-500'>Enter Nk-Heel</label>
-          <input
-            type='text'
-            value={nk_heel}
-            onChange={(e) => setNKHeel(e.target.value)}
-            placeholder='Enter Nk-Heel'
-            className='p-2 text-center border rounded-xl outline-none max-w-[150px]'
-          />
-        </div>
-        <div className='flex flex-col'>
-          <label className='text-gray-500'>Enter NK abv Knee</label>
-          <input
-            type='text'
-            value={nk_abov_knee}
-            onChange={(e) => setNKAbvKnee(e.target.value)}
-            placeholder='Enter NK abv Knee'
-            className='p-2 text-center border rounded-xl outline-none max-w-[150px]'
-          />
-        </div>
-        <div className='flex flex-col'>
-          <label className='text-gray-500'>Enter A-Length</label>
-          <input
-            type='text'
-            value={a_length}
-            onChange={(e) => setALength(e.target.value)}
-            placeholder='Enter A-Length'
-            className='p-2 text-center border rounded-xl outline-none max-w-[150px]'
-          />
-        </div>
-        <div className='flex flex-col'>
-          <label className='text-gray-500'>Enter S-Seam</label>
-          <input
-            type='text'
-            value={s_seam}
-            onChange={(e) => setSSeam(e.target.value)}
-            placeholder='Enter S-Seam'
-            className='p-2 text-center border rounded-xl outline-none max-w-[150px]'
-          />
-        </div>
-        <div className='flex flex-col'>
-          <label className='text-gray-500'>Enter Arm Hole</label>
-          <input
-            type='text'
-            value={arm_hole}
-            onChange={(e) => setArmHole(e.target.value)}
-            placeholder='Enter Arm Hole'
-            className='p-2 text-center border rounded-xl outline-none max-w-[150px]'
-          />
-        </div>
-        <div className='flex flex-col'>
-          <label className='text-gray-500'>Enter Bicep</label>
-          <input
-            type='text'
-            value={bicep}
-            onChange={(e) => setBicep(e.target.value)}
-            placeholder='Enter Bicep'
-            className='p-2 text-center border rounded-xl outline-none max-w-[150px]'
-          />
-        </div>
-        <div className='flex flex-col'>
-          <label className='text-gray-500'>Enter Fore Arm</label>
-          <input
-            type='text'
-            value={fore_arm}
-            onChange={(e) => setForeArm(e.target.value)}
-            placeholder='Enter Fore Arm'
-            className='p-2 text-center border rounded-xl outline-none max-w-[150px]'
-          />
-        </div>
-        <div className='flex flex-col'>
-          <label className='text-gray-500'>Enter Wrist</label>
-          <input
-            type='text'
-            value={wrist}
-            onChange={(e) => setWrist(e.target.value)}
-            placeholder='Enter Wrist'
-            className='p-2 text-center border rounded-xl outline-none max-w-[150px]'
-          />
-        </div>
-        <div className='flex flex-col'>
-          <label className='text-gray-500'>Enter V Neck Cut</label>
-          <input
-            type='text'
-            value={v_neck_cut}
-            onChange={(e) => setVNeckCut(e.target.value)}
-            placeholder='Enter V Neck Cut'
-            className='p-2 text-center border rounded-xl outline-none max-w-[150px]'
-          />
-        </div>
-        <div className='flex flex-col'>
-          <label className='text-gray-500'>Enter Abv Knee-Ankle</label>
-          <input
-            type='text'
-            value={abv_knee_ankle}
-            onChange={(e) => setAbvKneeAnkle(e.target.value)}
-            placeholder='Enter Abv Knee-Ankle'
-            className='p-2 text-center border rounded-xl outline-none max-w-[150px]'
-          />
-        </div>
-        <div className='flex flex-col'>
-          <label className='text-gray-500'>Enter abv Kneel</label>
-          <input
-            type='text'
-            value={w_abv_knee}
-            onChange={(e) => setWAbvKnee(e.target.value)}
-            placeholder='Enter Waist abv Kneel'
-            className='p-2 text-center border rounded-xl outline-none max-w-[150px]'
-          />
-        </div>
+
+      <div className='mt-8'>
+        <Tab.Group>
+          <Tab.List className='flex space-x-1 rounded-xl bg-black/10 p-1 max-w-xs mx-auto'>
+            <Tab
+              className={({ selected }) =>
+                classNames(
+                  "w-full rounded-lg py-2.5 text-sm font-medium leading-5",
+                  "ring-white/60 ring-offset-2 ring-offset-green-400 focus:outline-none focus:ring-2",
+                  selected
+                    ? "bg-white text-green-700 shadow"
+                    : "text-black hover:bg-white/[0.12] "
+                )
+              }>
+              Female
+            </Tab>
+            <Tab
+              className={({ selected }) =>
+                classNames(
+                  "w-full rounded-lg py-2.5 text-sm font-medium leading-5",
+                  "ring-white/60 ring-offset-2 ring-offset-green-400 focus:outline-none focus:ring-2",
+                  selected
+                    ? "bg-white text-green-700 shadow"
+                    : "text-black hover:bg-white/[0.12] "
+                )
+              }>
+              Male
+            </Tab>
+          </Tab.List>
+          <Tab.Panels className='mt-2'>
+            <Tab.Panel
+              className={classNames(
+                "rounded-xl bg-white p-3",
+                "ring-white/60 ring-offset-2 ring-offset-green-400 focus:outline-none focus:ring-2"
+              )}>
+              <div className='pt-4 text-sm grid grid-cols-2 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-5 gap-x-2 gap-y-4 mx-auto'>
+                <div className='flex flex-col w-full '>
+                  <label className='text-center text-gray-500'>Neck</label>
+                  <input
+                    type='text'
+                    value={neck}
+                    onChange={(e) => setNeck(e.target.value)}
+                    placeholder='enter neck'
+                    className='w-full p-2 text-center border rounded-xl outline-none'
+                  />
+                </div>
+                <div className='flex flex-col'>
+                  <label className='text-center text-gray-500'>Over Bust</label>
+                  <input
+                    type='text'
+                    value={o_bust}
+                    onChange={(e) => setOBust(e.target.value)}
+                    placeholder='enter over bust'
+                    className='p-2 text-center border rounded-xl outline-none '
+                  />
+                </div>
+                <div className='flex flex-col'>
+                  <label className='text-center text-gray-500'>Bust</label>
+                  <input
+                    type='text'
+                    value={bust}
+                    onChange={(e) => setBust(e.target.value)}
+                    placeholder='enter bust'
+                    className='p-2 text-center border rounded-xl outline-none '
+                  />
+                </div>
+                <div className='flex flex-col'>
+                  <label className='text-center text-gray-500'>
+                    Under Bust
+                  </label>
+                  <input
+                    type='text'
+                    value={u_bust}
+                    onChange={(e) => setUBust(e.target.value)}
+                    placeholder='enter under bust'
+                    className='p-2 text-center border rounded-xl outline-none '
+                  />
+                </div>
+                <div className='flex flex-col'>
+                  <label className='text-center text-gray-500'>Waist</label>
+                  <input
+                    type='text'
+                    value={waist}
+                    onChange={(e) => setWaist(e.target.value)}
+                    placeholder='enter waist'
+                    className='p-2 text-center border rounded-xl outline-none '
+                  />
+                </div>
+                <div className='flex flex-col'>
+                  <label className='text-center text-gray-500'>Hips</label>
+                  <input
+                    type='text'
+                    value={hips}
+                    onChange={(e) => setHips(e.target.value)}
+                    placeholder='enter hips'
+                    className='p-2 text-center border rounded-xl outline-none '
+                  />
+                </div>
+                <div className='flex flex-col'>
+                  <label className='text-center text-gray-500'>
+                    Neck to Heel
+                  </label>
+                  <input
+                    type='text'
+                    value={nk_heel}
+                    onChange={(e) => setNKHeel(e.target.value)}
+                    placeholder='enter neck to heel'
+                    className='p-2 text-center border rounded-xl outline-none '
+                  />
+                </div>
+                <div className='flex flex-col'>
+                  <label className='text-center text-gray-500'>
+                    Neck to abv Knee
+                  </label>
+                  <input
+                    type='text'
+                    value={nk_abov_knee}
+                    onChange={(e) => setNKAbvKnee(e.target.value)}
+                    placeholder='enter neck to abv knee'
+                    className='p-2 text-center border rounded-xl outline-none '
+                  />
+                </div>
+                <div className='flex flex-col'>
+                  <label className='text-center text-gray-500'>
+                    Arm Length
+                  </label>
+                  <input
+                    type='text'
+                    value={a_length}
+                    onChange={(e) => setALength(e.target.value)}
+                    placeholder='enter arm length'
+                    className='p-2 text-center border rounded-xl outline-none'
+                  />
+                </div>
+                <div className='flex flex-col'>
+                  <label className='text-center text-gray-500'>
+                    Shoulder Seam
+                  </label>
+                  <input
+                    type='text'
+                    value={s_seam}
+                    onChange={(e) => setSSeam(e.target.value)}
+                    placeholder='enter shoulder seam'
+                    className='p-2 text-center border rounded-xl outline-none'
+                  />
+                </div>
+                <div className='flex flex-col'>
+                  <label className='text-center text-gray-500'>Arm Hole</label>
+                  <input
+                    type='text'
+                    value={arm_hole}
+                    onChange={(e) => setArmHole(e.target.value)}
+                    placeholder='enter arm hole'
+                    className='p-2 text-center border rounded-xl outline-none '
+                  />
+                </div>
+                <div className='flex flex-col'>
+                  <label className='text-center text-gray-500'>Bicep</label>
+                  <input
+                    type='text'
+                    value={bicep}
+                    onChange={(e) => setBicep(e.target.value)}
+                    placeholder='enter bicep'
+                    className='p-2 text-center border rounded-xl outline-none '
+                  />
+                </div>
+                <div className='flex flex-col'>
+                  <label className='text-center text-gray-500'>Fore Arm</label>
+                  <input
+                    type='text'
+                    value={fore_arm}
+                    onChange={(e) => setForeArm(e.target.value)}
+                    placeholder='enter fore arm'
+                    className='p-2 text-center border rounded-xl outline-none '
+                  />
+                </div>
+                <div className='flex flex-col'>
+                  <label className='text-center text-gray-500'>Wrist</label>
+                  <input
+                    type='text'
+                    value={wrist}
+                    onChange={(e) => setWrist(e.target.value)}
+                    placeholder='enter wrist'
+                    className='p-2 text-center border rounded-xl outline-none '
+                  />
+                </div>
+                <div className='flex flex-col'>
+                  <label className='text-center text-gray-500'>
+                    V Neck Cut
+                  </label>
+                  <input
+                    type='text'
+                    value={v_neck_cut}
+                    onChange={(e) => setVNeckCut(e.target.value)}
+                    placeholder='enter v neck cut'
+                    className='p-2 text-center border rounded-xl outline-none '
+                  />
+                </div>
+                <div className='flex flex-col'>
+                  <label className='text-center text-gray-500'>
+                    Abv Knee to Ankle
+                  </label>
+                  <input
+                    type='text'
+                    value={abv_knee_ankle}
+                    onChange={(e) => setAbvKneeAnkle(e.target.value)}
+                    placeholder='enter abv knee to ankle'
+                    className='w-full p-2 text-center border rounded-xl outline-none '
+                  />
+                </div>
+                <div className='flex flex-col'>
+                  <label className='text-center text-gray-500'>
+                    Waist to Abv Knee
+                  </label>
+                  <input
+                    type='text'
+                    value={w_abv_knee}
+                    onChange={(e) => setWAbvKnee(e.target.value)}
+                    placeholder='enter waist to abv knee'
+                    className='p-2 text-center border rounded-xl outline-none '
+                  />
+                </div>
+              </div>
+            </Tab.Panel>
+            <Tab.Panel
+              className={classNames(
+                "rounded-xl bg-white p-3",
+                "ring-white/60 ring-offset-2 ring-offset-green-400 focus:outline-none focus:ring-2"
+              )}>
+              Male measurements
+            </Tab.Panel>
+          </Tab.Panels>
+        </Tab.Group>
       </div>
 
       <div className='pb-6 pt-12'>

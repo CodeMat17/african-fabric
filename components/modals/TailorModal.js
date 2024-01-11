@@ -10,7 +10,14 @@ import { AiOutlineLoading } from "react-icons/ai";
 import { CgSpinnerAlt } from "react-icons/cg";
 import { GiCheckMark } from "react-icons/gi";
 
-const TailorModal = ({ id, tailoring, tailor, assigned_on, finished_on }) => {
+const TailorModal = ({
+  id,
+  tailoring,
+  tailor,
+  assigned_on,
+  finished_on,
+  qc_admin,
+}) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -88,10 +95,10 @@ const TailorModal = ({ id, tailoring, tailor, assigned_on, finished_on }) => {
     }
   };
 
-
   return (
     <>
       <button
+        disabled={qc_admin === false}
         type='button'
         onClick={openModal}
         className={`relative ${

@@ -10,7 +10,7 @@ import { AiOutlineLoading } from "react-icons/ai";
 import { CgSpinnerAlt } from "react-icons/cg";
 import { GiCheckMark } from "react-icons/gi";
 
-const BeaderModal = ({ id, beader, beading, beaders, tailoring }) => {
+const BeaderModal = ({ id, beader, beading, beaders, tailoring, qc_admin }) => {
   const router = useRouter();
 
   const [assignBeaderSwitch, setAssignBeaderSwitch] = useState(false);
@@ -125,10 +125,10 @@ const BeaderModal = ({ id, beader, beading, beaders, tailoring }) => {
     }
   };
 
-
   return (
     <>
       <button
+        disabled={qc_admin === false}
         type='button'
         onClick={openModal}
         className={`relative ${

@@ -9,7 +9,7 @@ import { AiOutlineLoading } from "react-icons/ai";
 import { CgSpinnerAlt } from "react-icons/cg";
 import { GiCheckMark } from "react-icons/gi";
 
-const QualityControlModal = ({ id, beading, q_c }) => {
+const QualityControlModal = ({ id, beading, q_c, qc_admin }) => {
   const router = useRouter()
   const [loading, setLoading] = useState(false);
 
@@ -64,6 +64,7 @@ const QualityControlModal = ({ id, beading, q_c }) => {
   return (
     <>
       <button
+        disabled={qc_admin === false}
         type='button'
         onClick={openModal}
         className={`relative whitespace-nowrap ${
@@ -146,7 +147,9 @@ const QualityControlModal = ({ id, beading, q_c }) => {
                         </button>
                       </>
                     ) : (
-                      <p className="text-center text-red-400 mt-3">Beading must be confirmed before quality control checks</p>
+                      <p className='text-center text-red-400 mt-3'>
+                        Beading must be confirmed before quality control checks
+                      </p>
                     )}
                   </div>
 

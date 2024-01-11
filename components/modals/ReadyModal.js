@@ -9,7 +9,7 @@ import { AiOutlineLoading } from "react-icons/ai";
 import { CgSpinnerAlt } from "react-icons/cg";
 import { GiCheckMark } from "react-icons/gi";
 
-const ReadyModal = ({ id, q_c, ready }) => {
+const ReadyModal = ({ id, q_c, fitting_done, ready, qc_admin }) => {
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
@@ -63,13 +63,14 @@ const ReadyModal = ({ id, q_c, ready }) => {
   return (
     <>
       <button
+        disabled={qc_admin === false}
         type='button'
         onClick={openModal}
         className={`relative ${
           ready ? "bg-[#55c694]" : "bg-[#55c694]/40"
         } w-[25%] mx-auto flex items-center justify-center  text-white`}>
         Ready
-        {q_c && !ready && (
+        {fitting_done && !ready && (
           <AiOutlineLoading className='absolute text-xl animate-spin text-red-500' />
         )}
         {ready && (
@@ -107,7 +108,7 @@ const ReadyModal = ({ id, q_c, ready }) => {
                     Job Ready?
                   </Dialog.Title>
                   <div className='mt-2 text-sm'>
-                    {q_c ? (
+                    {fitting_done ? (
                       <>
                         <div className='flex items-center justify-center gap-4 py-6'>
                           <p>Not ready</p>
@@ -147,7 +148,7 @@ const ReadyModal = ({ id, q_c, ready }) => {
                     ) : (
                       <p className='text-red-400 text-center mt-3'>
                         To confirm if job is ready, you must have to confirm
-                        quality control checks first.
+                        fitting status first.
                       </p>
                     )}
                   </div>

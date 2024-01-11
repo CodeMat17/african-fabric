@@ -6,12 +6,22 @@ import Measurement from "@/components/Measurement";
 import SketchScreenshotComponent from "@/components/SketchScreenshotComponent";
 import UploadGalleryPhotos from "@/components/UploadGalleryPhotos";
 import { supabaseClient } from "@/supabaseClient";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import dayjs from "dayjs";
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 
 export const revalidate = 0;
 
 const OrderDetailsPage = async ({ params: { id } }) => {
+  const cookieStore = cookies();
+  const supabase = createServerComponentClient({ cookies: () => cookieStore });
+
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  
+  
   let query = supabaseClient;
 
   let { data: customer } = await query
@@ -38,14 +48,14 @@ const OrderDetailsPage = async ({ params: { id } }) => {
 
       <div className=' w-full py-8 flex flex-col lg:flex-row gap-8 lg:gap-2'>
         <div className='flex flex-col items-center justify-center lg:items-start w-full lg:w-[55%]'>
-          {customer.avatar &&
+          {customer.avatar && (
             <CdImageComponent
               width='96'
               height='96'
               image={customer.avatar}
               radius='rounded-full'
             />
-          }
+          )}
           <h1 className=' text-xl font-medium truncate'>{customer.name}</h1>
           <p className='text-gray-500'>{customer.email}</p>
           <p className='text-gray-500'>{customer.tel}</p>
@@ -56,6 +66,9 @@ const OrderDetailsPage = async ({ params: { id } }) => {
             </p>
           </div>
         </div>
+
+        {/* <pre>{JSON.stringify(customer, null, 2)}</pre> */}
+
         <div className=' flex items-center justify-center w-full lg:w-[45%]'>
           {customer.tailor ? (
             <JobProgressBar
@@ -68,7 +81,12 @@ const OrderDetailsPage = async ({ params: { id } }) => {
               beader={customer.beader}
               q_c={customer.q_c}
               ready={customer.ready}
+              status={customer.status}
+              fitting_date={customer.fitting_date}
+              fitting_confirmed_by={customer.fitting_confirmed_by}
+              fitting_done={customer.fitting_done}
               beaders={beaders}
+              session={session}
             />
           ) : (
             <div className='flex flex-col items-center justify-center'>
@@ -108,14 +126,14 @@ const OrderDetailsPage = async ({ params: { id } }) => {
           <div className='flex flex-col lg:items-center '>
             <p className='font-medium text-lg text-center'>Preferred Fabric</p>
             <div className='mt-2 rounded-xl w-auto'>
-              {customer.fabric &&
+              {customer.fabric && (
                 <CdImageComponent
                   width='280'
                   height='150'
                   image={customer.fabric}
                   radius='rounded-xl'
                 />
-              }
+              )}
             </div>
           </div>
           <div className='w-full flex flex-col max-w-xs sm:max-w-sm mx-auto'>

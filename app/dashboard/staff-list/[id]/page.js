@@ -1,5 +1,6 @@
 import DeleteStaff from "@/components/profile-staff/DeleteStaff";
 import EditStaff from "@/components/profile-staff/EditStaff";
+import Level2Admin from "@/components/profile-staff/Level2Admin";
 import MakeAdmin from "@/components/profile-staff/MakeAdmin";
 import ProfileStaff from "@/components/profile-staff/ProfileStaff";
 import { supabaseClient } from "@/supabaseClient";
@@ -14,7 +15,7 @@ const StaffDetail = async ({ params: { id } }) => {
     count,
   } = await supabaseClient
     .from("staffers")
-    .select("id, name, tel, email, position, is_admin")
+    .select("id, name, tel, email, position, is_admin, qc_admin")
     .match({ id })
     .single();
 
@@ -46,8 +47,8 @@ const StaffDetail = async ({ params: { id } }) => {
           </p>
         </div>
         <div className='flex gap-4'>
-          <div className='w-full'>
-            <label>Position</label>
+          <div className='w-full flex flex-col'>
+            <label className='text-center '>Position</label>
             <p className='border px-3 py-2.5 rounded-xl bg-gray-100 text-center'>
               {staff.position ? (
                 staff.position
@@ -56,8 +57,8 @@ const StaffDetail = async ({ params: { id } }) => {
               )}
             </p>
           </div>
-          <div className='w-full'>
-            <label>Is admin</label>
+          <div className='w-full flex flex-col'>
+            <label className='text-center'>Is admin</label>
             <p className='border px-3 py-2.5 rounded-xl bg-gray-100  text-center'>
               {staff.is_admin ? (
                 <span className='text-green-600 '>Yes</span>
@@ -68,7 +69,6 @@ const StaffDetail = async ({ params: { id } }) => {
           </div>
         </div>
         <div className='mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3'>
-          <DeleteStaff id={staff.id} name={staff.name} />
           <EditStaff
             id={staff.id}
             staff_name={staff.name}
@@ -82,7 +82,13 @@ const StaffDetail = async ({ params: { id } }) => {
           />
 
           <MakeAdmin id={staff.id} admin={staff.is_admin} />
+          {staff?.is_admin ? (
+            <Level2Admin id={staff.id} level2_admin={staff.qc_admin} />
+          ) : (
+            <DeleteStaff id={staff.id} name={staff.name} />
+          )}
         </div>
+        {staff?.is_admin && <DeleteStaff id={staff.id} name={staff.name} />}
       </div>
     </div>
   );
