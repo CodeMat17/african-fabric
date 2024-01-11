@@ -162,7 +162,9 @@ const Fitting = ({
                                 <>
                                   <p className='text-sm'>
                                     Fitting date:{" "}
-                                    {dayjs(fitting_date).format("MMM DD, YYYY")}
+                                    {dayjs(fitting_date).format(
+                                      "MMM DD, YYYY h:mm a"
+                                    )}
                                   </p>
                                   <p className='text-sm'>
                                     Scheduled by: {fitting_confirmed_by}
