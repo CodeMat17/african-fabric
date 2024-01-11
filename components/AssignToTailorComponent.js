@@ -21,6 +21,7 @@ const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
     setTailor(e.target.value);
   };
 
+  const [assignedOnDate, setAssignedOnDate] = useState();
   const [finishDate, setFinishDate] = useState();
 
   // toISOString();
@@ -32,7 +33,7 @@ const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
         .from("customers")
         .update({
           tailor,
-          tailoring_assigned_on: new Date(),
+          tailoring_assigned_on: assignedOnDate,
           tailoring_finish_on: finishDate,
         })
         .eq("id", id)
@@ -46,7 +47,7 @@ const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
           .from("staffers")
           .update({
             busy: true,
-            assigned_on: new Date(),
+            assigned_on: assignedOnDate,
             to_finish_on: finishDate,
           })
           .eq("name", tailor)
@@ -147,7 +148,14 @@ const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
         <div>
           <label className='text-sm'>Assigned on</label>
           <p className='border-2 py-4 px-3 mt-1 rounded-xl text-gray-500 cursor-not-allowed'>
-            {dayjs().format("MMM DD, YYYY")}
+            <DatePicker
+              // showIcon
+              placeholderText='Click to add assigned on date'
+              selected={assignedOnDate}
+              onChange={(date) => setAssignedOnDate(date)}
+              dateFormat='MMM dd, yyyy'
+              className='bg-inherit outline-none text-gray-500'
+            />
           </p>
         </div>
 
