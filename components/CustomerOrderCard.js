@@ -31,7 +31,7 @@ const CustomerOrderCard = ({ data }) => {
                     className='rounded-full'
                   />
                 }
-                <h1 className='text font-medium mt-2 text-center'>
+                <h1 className='font-medium mt-2 text-center w-full'>
                   {user.name}
                 </h1>
                 <p className='text-sm text-center'>{user.email}</p>
