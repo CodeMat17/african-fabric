@@ -29,7 +29,7 @@ const UpdateInfo = async ({ params: { id } }) => {
         <CdImageComponent
           width='130'
           height='130'
-          image={customer.avatar}
+          image={customer?.avatar}
           radius='rounded-full'
         />
       </div>
@@ -57,6 +57,22 @@ const UpdateInfo = async ({ params: { id } }) => {
           c_v_neck_cut={customer.v_neck_cut}
           c_abv_knee_ankle={customer.abv_knee_ankle}
           c_w_abv_knee={customer.w_abv_knee}
+          c_sex={customer.sex}
+          c_forehead={customer.forehead}
+          c_chest_at_ampits={customer.chest_at_ampits}
+          c_chest_or_bust={customer.chest_or_bust}
+          c_thigh_at_crotch={customer.thigh_at_crotch}
+          c_mid_thigh={customer.mid_thigh}
+          c_knee={customer.knee}
+          c_below_knee={customer.below_knee}
+          c_calf={customer.calf}
+          c_ankle={customer.ankle}
+          c_elbow={customer.elbow}
+          c_forearm={customer.forearm}
+          c_torso_circum={customer.torso_circum}
+          c_pants_length={customer.pants_length}
+          c_shoulders={customer.shoulders}
+          c_top_length={customer.top_length}
         />
       </div>
     </div>
