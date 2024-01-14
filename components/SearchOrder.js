@@ -10,6 +10,8 @@ const SearchOrder = () => {
   const [text, setText] = useState("");
   const [query] = useDebounce(text, 500);
 
+  console.log('query - ', query)
+
   useEffect(() => {
     if (!query) {
       router.push(`/dashboard/orders`);

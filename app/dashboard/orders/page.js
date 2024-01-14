@@ -1,10 +1,7 @@
-import MediumTable from "@/components/MediumTable";
-import MobileTable from "@/components/MobileTable";
+import CustomerOrderCard from "@/components/CustomerOrderCard";
 import Pagination from "@/components/Pagination";
-import CustomerCard from "@/components/RecentCustomerCard";
 import SearchOrder from "@/components/SearchOrder";
 import { supabaseClient } from "../../../supabaseClient";
-import CustomerOrderCard from "@/components/CustomerOrderCard";
 
 export const revalidate = 0;
 
@@ -15,18 +12,24 @@ const OrdersPage = async ({ searchParams }) => {
 
   let query = supabaseClient
     .from("customers")
-    .select("id, created_at, name, email, tel, style, status, avatar, fabric, tailoring, beading, q_c, ready", {
-      count: "exact",
-    })
+    .select(
+      "id, created_at, name, email, tel, style, status, avatar, fabric, tailoring, beading, q_c, ready",
+      {
+        count: "exact",
+      }
+    )
     .order("created_at", { ascending: false })
     .range(start, end);
 
   if (search) {
-    query = query.textSearch("name", search);
+    query = query.textSearch("name", search, {
+      type: "websearch",
+      config: "english",
+    });
   }
 
   const { data, count } = await query;
-
+  console.log("check data - ", data);
   return (
     <div className='px-4 py-8'>
       <h1 className='text-center uppercase text-xl font-medium'>

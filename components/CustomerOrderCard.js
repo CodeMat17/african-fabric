@@ -8,11 +8,11 @@ import LinearProgressBar from "./LinearProgressBar";
 const CustomerOrderCard = ({ data }) => {
   return (
     <div>
-      {data && data.length < 1 ? (
+      {data && data?.length < 1 ? (
         <p className='text-center py-12'>Invalid name was entered</p>
       ) : (
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 md:gap-6'>
-          {data.map((user) => (
+          {data?.map((user) => (
             <Link
               href={`/dashboard/orders/${user.id}`}
               key={user.id}
@@ -36,7 +36,7 @@ const CustomerOrderCard = ({ data }) => {
                 </h1>
                 <p className='text-sm text-center'>{user.email}</p>
                 <p className='text-sm text-center'>{user.tel}</p>
-                <div className='flex flex-col xl:flex-row items-center text-xs text-gray-500 mt-2 capitalize justify-center gap-0 xl:gap-2'>
+                <div className='w-full flex flex-col xl:flex-row items-center text-xs text-gray-500 mt-2 capitalize justify-center gap-0 xl:gap-2'>
                   <span className='w-full text-center'> {user.style}</span>{" "}
                   <span className='hidden xl:block'>&bull;</span>
                   <span className='w-full text-center whitespace-nowrap'>
