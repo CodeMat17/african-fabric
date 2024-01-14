@@ -2,7 +2,8 @@ import AssignToTailorButton from "@/components/AssignToTailorButton";
 import CdImageComponent from "@/components/CdImageComponent";
 import Gallery from "@/components/Gallery";
 import JobProgressBar from "@/components/JobProgressBar";
-import Measurement from "@/components/Measurement";
+import MeasurementMen from "@/components/MeasurementMen";
+import MeasurementWomen from "@/components/MeasurementWomen";
 import SketchScreenshotComponent from "@/components/SketchScreenshotComponent";
 import UploadGalleryPhotos from "@/components/UploadGalleryPhotos";
 import { supabaseClient } from "@/supabaseClient";
@@ -20,8 +21,7 @@ const OrderDetailsPage = async ({ params: { id } }) => {
   const {
     data: { session },
   } = await supabase.auth.getSession();
-  
-  
+
   let query = supabaseClient;
 
   let { data: customer } = await query
@@ -30,7 +30,10 @@ const OrderDetailsPage = async ({ params: { id } }) => {
     .match({ id })
     .single();
 
-  let { data: beaders } = await query.from("staffers").select("id, name, status").eq('position', 'Beader');
+  let { data: beaders } = await query
+    .from("staffers")
+    .select("id, name, status")
+    .eq("position", "Beader");
 
   let { data: gallery } = await query
     .from("gallery")
@@ -100,25 +103,51 @@ const OrderDetailsPage = async ({ params: { id } }) => {
         </div>
       </div>
       <div className='w-full flex justify-center'>
-        <Measurement
-          neck={customer.neck}
-          o_bust={customer.o_bust}
-          bust={customer.bust}
-          u_bust={customer.u_bust}
-          waist={customer.waist}
-          hips={customer.hips}
-          nk_heel={customer.nk_heel}
-          nk_abov_knee={customer.nk_abov_knee}
-          a_length={customer.a_length}
-          s_seam={customer.s_seam}
-          arm_hole={customer.arm_hole}
-          bicep={customer.bicep}
-          fore_arm={customer.fore_arm}
-          wrist={customer.wrist}
-          v_neck_cut={customer.v_neck_cut}
-          abv_knee_ankle={customer.abv_knee_ankle}
-          w_abv_knee={customer.w_abv_knee}
-        />
+        {customer.sex === "Women" && (
+          <MeasurementWomen
+            neck={customer.neck}
+            o_bust={customer.o_bust}
+            bust={customer.bust}
+            u_bust={customer.u_bust}
+            waist={customer.waist}
+            hips={customer.hips}
+            nk_heel={customer.nk_heel}
+            nk_abov_knee={customer.nk_abov_knee}
+            a_length={customer.a_length}
+            s_seam={customer.s_seam}
+            arm_hole={customer.arm_hole}
+            bicep={customer.bicep}
+            fore_arm={customer.fore_arm}
+            wrist={customer.wrist}
+            v_neck_cut={customer.v_neck_cut}
+            abv_knee_ankle={customer.abv_knee_ankle}
+            w_abv_knee={customer.w_abv_knee}
+          />
+        )}
+        {customer.sex === "Men" && (
+          <MeasurementMen
+            neck={customer.neck}
+            waist={customer.waist}
+            hips={customer.hips}
+            bicep={customer.bicep}
+            wrist={customer.wrist}
+            forehead={customer.forehead}
+            chest_at_ampits={customer.chest_at_ampits}
+            chest_or_bust={customer.chest_or_bust}
+            thigh_at_crotch={customer.thigh_at_crotch}
+            mid_thigh={customer.mid_thigh}
+            knee={customer.knee}
+            below_knee={customer.below_knee}
+            calf={customer.calf}
+            ankle={customer.ankle}
+            elbow={customer.elbow}
+            forearm={customer.forearm}
+            torso_circum={customer.torso_circum}
+            pants_length={customer.pants_length}
+            shoulders={customer.shoulders}
+            top_length={customer.top_length}
+          />
+        )}
       </div>
 
       <div className='flex flex-col items-center justify-center pt-12'>

@@ -11,7 +11,7 @@ const Tag = ({ item, value }) => (
 
 import { Accordion, AccordionItem } from "@nextui-org/react";
 
-const Measurement = ({
+const MeasurementWomen = ({
   neck,
   o_bust,
   bust,
@@ -29,8 +29,8 @@ const Measurement = ({
   v_neck_cut,
   abv_knee_ankle,
   w_abv_knee,
+  
 }) => {
-
   const measurements = [
     { id: 1, item: "Neck", value: neck },
     { id: 2, item: "O-Bust", value: o_bust },
@@ -43,7 +43,7 @@ const Measurement = ({
     { id: 9, item: "A-Length", value: a_length },
     { id: 10, item: "S-Seam", value: s_seam },
     { id: 11, item: "Arm Hole", value: arm_hole },
-    { id: 12, item: "Bicep", value:  bicep},
+    { id: 12, item: "Bicep", value: bicep },
     { id: 13, item: "Fore Arm", value: fore_arm },
     { id: 14, item: "Wrist", value: wrist },
     { id: 15, item: "V Neck Cut", value: v_neck_cut },
@@ -75,4 +75,4 @@ const Measurement = ({
   );
 };
 
-export default Measurement;
+export default MeasurementWomen;
