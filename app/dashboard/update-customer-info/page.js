@@ -22,7 +22,10 @@ const UpdateCustomerInfo = async ({ searchParams }) => {
     .range(start, end);
 
   if (search) {
-    query = query.textSearch("name", search);
+    query = query.textSearch("name", search, {
+      type: "websearch",
+      config: "english",
+    });
   }
 
   const { data, count } = await query;

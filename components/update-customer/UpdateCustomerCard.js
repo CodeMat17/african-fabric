@@ -11,7 +11,7 @@ const UpdateCustomerCard = ({ data }) => {
         <p className='text-center py-12'>Invalid name was entered</p>
       ) : (
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8 md:gap-6'>
-          {data.map((user) => (
+          {data?.map((user) => (
             <Link
               href={`/dashboard/update-customer-info/${user.id}`}
               key={user.id}

@@ -29,7 +29,7 @@ const OrdersPage = async ({ searchParams }) => {
   }
 
   const { data, count } = await query;
-  console.log("check data - ", data);
+
   return (
     <div className='px-4 py-8'>
       <h1 className='text-center uppercase text-xl font-medium'>
