@@ -5,6 +5,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { Fragment, useState } from "react";
 import { CgSpinnerAlt } from "react-icons/cg";
+import { TbEye, TbEyeClosed } from "react-icons/tb";
 
 const SigninComponent = () => {
   const supabase = createClientComponentClient();
@@ -14,6 +15,7 @@ const SigninComponent = () => {
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState(null);
   const [loading, setLoading] = useState(false);
+const [flipPassword, setFlipPassword] = useState(false)
 
   let [isOpen, setIsOpen] = useState(false);
 
@@ -116,7 +118,7 @@ const SigninComponent = () => {
                       <div>
                         <label className=' text-gray-500'>Password</label>
                         <input
-                          type='password'
+                          type={flipPassword ? "text" : "password"}
                           required
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
@@ -127,6 +129,14 @@ const SigninComponent = () => {
                         <span className='hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block'>
                           Password must be at least 6 chars long
                         </span>
+                        <div className='flex items-center justify-end text-sm mt-2'>
+                          Flip password{" "}
+                          <button
+                            onClick={() => setFlipPassword(!flipPassword)}
+                            className='ml-2 text-xl border-[0.5px] rounded-xl p-1 text-[#55c694] bg-[#55c694]/5 shadow-md'>
+                            {flipPassword ? <TbEyeClosed /> : <TbEye />}
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </form>

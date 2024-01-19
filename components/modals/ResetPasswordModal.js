@@ -4,7 +4,6 @@ import { supabaseClient } from "@/supabaseClient";
 import { Dialog, Transition } from "@headlessui/react";
 import { useRouter } from "next/navigation";
 import { Fragment, useState } from "react";
-import toast from "react-hot-toast";
 import { CgSpinnerAlt } from "react-icons/cg";
 
 const RestPasswordModal = ({}) => {
@@ -13,6 +12,7 @@ const RestPasswordModal = ({}) => {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
   const [invalidEmail, setInvalidEmail] = useState(null);
+  const [successful, setSuccessful] = useState(false);
 
   const emailPattern = "[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$";
 
@@ -28,11 +28,11 @@ const RestPasswordModal = ({}) => {
 
   const resetPassword = async () => {
     setLoading(true);
-    setErrorMsg(null)
-    setInvalidEmail(null)
+    setErrorMsg(null);
+    setInvalidEmail(null);
     if (!email.match(emailPattern) || !email) {
       setInvalidEmail("Enter a valid email address.");
-       setLoading(false);
+      setLoading(false);
       return;
     }
 
@@ -45,11 +45,7 @@ const RestPasswordModal = ({}) => {
           setErrorMsg(error.message);
         }
         if (data) {
-          toast.success(`Check your email for confirmation link`, {
-            duration: 5000,
-            position: "top-center",
-          });
-          closeModal();
+          setSuccessful(true);
         }
       } catch (error) {
         console.log("Error Msg: ", error.message);
@@ -57,7 +53,6 @@ const RestPasswordModal = ({}) => {
         setLoading(false);
       }
     }
-
   };
 
   return (
@@ -98,6 +93,13 @@ const RestPasswordModal = ({}) => {
                     className='text-lg text-center font-medium leading-6 text-gray-900'>
                     Reset Password
                   </Dialog.Title>
+
+                  {successful && (
+                    <div className='text-green-600 text-sm text-center bg-green-100 rounded-xl mt-3 py-2 px-3'>
+                      Successful! Check your email for the reset link.
+                    </div>
+                  )}
+
                   {errorMsg && (
                     <div className='my-4 text-center bg-red-100 px-4 py-2 rounded-xl text-sm text-red-600'>
                       {errorMsg}
@@ -126,7 +128,7 @@ const RestPasswordModal = ({}) => {
                       Close
                     </button>
                     <button
-                        onClick={resetPassword}
+                      onClick={resetPassword}
                       className='bg-[#55c694] w-full rounded-xl px-3 py-2 text-white font-medium tracking-wider test-sm'>
                       {loading ? (
                         <div className='whitespace-nowrap flex items-center justify-center gap-2'>
