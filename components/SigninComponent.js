@@ -15,7 +15,7 @@ const SigninComponent = () => {
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState(null);
   const [loading, setLoading] = useState(false);
-const [flipPassword, setFlipPassword] = useState(false)
+  const [flipPassword, setFlipPassword] = useState(false);
 
   let [isOpen, setIsOpen] = useState(false);
 
@@ -26,6 +26,11 @@ const [flipPassword, setFlipPassword] = useState(false)
   function openModal() {
     setIsOpen(true);
   }
+
+  const flipPasswordFn = (e) => {
+    e.preventDefault();
+    setFlipPassword(!flipPassword);
+  };
 
   const signIn = async (e) => {
     e.preventDefault();
@@ -132,8 +137,8 @@ const [flipPassword, setFlipPassword] = useState(false)
                         <div className='flex items-center justify-end text-sm mt-2'>
                           Flip password{" "}
                           <button
-                            onClick={() => setFlipPassword(!flipPassword)}
-                            className='ml-2 text-xl border-[0.5px] rounded-xl p-1 text-[#55c694] bg-[#55c694]/5 shadow-md'>
+                            onClick={flipPasswordFn}
+                            className='ml-2 text-xl border-[0.5px] rounded-md p-1 text-[#55c694] bg-[#55c694]/5 shadow-md'>
                             {flipPassword ? <TbEyeClosed /> : <TbEye />}
                           </button>
                         </div>
