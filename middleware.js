@@ -26,7 +26,7 @@ export const config = {
   matcher: [
     "/",
     "/account",
-    // '/signup-successful',
+    // "/reset-password",
     "/dashboard",
     "/dashboard/:path*",
   ],

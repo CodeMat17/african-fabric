@@ -13,7 +13,7 @@ import { Accordion, AccordionItem } from "@nextui-org/react";
 
 const MeasurementMen = ({
   neck,
-forehead,
+  forehead,
   waist,
   hips,
   bicep,
@@ -26,7 +26,8 @@ forehead,
   calf,
   ankle,
   elbow,
-  forearm, wrist,
+  forearm,
+  wrist,
   torso_circum,
   pants_length,
   shoulders,

@@ -1,7 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-// import { TbMailForward, TbShieldLock } from "react-icons/tb";
+import { useRouter } from "next/navigation"; 
+import ResetPasswordModal from '@/components/modals/ResetPasswordModal'
 import SigninComponent from "@/components/SigninComponent";
 import SignupComponent from "@/components/SignupComponent";
 import Image from "next/image";
@@ -39,6 +39,11 @@ export default function Home() {
         <div className='flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-12'>
           <SignupComponent />
           <SigninComponent />
+        </div>
+        <div className='flex justify-center items-center gap-1 text-sm mt-6'>
+          Forgot password?{" "}
+          
+          <ResetPasswordModal />
         </div>
       </div>
     </div>
