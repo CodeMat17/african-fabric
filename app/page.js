@@ -6,6 +6,8 @@ import ResetPasswordModal from "@/components/modals/ResetPasswordModal";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+export const revalidate = 0
+
 export default function Home() {
   const router = useRouter();
 
