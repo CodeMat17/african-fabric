@@ -26,10 +26,13 @@ const RestPasswordModal = ({}) => {
     setIsOpen(true);
   }
 
+  
+
   const resetPassword = async () => {
     setLoading(true);
     setErrorMsg(null);
     setInvalidEmail(null);
+    setSuccessful(false)
     if (!email.match(emailPattern) || !email) {
       setInvalidEmail("Enter a valid email address.");
       setLoading(false);

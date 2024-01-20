@@ -1,12 +1,10 @@
 "use client";
 
+import MagicSignup from "@/components/MagicSignup";
 import SigninComponent from "@/components/SigninComponent";
-import SignupComponent from "@/components/SignupComponent";
 import ResetPasswordModal from "@/components/modals/ResetPasswordModal";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import toast from "react-hot-toast";
 
 export default function Home() {
   const router = useRouter();
@@ -39,12 +37,13 @@ export default function Home() {
         </div>
 
         <div className='flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-12'>
-          <SignupComponent />
-          <SigninComponent />
+          {/* <SignupComponent /> */}
+          {/* <SigninComponent /> */}
+          <MagicSignup />
         </div>
-        <div className='flex justify-center items-center gap-1 text-sm mt-6'>
+        {/* <div className='flex justify-center items-center gap-1 text-sm mt-6'>
           Forgot password? <ResetPasswordModal />
-        </div>
+        </div> */}
       </div>
     </div>
     // <div className=' flex items-center justify-center bg-cover bg-center bg-gradient-to-tr from-purple-950 via-green-800 to-green-900'>
