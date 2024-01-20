@@ -54,9 +54,9 @@ const MagicSignup = () => {
       let { data, error } = await supabase.auth.signInWithOtp({
         email,
         // password,
-        // options: {
-        //   emailRedirectTo: `${location.origin}/auth/callback`,
-        // },
+        options: {
+          emailRedirectTo: `${location.origin}/auth/callback`,
+        },
       });
 
       if (error) {
