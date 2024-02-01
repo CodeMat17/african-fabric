@@ -14,16 +14,16 @@ const AccountPage = async () => {
     .select("id, name, tel, position")
     .single();
 
-  if (data?.name && data?.position) {
+  if (data?.name && data?.tel) {
     redirect("/dashboard");
   }
 
-  if (data?.name != 'empty' && !data?.position) {
+  if (data?.name != 'empty' && !data?.tel) {
     return (
       <div className='px-4 pt-32'>
         <div className='text-center p-4 rounded-xl bg-[#55c694]/10 text-[#55c694] font-medium max-w-sm mx-auto'>
           Welcome,{" "}
-          <span>
+          <span>s
        {data?.name}. Wait for the SuperAdmin to profile you and grant you
             access.
           </span>

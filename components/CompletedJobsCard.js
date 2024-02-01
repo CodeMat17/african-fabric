@@ -22,6 +22,7 @@ const CompletedJobsCard = ({
   fabric,
   completed_on,
   delivered_on,
+  qc_admin,
 }) => {
   const router = useRouter();
 
@@ -128,38 +129,51 @@ const CompletedJobsCard = ({
                 Delivered on
                 {dayjs(delivered_on).format("MMM DD, YYYY")}
               </p>
-              <button
-                onClick={deleteDeliveredDate}
-                className='mt-1 px-2 py-1.5 rounded-md bg-red-100'>
-                {loading ? (
-                  <CgSpinnerAlt className='text-xl text-red-600 animate-spin' />
-                ) : (
-                  <TbX className='text-xl text-red-600' />
-                )}
-              </button>
-            </div>
-          ) : (
-            <div className='mt-3 flex items-center justify-cente gap-3'>
-              <DatePicker
-                // showIcon
-                placeholderText='Delivered on...'
-                selected={deliveredOn}
-                onChange={(date) => setDeliveredOn(date)}
-                dateFormat='MMM dd, yyyy'
-                className='bg-inherit outline-none text-gray-500 border px-3 py-1.5 w-full rounded-md cursor-pointer'
-              />
-              {deliveredOn && (
+              {qc_admin && (
                 <button
-                  onClick={deliveredDate}
-                  className='px-2 py-1.5 rounded-md bg-green-100'>
+                  onClick={deleteDeliveredDate}
+                  className='mt-1 px-2 py-1.5 rounded-md bg-red-100'>
                   {loading ? (
-                    <CgSpinnerAlt className='text-xl text-green-600 animate-spin' />
+                    <CgSpinnerAlt className='text-xl text-red-600 animate-spin' />
                   ) : (
-                    <TbArrowBigRightLines className='text-xl text-green-600' />
+                    <TbX className='text-xl text-red-600' />
                   )}
                 </button>
               )}
             </div>
+          ) : (
+            <>
+              {qc_admin ? (
+                <div className='mt-3 flex items-center justify-cente gap-3'>
+                  <DatePicker
+                    // showIcon
+                    placeholderText='Delivered on...'
+                    selected={deliveredOn}
+                    onChange={(date) => setDeliveredOn(date)}
+                    dateFormat='MMM dd, yyyy'
+                    className='bg-inherit outline-none text-gray-500 border px-3 py-1.5 w-full rounded-md cursor-pointer'
+                  />
+
+                  <>
+                    {deliveredOn && (
+                      <button
+                        onClick={deliveredDate}
+                        className='px-2 py-1.5 rounded-md bg-green-100'>
+                        {loading ? (
+                          <CgSpinnerAlt className='text-xl text-green-600 animate-spin' />
+                        ) : (
+                          <TbArrowBigRightLines className='text-xl text-green-600' />
+                        )}
+                      </button>
+                    )}
+                  </>
+                </div>
+              ) : (
+                <p className='mt-2 text-xs text-red-400'>
+                  Yet to be delivered
+                </p>
+              )}
+            </>
           )}
         </div>
       </div>
