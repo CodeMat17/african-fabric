@@ -3,15 +3,18 @@ import { supabaseClient } from "@/supabaseClient";
 
 export const revalidate = 0;
 
-
 const StaffList = async () => {
   const query = supabaseClient
     .from("staffers")
     .select("*")
     .order("name", { ascending: true });
 
-  const { data: all } = await query.is("position", null);
-  const { data: tailors } = await query.eq("position", "Tailor");
+  const { data: all } = await query.is("is_admin", false);
+  const { data: tailors } = await supabaseClient
+    .from("staffers")
+    .select("*")
+    .order("name", { ascending: true })
+    .eq("position", "Tailor");
   const { data: consultants } = await supabaseClient
     .from("staffers")
     .select("*")
@@ -24,11 +27,14 @@ const StaffList = async () => {
     .order("name", { ascending: true })
     .eq("position", "Beader");
 
-    const { data: others } = await supabaseClient
-      .from("staffers")
-      .select("*")
-      .order("name", { ascending: true })
-      .eq("position", "Others");
+  const { data: others } = await supabaseClient
+    .from("staffers")
+    .select("*")
+    .order("name", { ascending: true })
+    // .eq("position", "Others")
+    .neq("position", "Tailor")
+    .neq("position", "Consultant")
+    .neq("position", "Beader");
 
   return (
     <div className='px-2 py-8'>
@@ -43,6 +49,7 @@ const StaffList = async () => {
           others={others}
         />
       </div>
+      {/* <pre className=''>{JSON.stringify(all, null, 2)}</pre> */}
     </div>
   );
 };

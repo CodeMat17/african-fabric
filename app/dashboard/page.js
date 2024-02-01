@@ -5,7 +5,7 @@ import { supabaseClient } from "@/supabaseClient";
 
 export const revalidate = 0;
 
-const page = async () => {
+const Dashboard = async () => {
   const { count: total } = await supabaseClient
     .from("customers")
     .select("id", { count: "exact" });
@@ -56,4 +56,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default Dashboard;

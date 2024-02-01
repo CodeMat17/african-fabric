@@ -11,7 +11,8 @@ const staff = [
   { id: 1, position: "Tailor" },
   { id: 2, position: "Consultant" },
   { id: 3, position: "Beader" },
-  { id: 4, position: "Others" },
+  { id: 4, position: "Ops Mgr." },
+  { id: 5, position: "Others" },
 ];
 
 const ProfileStaff = ({ id, staff_name, staff_position }) => {
@@ -123,7 +124,7 @@ const ProfileStaff = ({ id, staff_name, staff_position }) => {
                               key={staf.position}
                               value={staf}
                               className={({ active, checked }) =>
-                                `w-1/4  ${
+                                `w-1/5  ${
                                   active
                                     ? "ring-2 ring-white/60 ring-offset-2 ring-offset-sky-300"
                                     : ""
@@ -138,7 +139,7 @@ const ProfileStaff = ({ id, staff_name, staff_position }) => {
                                       <div className='text-sm'>
                                         <RadioGroup.Label
                                           as='p'
-                                          className={`  ${
+                                          className={`whitespace-nowrap  ${
                                             checked
                                               ? "text-white"
                                               : "text-gray-900"

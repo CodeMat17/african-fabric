@@ -4,6 +4,8 @@ import { supabaseClient } from "@/supabaseClient";
 import { Dialog, Switch, Transition } from "@headlessui/react";
 import { useRouter } from "next/navigation";
 import { Fragment, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import toast from "react-hot-toast";
 import { AiOutlineLoading } from "react-icons/ai";
 import { CgSpinnerAlt } from "react-icons/cg";
@@ -11,6 +13,8 @@ import { GiCheckMark } from "react-icons/gi";
 
 const ReadyModal = ({ id, q_c, fitting_done, ready, qc_admin }) => {
   const router = useRouter();
+
+  const [completedOnDate, setCompletedOnDate] = useState("");
 
   const [loading, setLoading] = useState(false);
 
@@ -31,7 +35,7 @@ const ReadyModal = ({ id, q_c, fitting_done, ready, qc_admin }) => {
     try {
       const { error } = await supabaseClient
         .from("customers")
-        .update({ ready: enabled })
+        .update({ ready: enabled, completed_on: completedOnDate })
         .eq("id", id)
         .select();
 
@@ -79,7 +83,7 @@ const ReadyModal = ({ id, q_c, fitting_done, ready, qc_admin }) => {
       </button>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as='div' className='relative z-10' onClose={closeModal}>
+        <Dialog as='div' className='relative z-10 ' onClose={closeModal}>
           <Transition.Child
             as={Fragment}
             enter='ease-out duration-300'
@@ -91,7 +95,7 @@ const ReadyModal = ({ id, q_c, fitting_done, ready, qc_admin }) => {
             <div className='fixed inset-0 bg-black bg-opacity-25' />
           </Transition.Child>
 
-          <div className='fixed inset-0 overflow-y-auto'>
+          <div className='fixed inset-0 overflow-y-auto '>
             <div className='flex min-h-full items-center justify-center p-4 text-center'>
               <Transition.Child
                 as={Fragment}
@@ -101,7 +105,7 @@ const ReadyModal = ({ id, q_c, fitting_done, ready, qc_admin }) => {
                 leave='ease-in duration-200'
                 leaveFrom='opacity-100 scale-100'
                 leaveTo='opacity-0 scale-95'>
-                <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                <Dialog.Panel className='w-full max-w-md h-[500px] transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
                   <Dialog.Title
                     as='h3'
                     className='text-lg text-center font-medium leading-6 text-gray-900'>
@@ -130,20 +134,39 @@ const ReadyModal = ({ id, q_c, fitting_done, ready, qc_admin }) => {
                               />
                             </Switch>
                           </div>
-                          <p>Ready</p>
+                          <p>Completed</p>
                         </div>
-                        <button
-                          onClick={confirmReady}
-                          className='bg-[#55c694] w-full rounded-xl py-2.5 text-white'>
-                          {loading ? (
-                            <div className='whitespace-nowrap flex items-center justify-center gap-4'>
-                              <CgSpinnerAlt className='text-xl animate-spin' />{" "}
-                              <span>Confirming...</span>
-                            </div>
+                        <div className='mb-6 flex items-center justify-center'>
+                          <DatePicker
+                            // showIcon
+                            placeholderText='Completed on...'
+                            selected={completedOnDate}
+                            onChange={(date) => setCompletedOnDate(date)}
+                            dateFormat='MMM dd, yyyy'
+                            className='z-50 bg-inherit outline-none text-center text-gray-500 border p-4 w-full rounded-xl cursor-pointer'
+                          />
+                        </div>
+                        <>
+                          {completedOnDate ? (
+                            <button
+                              onClick={confirmReady}
+                              className={`bg-[#55c694] w-full rounded-xl py-2.5 text-white`}>
+                              {loading ? (
+                                <div className='whitespace-nowrap flex items-center justify-center gap-4'>
+                                  <CgSpinnerAlt className='text-xl animate-spin' />{" "}
+                                  <span>Confirming...</span>
+                                </div>
+                              ) : (
+                                "Confirm Job Status"
+                              )}
+                            </button>
                           ) : (
-                            "Confirm Job Status"
+                            <button
+                              className={`whitespace-nowrap bg-black/30 w-full rounded-xl py-2.5 text-white cursor-not-allowed`}>
+                              Confirm Job Status
+                            </button>
                           )}
-                        </button>
+                        </>
                       </>
                     ) : (
                       <p className='text-red-400 text-center mt-3'>

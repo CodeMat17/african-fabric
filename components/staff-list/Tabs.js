@@ -25,7 +25,7 @@ const Tabs = ({ all, tailors, consultants, beaders, others }) => {
                   : "text-gray-500 hover:bg-white/[0.12] hover:text-gray-800"
               )
             }>
-           New
+            New
           </Tab>
           <Tab
             className={({ selected }) =>
@@ -84,7 +84,9 @@ const Tabs = ({ all, tailors, consultants, beaders, others }) => {
             )}>
             <div>
               <div className='relative rounded-xl p-3'>
-                <h3 className='font-medium leading-5 text-center'>New Staff</h3>
+                <h3 className='font-medium text-lg leading-5 text-center'>
+                  New Staff
+                </h3>
                 {all.length < 1 ? (
                   <p className='text-center py-12 text-red-600'>
                     No new staff at the moment.
@@ -113,8 +115,10 @@ const Tabs = ({ all, tailors, consultants, beaders, others }) => {
             )}>
             <div>
               <div className='relative rounded-xl p-3'>
-                <h3 className='font-medium leading-5 text-center'>Tailors</h3>
-                {tailors.length < 1 ? (
+                <h3 className='font-medium text-lg leading-5 text-center'>
+                  Tailors
+                </h3>
+                {tailors.length === 0 ? (
                   <p className='text-center py-12 text-red-600'>
                     No registered tailor at the moment.
                   </p>
@@ -145,7 +149,7 @@ const Tabs = ({ all, tailors, consultants, beaders, others }) => {
             )}>
             <div>
               <div className='relative rounded-xl p-3'>
-                <h3 className='font-medium leading-5 text-center'>
+                <h3 className='font-medium text-lg leading-5 text-center'>
                   Consultants
                 </h3>
                 {consultants.length < 1 ? (
@@ -179,7 +183,9 @@ const Tabs = ({ all, tailors, consultants, beaders, others }) => {
             )}>
             <div>
               <div className='relative rounded-xl p-3'>
-                <h3 className='font-medium leading-5 text-center'>Beaders</h3>
+                <h3 className='font-medium text-lg leading-5 text-center'>
+                  Beaders
+                </h3>
                 {beaders.length < 1 ? (
                   <p className='text-center py-12 text-red-600'>
                     No registered beader at the moment.
@@ -225,7 +231,7 @@ const Tabs = ({ all, tailors, consultants, beaders, others }) => {
                           id={other.id}
                           name={other.name}
                           tel={other.tel}
-                          // busy={consult.busy}
+                          position={other.position}
                           // assigned_on={consult.assigned_on}
                           // to_finish_on={consult.to_finish_on}
                         />

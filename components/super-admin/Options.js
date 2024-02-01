@@ -15,8 +15,6 @@ const Options = ({ session }) => {
   const [is_super_admin, setIsSuperAdmin] = useState(null);
   const [showOptions, setShowOptions] = useState(false);
 
- 
-
   const getProfile = useCallback(async () => {
     try {
       setLoading(true);
@@ -47,13 +45,9 @@ const Options = ({ session }) => {
     setLoading(false);
   }, [user, getProfile]);
 
-   if (loading) {
-     return (
-       <p className='text-center py-20'>
-         Please wait...
-       </p>
-     );
-   }
+  if (loading) {
+    return <p className='text-center py-20'>Please wait...</p>;
+  }
 
   return (
     <div>
