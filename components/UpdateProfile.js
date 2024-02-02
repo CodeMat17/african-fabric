@@ -80,7 +80,7 @@ const UpdateProfile = ({ id, user_email }) => {
             placeholder='Enter your fullname'
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className='w-full border rounded-xl px-3 py-2.5 bg-gray-100 focus:outline-none focus:border-[#55c694] focus:ring-[#55c694] focus:ring-1'
+            className='capitalize w-full border rounded-xl px-3 py-2.5 bg-gray-100 focus:outline-none focus:border-[#55c694] focus:ring-[#55c694] focus:ring-1'
           />
         </div>
 

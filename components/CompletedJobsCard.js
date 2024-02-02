@@ -119,15 +119,14 @@ const CompletedJobsCard = ({
           <p className='font-light'>{email}</p>
           <p className='font-light'>{tel}</p>
           {completed_on && (
-            <p className='mt-2 w-full text-xs text-gray-500'>
+            <p className='mt-2 w-full text-xs text-green-500'>
               Completed on {dayjs(completed_on).format("MMM DD, YYYY")}
             </p>
           )}
           {delivered_on ? (
             <div className='flex items-center gap-4'>
-              <p className='mt-2 text-xs text-gray-500'>
-                Delivered on
-                {dayjs(delivered_on).format("MMM DD, YYYY")}
+              <p className='mt-2 text-xs text-green-600'>
+                Delivered on {dayjs(delivered_on).format("MMM DD, YYYY")}
               </p>
               {qc_admin && (
                 <button
