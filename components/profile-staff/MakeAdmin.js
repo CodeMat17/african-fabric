@@ -86,7 +86,7 @@ const MakeAdmin = ({ id, admin }) => {
               <CgSpinnerAlt className='text-xl animate-spin' /> Please wait
             </>
           ) : (
-            "Remove admin"
+            "Remove access"
           )}
         </button>
       ) : (
@@ -99,7 +99,7 @@ const MakeAdmin = ({ id, admin }) => {
               <CgSpinnerAlt className='text-xl animate-spin' /> Please wait
             </>
           ) : (
-            "Make admin"
+            "Grant access"
           )}
         </button>
       )}

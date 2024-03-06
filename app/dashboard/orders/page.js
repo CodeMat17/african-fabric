@@ -1,6 +1,6 @@
-import CustomerOrderCard from "@/components/CustomerOrderCard";
-import Pagination from "@/components/Pagination";
-import SearchOrder from "@/components/SearchOrder";
+import CustomerOrderCard from "../../../components/CustomerOrderCard";
+import Pagination from "../../../components/Pagination";
+import SearchOrder from "../../../components/SearchOrder";
 import { supabaseClient } from "../../../supabaseClient";
 
 export const revalidate = 0;

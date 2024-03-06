@@ -1,5 +1,7 @@
-import HeaderNavBar from "@/components/HeaderNavBar";
-import Nav from "@/components/Nav";
+// import HeaderNavBar from "@/components/HeaderNavBar";
+// import Nav from "@/components/Nav";
+import Nav from '../../components/Nav'
+import HeaderNavBar from '../../components/HeaderNavBar'
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { Suspense } from "react";
@@ -32,9 +34,8 @@ export default async function DashboardLayout({ children }) {
             <Nav />
             <main className='md:ml-[278px] flex-grow md:rounded-3xl md:overflow-hidden transition-all transform duration-500'>
               <HeaderNavBar />
-              {/* <Suspense fallback={<Loading />}> */}
               <section>{children}</section>
-              {/* </Suspense> */}
+         
             </main>
           </div>
         ) : (

@@ -26,14 +26,7 @@ const StaffDetail = async ({ params: { id } }) => {
   return (
     <div className='px-4 pt-8 pb-12'>
       <p className='text-center text-xl font-medium'>Profile Staff</p>
-
       <div className='mt-6 text-sm text-gray-500 flex flex-col gap-3 max-w-md mx-auto'>
-        <div>
-          <label>Name</label>
-          <p className='border px-3 py-2.5 rounded-xl bg-gray-100'>
-            {staff.name}
-          </p>
-        </div>
         <div>
           <label>Email</label>
           <p className='border px-3 py-2.5 rounded-xl bg-gray-100'>
@@ -41,22 +34,22 @@ const StaffDetail = async ({ params: { id } }) => {
           </p>
         </div>
         <div>
-          <label>Tel</label>
+          <label>Title</label>
           <p className='border px-3 py-2.5 rounded-xl bg-gray-100'>
-            {staff.tel}
+            {staff.name}
           </p>
         </div>
-        <div className='flex gap-4'>
-          <div className='w-full flex flex-col'>
-            <label className='text-center '>Position</label>
-            <p className='border px-3 py-2.5 rounded-xl bg-gray-100 text-center'>
-              {staff.position ? (
-                staff.position
-              ) : (
-                <span className='text-red-400'>Not profiled yet</span>
-              )}
-            </p>
-          </div>
+        <div className='flex items-center gap-3'>
+          <label className=''>Access:</label>
+          <p className='border px-3 py-2.5 rounded-xl bg-gray-100'>
+            {staff.is_admin ? (
+              <span className='text-green-600 '>Granted</span>
+            ) : (
+              <span className='text-red-600'>Not granted</span>
+            )}
+          </p>
+        </div>
+        {/* <div className='flex gap-4'>
           <div className='w-full flex flex-col'>
             <label className='text-center'>Is admin</label>
             <p className='border px-3 py-2.5 rounded-xl bg-gray-100  text-center'>
@@ -67,28 +60,28 @@ const StaffDetail = async ({ params: { id } }) => {
               )}
             </p>
           </div>
-        </div>
-        <div className='mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3'>
-          <EditStaff
+        </div> */}
+        <div className='mt-6'>
+          {/* <EditStaff
             id={staff.id}
             staff_name={staff.name}
             staff_tel={staff.tel}
-          />
+          /> */}
 
-          <ProfileStaff
+          {/* <ProfileStaff
             id={staff.id}
             staff_name={staff.name}
             staff_position={staff.position}
-          />
+          /> */}
 
           <MakeAdmin id={staff.id} admin={staff.is_admin} />
-          {staff?.is_admin ? (
+          {/* {staff?.is_admin ? (
             <Level2Admin id={staff.id} level2_admin={staff.qc_admin} />
           ) : (
             <DeleteStaff id={staff.id} name={staff.name} />
-          )}
+          )} */}
         </div>
-        {staff?.is_admin && <DeleteStaff id={staff.id} name={staff.name} />}
+        {/* {staff?.is_admin && <DeleteStaff id={staff.id} name={staff.name} />} */}
       </div>
     </div>
   );

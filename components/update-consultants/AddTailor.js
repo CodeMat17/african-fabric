@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { BsPersonAdd } from "react-icons/bs";
 import { CgSpinnerAlt } from "react-icons/cg";
 
-const AddConsultant = () => {
+const AddTailor = () => {
   const router = useRouter();
 
   const [name, setName] = useState("");
@@ -25,12 +25,12 @@ const AddConsultant = () => {
     setIsOpen(true);
   }
 
-  const addConsultant = async () => {
+  const addTailor = async () => {
     try {
       setLoading(true);
 
       const { error } = await supabaseClient
-        .from("consultants")
+        .from("tailors")
         .insert([{ name, tel }])
         .select();
 
@@ -47,8 +47,8 @@ const AddConsultant = () => {
             "aria-live": "polite",
           },
         });
-          setName("");
-          setTel("");
+        setName("");
+        setTel("");
         router.refresh();
         closeModal();
       }
@@ -66,7 +66,7 @@ const AddConsultant = () => {
           type='button'
           onClick={openModal}
           className='flex items-center justify-center gap-3 rounded-xl text-[#55c694] bg-black/5 px-4 py-2 text-sm font-medium hover:bg-black/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75'>
-          <BsPersonAdd className='text-2xl' /> <span>Add Consultant</span>
+          <BsPersonAdd className='text-2xl' /> <span>Add Tailor</span>
         </button>
       </div>
 
@@ -97,7 +97,7 @@ const AddConsultant = () => {
                   <Dialog.Title
                     as='h3'
                     className='text-lg text-center font-medium leading-6 text-gray-900'>
-                    Add Consultant
+                    Add Tailor
                   </Dialog.Title>
                   <div className='mt-4 text-sm flex flex-col gap-3'>
                     <div>
@@ -106,7 +106,7 @@ const AddConsultant = () => {
                         type='text'
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        placeholder='Enter consultant name here'
+                        placeholder='Enter tailor name here'
                         className='w-full py-2 px-3 outline-none border rounded-xl'
                       />
                     </div>
@@ -116,7 +116,7 @@ const AddConsultant = () => {
                         type='tel'
                         value={tel}
                         onChange={(e) => setTel(e.target.value)}
-                        placeholder='Enter consultant contact number here'
+                        placeholder='Enter tailor contact number here'
                         className='w-full py-2 px-3 outline-none border rounded-xl'
                       />
                     </div>
@@ -130,15 +130,12 @@ const AddConsultant = () => {
                       Close
                     </button>
                     <button
-                      onClick={addConsultant}
+                      onClick={addTailor}
                       type='button'
                       disabled={!name || !tel}
-                      className='rounded-xl border border-transparent bg-[#55c694] px-6 py-2.5 tracking-wide text-sm font-medium text-white hover:bg-[#55c694]/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 disabled:bg-[#55c694]/20 disabled:text-gray-400 disabled:cursor-not-allowed'>
-                      {loading ? (
-                        <div className="flex items-center justify-center gap-3">
-                          <CgSpinnerAlt className='text-2xl animate-spin' />{" "}
-                          <span>Adding...</span>
-                        </div>
+                      className='rounded-xl border border-transparent bg-[#55c694] px-6 py-2.5 tracking-wide text-sm font-medium text-white hover:bg-[#55c694]/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 disabled:bg-[#55c694]/20 disabled:text-gray-400 disabled:cursor-not-allowed flex items-center justify-center'>
+                      {loading ? (  <CgSpinnerAlt className='text-2xl animate-spin' />
+                     
                       ) : (
                         "Add"
                       )}
@@ -154,4 +151,4 @@ const AddConsultant = () => {
   );
 };
 
-export default AddConsultant;
+export default AddTailor;

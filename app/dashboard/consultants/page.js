@@ -1,6 +1,5 @@
-import AddConsultant from "@/components/update-consultants/AddConsultant";
-import UpdateConsultantCard from "@/components/update-consultants/ConsultantCard";
-import { supabaseClient } from "@/supabaseClient";
+import UpdateConsultantCard from "../../../components/update-consultants/ConsultantCard";
+import { supabaseClient } from "../../../supabaseClient";
 
 export const revalidate = 0;
 

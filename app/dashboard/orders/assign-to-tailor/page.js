@@ -1,5 +1,5 @@
-import AssignToTailorComponent from "@/components/AssignToTailorComponent";
-import { supabaseClient } from "@/supabaseClient";
+import AssignToTailorComponent from "../../../../components/AssignToTailorComponent";
+import { supabaseClient } from "../../../../supabaseClient";
 
 export const revalidate = 0;
 
@@ -9,9 +9,9 @@ const AssignToTailor = async ({ searchParams }) => {
   const fabric = searchParams?.fabric || "";
 
   const { data: tailors } = await supabaseClient
-    .from("staffers")
-    .select("id, name, position, busy")
-    .eq("position", "Tailor");
+    .from("tailors")
+    .select("id, name, busy")
+    // .eq("position", "Tailor");
 
   return (
     <div className='px-4 py-8'>

@@ -1,4 +1,4 @@
-import { supabaseClient } from "@/supabaseClient";
+import { supabaseClient } from "../supabaseClient";
 import BeaderModal from "./modals/BeaderModal";
 import FittingModal from "./modals/FittingModal";
 import QualityControlModal from "./modals/QualityControlModal";

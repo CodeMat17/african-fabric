@@ -1,15 +1,16 @@
-import UpdateTailorCard from "@/components/profile-staff/EditStaff";
-import TailorCard from "@/components/update-consultants/TailorCard";
-import { supabaseClient } from "@/supabaseClient";
+
+
+import TailorCard from "../../../components/update-consultants/TailorCard";
+import { supabaseClient } from "../../../supabaseClient";
 
 export const revalidate = 0;
 
 const Tailors = async () => {
   let { data: tailors, error } = await supabaseClient
-    .from("staffers")
+    .from("tailors")
     .select("*")
     .order("name", { ascending: true })
-    .eq("position", "Tailor");
+    // .eq("position", "Tailor");
 
   if (error) {
     throw new Error(`Somethingwent wrong: ${error.message}`);

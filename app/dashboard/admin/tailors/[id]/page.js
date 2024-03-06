@@ -1,16 +1,12 @@
-"use client";
-
-import { supabaseClient } from "@/supabaseClient";
+import DeleteTailor from "../../../../../components/DeleteTailor";
+import EditTailor from "../../../../../components/EditTailor";
+import { supabaseClient } from "../../../../../supabaseClient";
 import dayjs from "dayjs";
-import { notFound, useRouter } from "next/navigation";
-import { useState } from "react";
+import { notFound } from "next/navigation";
 
 export const revalidate = 0;
 
-const UpdateTailor = async ({ params: { id } }) => {
-  const router = useRouter();
-  const [deleteLoading, setDeletLoading] = useState(false);
-
+const AdminTailorID = async ({ params: { id } }) => {
   let {
     data: tailor,
     error,
@@ -20,18 +16,6 @@ const UpdateTailor = async ({ params: { id } }) => {
   if (!tailor) {
     notFound;
   }
-
-  const deleteTailor = async () => {
-    try {
-    } catch (error) {
-      console.log("Error Msg: ", error);
-    } finally {
-    }
-    const { error } = await supabaseClient
-      .from("tailors")
-      .delete()
-      .eq(id, tailor.id);
-  };
 
   return (
     <div className='px-4 pt-4 pb-12'>
@@ -60,15 +44,12 @@ const UpdateTailor = async ({ params: { id } }) => {
         )}
       </div>
       <div className='mt-10 flex justify-center items-center gap-8'>
-        <button className='bg-black/5 font-semibold text-black px-8 py-1.5 rounded-lg'>
-          Edit info
-        </button>
-        <button className='bg-red-600 font-semibold text-white px-8 py-1.5 rounded-lg'>
-          Delete Tailor
-        </button>
+        <EditTailor id={tailor.id} tname={tailor.name} ttel={tailor.tel} />
+
+        <DeleteTailor id={tailor.id} />
       </div>
     </div>
   );
 };
 
-export default UpdateTailor;
+export default AdminTailorID;

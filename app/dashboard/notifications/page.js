@@ -1,5 +1,5 @@
-import NotificationComponent from "@/components/NotificationComponent";
-import { supabaseClient } from "@/supabaseClient";
+import NotificationComponent from "../../../components/NotificationComponent";
+import { supabaseClient } from "../../../supabaseClient";
 
 const NotificationPage = async () => {
   const today = new Date().toISOString().split("T")[0];

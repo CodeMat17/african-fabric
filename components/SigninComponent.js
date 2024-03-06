@@ -52,7 +52,7 @@ const SigninComponent = () => {
 
       if (data) {
         router.refresh();
-        router.push("/account");
+        router.push("/dashboard");
       }
     } catch (error) {
       console.log("Error Msg:", error.message);
@@ -65,7 +65,7 @@ const SigninComponent = () => {
     <>
       <button
         onClick={openModal}
-        className='bg-[#55c694] hover:bg-[#55c694]/80 text-white w-full px-4 py-2.5 rounded-xl'>
+        className='bg-[#55c694]/20 hover:bg-[#55c694]/30 text-[#55c694] w-full px-4 py-2.5 rounded-xl'>
         Sign in
       </button>
 

@@ -3,13 +3,12 @@
 import dayjs from "dayjs";
 import Link from "next/link";
 
-const TailorCard = ({ data }) => {
+const AdminTailorCard = ({ data }) => {
   return (
     <div className='w-full max-w-xs sm:max-w-xl lg:max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 '>
       {data.map((user) => (
-          <div
-            key={user.id}
-            className='border text-sm shadow-md bg-gray-100 odd:bg-gray-200 rounded-xl overflow-hidden p-4'>
+        <Link key={user.id} href={`/dashboard/admin/tailors/${user.id}`}>
+          <div className='border text-sm shadow-md bg-gray-100 odd:bg-gray-200 rounded-xl overflow-hidden p-4'>
             <div className='w-full flex flex-col items-center justify-center   '>
               <h1 className='text-lg font-medium mt-2 text-center'>
                 {user.name}
@@ -45,10 +44,10 @@ const TailorCard = ({ data }) => {
               )}
             </div>
           </div>
-      
+        </Link>
       ))}
     </div>
   );
 };
 
-export default TailorCard;
+export default AdminTailorCard;

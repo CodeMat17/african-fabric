@@ -22,9 +22,9 @@ const Dashboard = async () => {
     .limit(5);
 
   const { count: noOfTailors } = await supabaseClient
-    .from("staffers")
+    .from("tailors")
     .select("id", { count: "exact" })
-    .eq("position", "Tailor");
+    // .eq("position", "Tailor");
 
   const { count: noOfConsultants } = await supabaseClient
     .from("staffers")

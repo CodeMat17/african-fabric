@@ -1,14 +1,14 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import Options from "@/components/super-admin/Options";
+import Options from "../../../components/super-admin/Options";
 
 const SettingsPage = async () => {
-const cookieStore = cookies()
-  const supabase = createServerComponentClient({ cookies: () => cookieStore })
+  const cookieStore = cookies();
+  const supabase = createServerComponentClient({ cookies: () => cookieStore });
 
   const {
     data: { session },
-  } = await supabase.auth.getSession()
+  } = await supabase.auth.getSession();
 
   return (
     <div className='p-8 w-full'>

@@ -40,8 +40,8 @@ export default function Home() {
 
         <div className='flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mt-12'>
           {/* <SignupComponent /> */}
-          {/* <SigninComponent /> */}
-          <MagicSignup />
+          <SigninComponent />
+          {/* <MagicSignup /> */}
         </div>
         {/* <div className='flex justify-center items-center gap-1 text-sm mt-6'>
           Forgot password? <ResetPasswordModal />
