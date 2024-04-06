@@ -11,7 +11,14 @@ import { AiOutlineLoading } from "react-icons/ai";
 import { CgSpinnerAlt } from "react-icons/cg";
 import { GiCheckMark } from "react-icons/gi";
 
-const ReadyModal = ({ id, q_c, fitting_done, ready, qc_admin }) => {
+const ReadyModal = ({
+  id,
+  q_c,
+  fitting_done,
+  ready,
+  qc_admin,
+  staff_admin,
+}) => {
   const router = useRouter();
 
   const [completedOnDate, setCompletedOnDate] = useState("");
@@ -67,12 +74,12 @@ const ReadyModal = ({ id, q_c, fitting_done, ready, qc_admin }) => {
   return (
     <>
       <button
-        disabled={qc_admin === false}
+        disabled={staff_admin != "Manager"}
         type='button'
         onClick={openModal}
         className={`relative ${
           ready ? "bg-[#55c694]" : "bg-[#55c694]/40"
-        } w-[25%] mx-auto flex items-center justify-center  text-white`}>
+        } w-[25%] mx-auto flex items-center justify-center  text-white disabled:cursor-not-allowed`}>
         Ready
         {fitting_done && !ready && (
           <AiOutlineLoading className='absolute text-xl animate-spin text-red-500' />

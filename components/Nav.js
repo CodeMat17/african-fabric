@@ -1,34 +1,35 @@
 "use client";
 
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { FaPowerOff } from "react-icons/fa";
 import { GiClothes } from "react-icons/gi";
+import { GoDiscussionOutdated } from "react-icons/go";
 import { ImManWoman } from "react-icons/im";
 import { LuLayoutDashboard } from "react-icons/lu";
+import { MdOutlineNotificationsActive } from "react-icons/md";
 import { PiGearFill } from "react-icons/pi";
 import { TbShoppingBagCheck } from "react-icons/tb";
-import { MdOutlineNotificationsActive } from "react-icons/md";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 const Nav = () => {
-    const supabase = createClientComponentClient();
-    const router = useRouter();
+  const supabase = createClientComponentClient();
+  const router = useRouter();
   const pathname = usePathname();
 
-   const signoutFn = async () => {
-     // Check if we have a session
-     const {
-       data: { session },
-     } = await supabase.auth.getSession();
+  const signoutFn = async () => {
+    // Check if we have a session
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
 
-     if (session) {
-       await supabase.auth.signOut();
-     }
+    if (session) {
+      await supabase.auth.signOut();
+    }
 
-     router.push("/");
-   };
+    router.push("/");
+  };
 
   return (
     <aside className='fixed top-0 left-0 h-screen hidden md:flex transition-all transform duration-500'>
@@ -61,6 +62,17 @@ const Nav = () => {
               }`}>
               <TbShoppingBagCheck className='text-2xl' />
               <span>Orders</span>
+            </Link>
+
+            <Link
+              href='/dashboard/scheduler'
+              className={`w-full flex items-center gap-3 p-2 rounded-l-xl text-lg font-medium md:rounded-xl hover:bg-black/5 hover:text-gray-500 transition-all duration-500 ${
+                pathname.includes("/dashboard/scheduler")
+                  ? "shadow-md bg-[#55c694] text-white"
+                  : "text-gray-700"
+              }`}>
+              <GoDiscussionOutdated className='text-2xl' />
+              <span>Scheduler</span>
             </Link>
 
             <Link

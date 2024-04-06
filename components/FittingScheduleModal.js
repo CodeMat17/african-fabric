@@ -2,22 +2,21 @@
 
 import { supabaseClient } from "@/supabaseClient";
 import { Dialog, Transition } from "@headlessui/react";
+import setHours from "date-fns/setHours";
+import setMinutes from "date-fns/setMinutes";
 import { useRouter } from "next/navigation";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import toast from "react-hot-toast";
 import { CgSpinnerAlt } from "react-icons/cg";
-import setHours from "date-fns/setHours";
-import setMinutes from "date-fns/setMinutes";
 
 const FittingSchedule = ({
   id,
   text,
   classnames,
   confirmed_fitting_date,
-
-  adminName,
+  email,
 }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -34,6 +33,45 @@ const FittingSchedule = ({
     setIsOpen(true);
   }
 
+  const [admin_name, setAdminName] = useState("");
+  useEffect(() => {
+    if (email === "manager@africanfabricanddesigns.com") {
+      setAdminName("Manager");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (email === "qc@africanfabricanddesigns.com") {
+      setAdminName("Quality Control Manager");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (email === "consultant3@africanfabricanddesigns.com") {
+      setAdminName("Consultant 3");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (email === "consultant2@africanfabricanddesigns.com") {
+      setAdminName("Consultant 2");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (email === "consultant1@africanfabricanddesigns.com") {
+      setAdminName("Consultant 1");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (email === "beaders@africanfabricanddesigns.com") {
+      setAdminName("Beader");
+    }
+  }, []);
+
+  // console.log("Admin name: ", admin_name);
+
   const updateFittingDate = async () => {
     if (!fitting_date) {
       alert(
@@ -45,7 +83,12 @@ const FittingSchedule = ({
 
         const { error } = await supabaseClient
           .from("customers")
-          .update({ fitting_date, fitting_confirmed_by: adminName})
+          .update({
+            fitting_date,
+            fitting_confirmed_by: admin_name,
+            // fitting_done: true,
+            // status: "fitting done",
+          })
           .eq("id", id)
           .select();
 
@@ -65,6 +108,7 @@ const FittingSchedule = ({
           });
           router.refresh();
           closeModal();
+          router.back();
         }
       } catch (error) {
         console.log("Error Msg: ", error.message);
@@ -76,8 +120,11 @@ const FittingSchedule = ({
 
   return (
     <>
-      <button type='button' onClick={openModal} className={classnames}>
-        {text}
+      <button
+        type='button'
+        onClick={openModal}
+        className=' rounded-lg px-6 py-1.5 shadow-md bg-white'>
+        Enter date n time
       </button>
 
       <Transition appear show={isOpen} as={Fragment}>

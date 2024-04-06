@@ -147,7 +147,7 @@ const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
 
         <div>
           <label className='text-sm'>Assigned on</label>
-          <p className='border-2 py-4 px-3 mt-1 rounded-xl text-gray-500 cursor-not-allowed'>
+          <p className='border-2 py-4 px-3 mt-1 rounded-xl text-gray-500'>
             <DatePicker
               // showIcon
               placeholderText='Click to add assigned on date'

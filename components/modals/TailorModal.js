@@ -16,7 +16,7 @@ const TailorModal = ({
   tailor,
   assigned_on,
   finished_on,
-  qc_admin,
+  staff_admin,
 }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -98,12 +98,12 @@ const TailorModal = ({
   return (
     <>
       <button
-        disabled={qc_admin === false}
+        disabled={staff_admin !== "Consultant" && staff_admin !== "Manager"}
         type='button'
         onClick={openModal}
         className={`relative ${
           tailoring ? "bg-[#55c694]" : "bg-[#55c694]/40"
-        } w-[25%] mx-auto flex items-center justify-center  text-white`}>
+        } w-[25%] mx-auto flex items-center justify-center  text-white disabled:cursor-not-allowed`}>
         Tailoring
         {!tailoring && (
           <AiOutlineLoading className='absolute text-xl animate-spin text-red-500' />

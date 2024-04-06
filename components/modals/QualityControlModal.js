@@ -9,11 +9,11 @@ import { AiOutlineLoading } from "react-icons/ai";
 import { CgSpinnerAlt } from "react-icons/cg";
 import { GiCheckMark } from "react-icons/gi";
 
-const QualityControlModal = ({ id, beading, q_c, qc_admin }) => {
+const QualityControlModal = ({ id, beading, q_c, staff_admin }) => {
   const router = useRouter()
   const [loading, setLoading] = useState(false);
 
-  const [enabled, setEnabled] = useState(false);
+  const [enabled, setEnabled] = useState(q_c);
 
   let [isOpen, setIsOpen] = useState(false);
 
@@ -64,12 +64,12 @@ const QualityControlModal = ({ id, beading, q_c, qc_admin }) => {
   return (
     <>
       <button
-        disabled={qc_admin === false}
+        disabled={staff_admin !== "Qc" && staff_admin !== "Manager"}
         type='button'
         onClick={openModal}
         className={`relative whitespace-nowrap ${
           q_c ? "bg-[#55c694]" : "bg-[#55c694]/40"
-        } w-[25%] mx-auto flex items-center justify-center  text-white`}>
+        } w-[25%] mx-auto flex items-center justify-center  text-white disabled:cursor-not-allowed`}>
         Q-ctrl
         {beading && !q_c && (
           <AiOutlineLoading className='absolute text-xl animate-spin text-red-500' />

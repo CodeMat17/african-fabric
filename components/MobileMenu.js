@@ -8,6 +8,7 @@ import { Fragment } from "react";
 import { BiMenuAltRight } from "react-icons/bi";
 import { FaPowerOff } from "react-icons/fa";
 import { GiClothes } from "react-icons/gi";
+import { GoDiscussionOutdated } from "react-icons/go";
 import { ImManWoman } from "react-icons/im";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { MdOutlineClose, MdOutlineNotificationsActive } from "react-icons/md";
@@ -86,6 +87,18 @@ const MobileMenu = () => {
                           : "bg-white text-gray-500"
                       }`}>
                       <TbShoppingBagCheck className='text-3xl' />
+                    </Link>
+                  </Menu.Item>
+
+                  <Menu.Item as={Fragment}>
+                    <Link
+                      href='/dashboard/scheduler'
+                      className={` flex justify-center py-2.5 rounded-full ${
+                        pathname.includes("/dashboard/scheduler")
+                          ? "bg-[#6BB77B] text-white"
+                          : "bg-white text-gray-500"
+                      }`}>
+                      <GoDiscussionOutdated className='text-3xl' />
                     </Link>
                   </Menu.Item>
 

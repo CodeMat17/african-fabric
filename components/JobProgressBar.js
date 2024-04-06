@@ -30,7 +30,7 @@ const JobProgressBar = async ({
     status: queryStatus,
   } = await supabaseClient
     .from("staffers")
-    .select(`qc_admin, email, name`)
+    .select(`staff_admin, email, name`)
     .eq("id", admin_id)
     .single();
 
@@ -40,7 +40,8 @@ const JobProgressBar = async ({
 
   return (
     <div className='w-full py-6 max-w-sm mx-auto'>
-      {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(data, null, 2)}</pre>
+      <pre>{JSON.stringify(q_c, null, 2)}</pre> */}
       <p className='text-sm text-center mb-1'>Job Progress Status</p>
 
       <div className='relative pt-2'>
@@ -51,7 +52,8 @@ const JobProgressBar = async ({
             tailor={tailor}
             assigned_on={assigned_on}
             finished_on={finished_on}
-            qc_admin={data?.qc_admin}
+            // qc_admin={data?.qc_admin}
+            staff_admin={data?.staff_admin}
           />
 
           <BeaderModal
@@ -60,14 +62,16 @@ const JobProgressBar = async ({
             beader={beader}
             beading={beading}
             beaders={beaders}
-            qc_admin={data?.qc_admin}
+            // qc_admin={data?.qc_admin}
+            staff_admin={data?.staff_admin}
           />
 
           <QualityControlModal
             id={id}
             beading={beading}
             q_c={q_c}
-            qc_admin={data?.qc_admin}
+            // qc_admin={data?.qc_admin}
+            staff_admin={data?.staff_admin}
           />
 
           <FittingModal
@@ -78,14 +82,16 @@ const JobProgressBar = async ({
             fitting_date={fitting_date}
             fitting_confirmed_by={fitting_confirmed_by}
             fitting_done={fitting_done}
-            qc_admin={data?.qc_admin}
+            // qc_admin={data?.qc_admin}
+            staff_admin={data?.staff_admin}
           />
 
           <ReadyModal
             id={id}
             fitting_done={fitting_done}
             ready={ready}
-            qc_admin={data?.qc_admin}
+            // qc_admin={data?.qc_admin}
+            staff_admin={data?.staff_admin}
           />
         </div>
         <div className='mb-2 flex items-center justify-between text-xs'>

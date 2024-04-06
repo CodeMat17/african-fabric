@@ -14,6 +14,7 @@ const Fitting = ({
   id,
   q_c,
   qc_admin,
+  staff_admin,
   ready,
   status,
   fitting_date,
@@ -108,12 +109,12 @@ const Fitting = ({
   return (
     <>
       <button
-        disabled={qc_admin === false}
+        disabled={staff_admin != 'Manager'}
         type='button'
         onClick={openModal}
         className={`relative whitespace-nowrap ${
           fitting_done ? "bg-[#55c694]" : "bg-[#55c694]/40"
-        } w-[25%] mx-auto flex items-center justify-center  text-white`}>
+        } w-[25%] mx-auto flex items-center justify-center  text-white disabled:cursor-not-allowed`}>
         Fitting
         {q_c && !fitting_done && (
           <AiOutlineLoading className='absolute text-xl animate-spin text-red-500' />
@@ -247,7 +248,7 @@ const Fitting = ({
                                   </Switch>
                                 </div>
                                 <p className='text-sm'>
-                                  Push to schedule for fitting
+                                  Ask for fitting date
                                 </p>
                               </div>
                               {enabled ? (
@@ -260,7 +261,7 @@ const Fitting = ({
                                       <span>Pushing...</span>
                                     </div>
                                   ) : (
-                                    "Push for schedule"
+                                    "Send"
                                   )}
                                 </button>
                               ) : (
