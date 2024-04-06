@@ -41,7 +41,7 @@ const Nav = () => {
           <div className='relative aspect-video w-full rounded-xl overflow-hidden flex items-center justify-center'>
             <Image alt='logo' fill priority src='/logo3.webp' />
           </div>
-          <nav className=' w-full transition-all duration-500 pt-4 px-6 flex flex-col items-center gap-4'>
+          <nav className=' w-full transition-all duration-500 pt-4 px-6 flex flex-col items-center gap-1.5'>
             <Link
               href='/dashboard'
               className={`w-full flex items-center gap-3 p-2 rounded-l-xl text-lg font-medium md:rounded-xl hover:bg-black/5 hover:text-gray-500 transition-all duration-500 ${
