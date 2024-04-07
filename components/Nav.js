@@ -8,7 +8,7 @@ import { FaPowerOff } from "react-icons/fa";
 import { GiClothes } from "react-icons/gi";
 import { GoDiscussionOutdated } from "react-icons/go";
 import { ImManWoman } from "react-icons/im";
-import { LuLayoutDashboard } from "react-icons/lu";
+import { LuLayoutDashboard, LuListTodo } from "react-icons/lu";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { PiGearFill } from "react-icons/pi";
 import { TbShoppingBagCheck } from "react-icons/tb";
@@ -86,6 +86,17 @@ const Nav = () => {
               <span>Notifications</span>
             </Link>
 
+            <Link
+              href='/dashboard/completed-jobs'
+              className={`w-full flex items-center gap-3 p-2 rounded-l-xl text-lg font-medium md:rounded-xl hover:bg-black/5 hover:text-gray-500 transition-all duration-500 ${
+                pathname.includes("/dashboard/completed-jobs")
+                  ? "shadow-md bg-[#55c694] text-white"
+                  : "text-gray-700"
+              }`}>
+              <LuListTodo className='text-2xl' />
+              <span>Completed</span>
+            </Link>
+
             {/* <Link
               href='/dashboard/new-order'
               className={`w-full flex items-center gap-3 p-2 rounded-l-xl text-lg font-medium md:rounded-xl hover:bg-black/5 hover:text-gray-500 transition-all duration-500 ${
@@ -97,7 +108,7 @@ const Nav = () => {
               <span>New Other</span>
             </Link> */}
 
-            <Link
+            {/* <Link
               href='/dashboard/consultants'
               className={`w-full flex items-center gap-3 p-2 rounded-l-xl text-lg font-medium md:rounded-xl hover:bg-black/5 hover:text-gray-500 transition-all duration-500 ${
                 pathname.includes("/dashboard/consultants")
@@ -106,9 +117,9 @@ const Nav = () => {
               }`}>
               <ImManWoman className='text-2xl' />
               <span>Consultants</span>
-            </Link>
+            </Link> */}
 
-            <Link
+            {/* <Link
               href='/dashboard/tailors'
               className={`w-full flex items-center gap-3 p-2 rounded-l-xl text-lg font-medium md:rounded-xl hover:bg-black/5 hover:text-gray-500 transition-all duration-500 ${
                 pathname.includes("/dashboard/tailors")
@@ -117,7 +128,7 @@ const Nav = () => {
               }`}>
               <GiClothes className='text-2xl' />
               <span>Tailors</span>
-            </Link>
+            </Link> */}
 
             <Link
               href='/dashboard/admin'

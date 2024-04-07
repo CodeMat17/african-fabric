@@ -10,7 +10,7 @@ import { FaPowerOff } from "react-icons/fa";
 import { GiClothes } from "react-icons/gi";
 import { GoDiscussionOutdated } from "react-icons/go";
 import { ImManWoman } from "react-icons/im";
-import { LuLayoutDashboard } from "react-icons/lu";
+import { LuLayoutDashboard, LuListTodo } from "react-icons/lu";
 import { MdOutlineClose, MdOutlineNotificationsActive } from "react-icons/md";
 import { PiGearFill } from "react-icons/pi";
 import { TbShoppingBagCheck } from "react-icons/tb";
@@ -128,17 +128,17 @@ const MobileMenu = () => {
 
                   <Menu.Item as={Fragment}>
                     <Link
-                      href='/dashboard/consultants'
+                      href='/dashboard/completed-jobs'
                       className={` flex justify-center py-2.5 rounded-full ${
-                        pathname.includes("/dashboard/consultants")
+                        pathname.includes("/dashboard/completed-jobs")
                           ? "bg-[#6BB77B] text-white"
                           : "bg-white text-gray-500"
                       }`}>
-                      <ImManWoman className='text-3xl' />
+                      <LuListTodo className='text-3xl' />
                     </Link>
                   </Menu.Item>
 
-                  <Menu.Item as={Fragment}>
+                  {/* <Menu.Item as={Fragment}>
                     <Link
                       href='/dashboard/tailors'
                       className={` flex justify-center py-2.5 rounded-full ${
@@ -148,7 +148,7 @@ const MobileMenu = () => {
                       }`}>
                       <GiClothes className='text-3xl' />
                     </Link>
-                  </Menu.Item>
+                  </Menu.Item> */}
 
                   <Menu.Item as={Fragment}>
                     <Link

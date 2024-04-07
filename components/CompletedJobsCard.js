@@ -2,6 +2,8 @@
 
 import { supabaseClient } from "@/supabaseClient";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 import { CldImage } from "next-cloudinary";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -10,6 +12,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import toast from "react-hot-toast";
 import { CgSpinnerAlt } from "react-icons/cg";
 import { TbArrowBigRightLines, TbX } from "react-icons/tb";
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 export const revalidate = 0;
 
@@ -29,12 +34,21 @@ const CompletedJobsCard = ({
   const [deliveredOn, setDeliveredOn] = useState("");
   const [loading, setLoading] = useState(false);
 
+  
+
+  console.log("Date: ", deliveredOn);
+ if (deliveredOn) {
+    const isoDate = dayjs.utc(deliveredOn).local();
+     console.log("isoDate: ", isoDate);
+  }
+
   const deliveredDate = async () => {
     setLoading(true);
+     const isoDate = new Date(deliveredOn).toISOString();
     try {
       const { error } = await supabaseClient
         .from("customers")
-        .update({ delivered_on: deliveredOn })
+        .update({ delivered_on: isoDate })
         .eq("id", id)
         .select();
 
@@ -126,7 +140,8 @@ const CompletedJobsCard = ({
           {delivered_on ? (
             <div className='flex items-center gap-4'>
               <p className='mt-2 text-xs text-green-600'>
-                Delivered on {dayjs(delivered_on).format("MMM DD, YYYY")}
+                Delivered on{" "}
+                {dayjs.utc(delivered_on).local().format("MMM DD, YYYY")}
               </p>
               {qc_admin && (
                 <button
@@ -168,9 +183,7 @@ const CompletedJobsCard = ({
                   </>
                 </div>
               ) : (
-                <p className='mt-2 text-xs text-red-400'>
-                  Yet to be delivered
-                </p>
+                <p className='mt-2 text-xs text-red-400'>Yet to be delivered</p>
               )}
             </>
           )}
