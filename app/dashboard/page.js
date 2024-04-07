@@ -21,15 +21,15 @@ const Dashboard = async () => {
     .order("created_at", { ascending: false })
     .limit(5);
 
-  const { count: noOfTailors } = await supabaseClient
-    .from("tailors")
-    .select("id", { count: "exact" })
-    // .eq("position", "Tailor");
-
   const { count: noOfConsultants } = await supabaseClient
     .from("staffers")
     .select("id", { count: "exact" })
     .eq("position", "Consultant");
+
+  const { count: noOfQc } = await supabaseClient
+    .from("staffers")
+    .select("id", { count: "exact" })
+    .eq("position", "Quality Control");
   
   const { count: noOfBeaders } = await supabaseClient
     .from("staffers")
@@ -47,7 +47,7 @@ const Dashboard = async () => {
 
         <AgentsFolders
           noOfConsultants={noOfConsultants}
-          noOfTailors={noOfTailors}
+          noOfQc={noOfQc}
           noOfBeaders={noOfBeaders}
         />
       </div>
