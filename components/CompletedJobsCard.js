@@ -115,23 +115,31 @@ const CompletedJobsCard = ({
         </div>
       </div>
       <div className='px-4 py-3'>
-        {avatar && (
-          <CldImage
-            width='50'
-            height='50'
-            crop='thumb'
-            gravity='faces'
-            src={avatar}
-            sizes='50vw'
-            alt='Profile image'
-            loading='lazy'
-            className='rounded-full'
-          />
-        )}
+        <div className="flex items-center gap-4">
+          {avatar && (
+            <CldImage
+              width='50'
+              height='50'
+              crop='thumb'
+              gravity='faces'
+              src={avatar}
+              sizes='50vw'
+              alt='Profile image'
+              loading='lazy'
+              className='rounded-full'
+            />
+          )}
+          <div className='mt-1 leading-5 text-sm'>
+            <p className='font-medium capitalize'>{name}</p>
+            <p className='font-light'>{email}</p>
+            {/* <p className='font-light'>{tel}</p> */}
+          </div>
+        </div>
+
         <div className='mt-1 leading-5 text-sm'>
-          <p className='font-medium capitalize'>{name}</p>
+          {/* <p className='font-medium capitalize'>{name}</p>
           <p className='font-light'>{email}</p>
-          <p className='font-light'>{tel}</p>
+          <p className='font-light'>{tel}</p> */}
           {completed_on && (
             <p className='mt-2 w-full text-xs text-green-500'>
               Completed on {dayjs(completed_on).format("MMM DD, YYYY")}
@@ -141,7 +149,7 @@ const CompletedJobsCard = ({
             <div className='flex items-center gap-4'>
               <p className='mt-2 text-xs text-green-600'>
                 Delivered on{" "}
-                {dayjs.utc(delivered_on).local().format("MMM DD, YYYY")}
+                {dayjs(delivered_on).local().format("MMM DD, YYYY")}
               </p>
               {qc_admin && (
                 <button
