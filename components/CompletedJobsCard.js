@@ -2,8 +2,8 @@
 
 import { supabaseClient } from "@/supabaseClient";
 import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 import { CldImage } from "next-cloudinary";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -13,8 +13,8 @@ import toast from "react-hot-toast";
 import { CgSpinnerAlt } from "react-icons/cg";
 import { TbArrowBigRightLines, TbX } from "react-icons/tb";
 
-dayjs.extend(utc)
-dayjs.extend(timezone)
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export const revalidate = 0;
 
@@ -34,17 +34,13 @@ const CompletedJobsCard = ({
   const [deliveredOn, setDeliveredOn] = useState("");
   const [loading, setLoading] = useState(false);
 
-  
-
-  console.log("Date: ", deliveredOn);
- if (deliveredOn) {
-    const isoDate = dayjs.utc(deliveredOn).local();
-     console.log("isoDate: ", isoDate);
-  }
 
   const deliveredDate = async () => {
     setLoading(true);
-     const isoDate = new Date(deliveredOn).toISOString();
+    const utcDate = new Date(
+      deliveredOn.getTime() - deliveredOn.getTimezoneOffset() * 60000
+    );
+    const isoDate = utcDate.toISOString().toLocaleString();
     try {
       const { error } = await supabaseClient
         .from("customers")
@@ -115,7 +111,7 @@ const CompletedJobsCard = ({
         </div>
       </div>
       <div className='px-4 py-3'>
-        <div className="flex items-center gap-4">
+        <div className='flex items-center gap-4'>
           {avatar && (
             <CldImage
               width='50'
@@ -172,7 +168,10 @@ const CompletedJobsCard = ({
                     placeholderText='Delivered on...'
                     selected={deliveredOn}
                     onChange={(date) => setDeliveredOn(date)}
-                    dateFormat='MMM dd, yyyy'
+                    // dateFormat='MMM dd, yyyy'
+                    dateFormat='dd-MMM-yyyy'
+                    // withPortal
+                    // strictParsing
                     className='bg-inherit outline-none text-gray-500 border px-3 py-1.5 w-full rounded-md cursor-pointer'
                   />
 

@@ -2,7 +2,6 @@
 
 import { supabaseClient } from "@/supabaseClient";
 import { Select, SelectItem } from "@nextui-org/react";
-import dayjs from "dayjs";
 import { CldImage } from "next-cloudinary";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -24,17 +23,26 @@ const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
   const [assignedOnDate, setAssignedOnDate] = useState();
   const [finishDate, setFinishDate] = useState();
 
-  // toISOString();
-
   const assignATailor = async () => {
     try {
       setLoading(true);
+
+      const assignedUtcDate = new Date(
+        assignedOnDate.getTime() - assignedOnDate.getTimezoneOffset() * 60000
+      );
+      const assignedISODate = assignedUtcDate.toISOString().toLocaleString();
+
+      const finishUtcDate = new Date(
+        finishDate.getTime() - finishDate.getTimezoneOffset() * 60000
+      );
+      const finishISODate = finishUtcDate.toISOString().toLocaleString();
+
       const { error } = await supabaseClient
         .from("customers")
         .update({
           tailor,
-          tailoring_assigned_on: assignedOnDate,
-          tailoring_finish_on: finishDate,
+          tailoring_assigned_on: assignedISODate,
+          tailoring_finish_on: finishISODate,
         })
         .eq("id", id)
         .select();
@@ -47,8 +55,8 @@ const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
           .from("staffers")
           .update({
             busy: true,
-            assigned_on: assignedOnDate,
-            to_finish_on: finishDate,
+            assigned_on: assignedISODate,
+            to_finish_on: finishISODate,
           })
           .eq("name", tailor)
           .select();

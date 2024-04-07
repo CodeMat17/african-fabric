@@ -3,12 +3,15 @@
 import { supabaseClient } from "@/supabaseClient";
 import { Dialog, Switch, Transition } from "@headlessui/react";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 import { useRouter } from "next/navigation";
 import { Fragment, useState } from "react";
 import toast from "react-hot-toast";
 import { AiOutlineLoading } from "react-icons/ai";
 import { CgSpinnerAlt } from "react-icons/cg";
 import { GiCheckMark } from "react-icons/gi";
+
+dayjs.extend(utc);
 
 const Fitting = ({
   id,
@@ -109,7 +112,7 @@ const Fitting = ({
   return (
     <>
       <button
-        disabled={staff_admin != 'Manager'}
+        disabled={staff_admin != "Manager"}
         type='button'
         onClick={openModal}
         className={`relative whitespace-nowrap ${
@@ -163,9 +166,9 @@ const Fitting = ({
                                 <>
                                   <p className='text-sm'>
                                     Fitting date:{" "}
-                                    {dayjs(fitting_date).format(
-                                      "MMM DD, YYYY h:mm a"
-                                    )}
+                                    {dayjs(fitting_date)
+                                      // .local()
+                                      .format("MMM DD, YYYY h:mm a")}
                                   </p>
                                   <p className='text-sm'>
                                     Scheduled by: {fitting_confirmed_by}
@@ -247,9 +250,7 @@ const Fitting = ({
                                     />
                                   </Switch>
                                 </div>
-                                <p className='text-sm'>
-                                  Ask for fitting date
-                                </p>
+                                <p className='text-sm'>Ask for fitting date</p>
                               </div>
                               {enabled ? (
                                 <button

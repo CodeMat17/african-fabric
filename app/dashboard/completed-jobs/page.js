@@ -30,7 +30,7 @@ const { data: userData } = await supabase
         ) : (
           ready.map((comp) => <CompletedJobsCard key={comp.id} {...comp} qc_admin={userData?.qc_admin} />)
         )}
-      </div>{" "}
+      </div>
     </div>
   );
 };

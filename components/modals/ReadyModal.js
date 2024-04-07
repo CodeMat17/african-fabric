@@ -39,10 +39,16 @@ const ReadyModal = ({
 
   const confirmReady = async () => {
     setLoading(true);
+
+    const utcDate = new Date(
+      completedOnDate.getTime() - completedOnDate.getTimezoneOffset() * 60000
+    );
+    const isoDate = utcDate.toISOString().toLocaleString();
+
     try {
       const { error } = await supabaseClient
         .from("customers")
-        .update({ ready: enabled, completed_on: completedOnDate })
+        .update({ ready: enabled, completed_on: isoDate })
         .eq("id", id)
         .select();
 

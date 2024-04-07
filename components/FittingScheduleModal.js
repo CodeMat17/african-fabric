@@ -70,7 +70,16 @@ const FittingSchedule = ({
     }
   }, []);
 
-  // console.log("Admin name: ", admin_name);
+  console.log("Admin name: ", admin_name);
+  console.log("fitting date: ", fitting_date);
+  if (fitting_date) {
+    // const utcDate = new Date(
+    //   fitting_date.getTime() - fitting_date.getTimezoneOffset() * 60000
+    // );
+    const isoDate = fitting_date.toISOString()
+
+    console.log("fitting ISO: ", isoDate);
+  }
 
   const updateFittingDate = async () => {
     if (!fitting_date) {
@@ -81,10 +90,15 @@ const FittingSchedule = ({
       try {
         setLoading(true);
 
+        const utcDate = new Date(
+          fitting_date.getTime() - fitting_date.getTimezoneOffset() * 60000
+        );
+        const isoDate = utcDate.toISOString().toLocaleString();
+
         const { error } = await supabaseClient
           .from("customers")
           .update({
-            fitting_date,
+            fitting_date: isoDate,
             fitting_confirmed_by: admin_name,
             // fitting_done: true,
             // status: "fitting done",

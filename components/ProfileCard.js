@@ -29,7 +29,7 @@ const ProfileCard = () => {
 
 
   return (
-    <div>
+    <div className="min-h-screen py-6">
       {/* <pre>{JSON.stringify(data, null, 2)}</pre> */}
       {profileData && (
         <form className='group'>

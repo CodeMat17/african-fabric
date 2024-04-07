@@ -90,6 +90,11 @@ const MeasurementData = ({
     try {
       setLoadingProfile(true);
 
+       const utcDate = new Date(
+         due_date.getTime() - due_date.getTimezoneOffset() * 60000
+       );
+       const isoDate = utcDate.toISOString().toLocaleString;
+
       const { error } = await supabaseClient
         .from("customers")
         .insert([
@@ -120,7 +125,7 @@ const MeasurementData = ({
             m_on_paper,
             sex: selectedSex,
             sketch,
-            due_date,
+            due_date: isoDate,
             three_days_2_due_date,
             two_days_2_due_date,
           },
@@ -177,6 +182,11 @@ const MeasurementData = ({
     try {
       setLoadingProfile(true);
 
+       const utcDate = new Date(
+         due_date.getTime() - due_date.getTimezoneOffset() * 60000
+       );
+       const isoDate = utcDate.toISOString().toLocaleString;
+
       const { error } = await supabaseClient
         .from("customers")
         .insert([
@@ -210,7 +220,7 @@ const MeasurementData = ({
             sex: selectedSex,
             m_on_paper,
             sketch,
-            due_date,
+            due_date: isoDate,
             three_days_2_due_date,
             two_days_2_due_date,
           },
