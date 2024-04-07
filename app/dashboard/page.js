@@ -35,6 +35,11 @@ const Dashboard = async () => {
     .from("staffers")
     .select("id", { count: "exact" })
     .eq("position", "Beader");
+  
+   const { count: noOfTailors } = await supabaseClient
+     .from("tailors")
+     .select("id", { count: "exact" })
+    //  .eq("position", "Beader");
 
   return (
     <div className='p-4 bg-[#f8f9fa]'>
@@ -49,6 +54,7 @@ const Dashboard = async () => {
           noOfConsultants={noOfConsultants}
           noOfQc={noOfQc}
           noOfBeaders={noOfBeaders}
+          noOfTailors={noOfTailors}
         />
       </div>
       <RecentOrders recent={recent} />
