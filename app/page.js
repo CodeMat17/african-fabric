@@ -6,7 +6,7 @@ import ResetPasswordModal from "@/components/modals/ResetPasswordModal";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-export const revalidate = 0
+export const revalidate = 0;
 
 export default function Home() {
   const router = useRouter();
@@ -29,7 +29,7 @@ export default function Home() {
       {/* Main Content */}
       <div className='relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4'>
         {/* Logo Section */}
-        <div className='flex flex-col items-center justify-center'>
+        <div className='flex flex-col items-center justify-center relative'>
           <div className='relative w-[290px] h-[290px] sm:w-[330px] sm:h-[330px] animate-spin-slower'>
             <Image
               alt='Logo'
@@ -39,8 +39,10 @@ export default function Home() {
               className='object-contain'
             />
           </div>
-          <div className='absolute bg-white/50 rounded-full overflow-hidden top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
-            <div className='relative w-[160px] sm:w-[190px] aspect-video'>
+
+          {/* Centered Logo Tag Image */}
+          <div className='absolute inset-0 flex justify-center items-center'>
+            <div className='relative w-[160px] sm:w-[190px] aspect-video bg-white/20 rounded-3xl'>
               <Image
                 alt='Logo Tag'
                 src='/logo/logo_tag.webp'
