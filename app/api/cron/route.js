@@ -18,10 +18,7 @@ export async function GET(req) {
       supabaseClient.from("tailors").select("id"),
     ]);
 
-    if (error) {
-      console.error("Error fetching data:", error.message);
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
+ 
 
     console.log("Data fetched successfully:", data);
     return NextResponse.json({ users: data }, { status: 200 });
