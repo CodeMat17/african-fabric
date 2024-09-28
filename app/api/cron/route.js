@@ -18,12 +18,8 @@ export async function GET(req) {
       supabaseClient.from("tailors").select("id"),
     ]);
 
- 
-
-    console.log("Data fetched successfully:", data);
-    return NextResponse.json({ users: data }, { status: 200 });
+     return NextResponse.json({ message: "Keeping backend awake..." });
   } catch (error) {
-    console.error("Caught error:", error.message);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+       return NextResponse.json({ error: error }, { status: 500 });
   }
 }
