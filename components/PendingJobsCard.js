@@ -86,8 +86,9 @@ const PendingJobsCard = ({
           <p className='font-light'>{email}</p>
           <p className='font-light'>{tel}</p>
           <p className='mt-2 w-full text-xs text-gray-500'>
-            Due date {dayjs(due_date).format("MMM DD, YYYY")}
+            Due date: {due_date ? dayjs(due_date).format("MMM DD, YYYY") : 'Not set yet'}
           </p>
+       
           {status === 'fitting' ?
             <div className='mt-2'>
               {fitting_date ? (

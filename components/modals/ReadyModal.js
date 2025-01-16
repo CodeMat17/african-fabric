@@ -80,12 +80,12 @@ const ReadyModal = ({
   return (
     <>
       <button
-        disabled={staff_admin != "Manager"}
+        disabled={staff_admin != "Manager" && staff_admin != "Sales"}
         type='button'
         onClick={openModal}
         className={`relative ${
           ready ? "bg-[#55c694]" : "bg-[#55c694]/40"
-        } w-[25%] mx-auto flex items-center justify-center  text-white disabled:cursor-not-allowed`}>
+        } w-[25%] mx-auto flex items-center justify-center text-white disabled:cursor-not-allowed`}>
         Ready
         {fitting_done && !ready && (
           <AiOutlineLoading className='absolute text-xl animate-spin text-red-500' />

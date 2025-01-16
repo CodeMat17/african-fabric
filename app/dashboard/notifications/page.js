@@ -7,7 +7,7 @@ const NotificationPage = async () => {
   const { data: notifications, error } = await supabaseClient
     .from("customers")
     .select(
-      "id, name, tel, created_at, due_date, avatar, fabric, due_date, three_days_2_due_date, two_days_2_due_date"
+      "id, name, tel, created_at, due_date, avatar, fabric, due_date, three_days_2_due_date, two_days_2_due_date, one_day_2_due_date"
     )
     .or(
       `two_days_2_due_date.eq.${today}, three_days_2_due_date.eq.${today}, due_date.eq.${today}`

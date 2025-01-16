@@ -33,9 +33,10 @@ const FittingsCard = ({fittings}) => {
               <p className='text-center whitespace-nowrap'>
                 Booked on {dayjs(fitting.created_at).format("MMM DD, YYYY")}
               </p>
-              <p className='text-center whitespace-nowrap'>
+              {fitting.due_date && <p className='text-center whitespace-nowrap'>
                 Due on {dayjs(fitting.due_date).format("MMM DD, YYYY")}
               </p>
+              }
             </div>
             {/* <div className='text-red-600 font-medium'>
               {today === due.due_date && (

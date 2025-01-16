@@ -18,18 +18,19 @@ const NotificationComponent = ({ notifications }) => {
           {notifications.map((due) => (
             <Link key={due.id} href={`/dashboard/orders/${due.id}`}>
               <div className='border p-6 rounded-xl flex flex-col items-center bg-red-600/10'>
-                {due.avatar && <CldImage
-                  width='80'
-                  height='80'
-                  crop='thumb'
-                  gravity='faces'
-                  src={due.avatar}
-                  sizes='50vw'
-                  alt='Profile image'
-                  loading='lazy'
-                  className='rounded-full'
-                />
-                }
+                {due.avatar && (
+                  <CldImage
+                    width='80'
+                    height='80'
+                    crop='thumb'
+                    gravity='faces'
+                    src={due.avatar}
+                    sizes='50vw'
+                    alt='Profile image'
+                    loading='lazy'
+                    className='rounded-full'
+                  />
+                )}
                 <p className='font-medium text-center mt-1 whitespace-nowrap'>
                   {due.name}
                 </p>
@@ -40,21 +41,27 @@ const NotificationComponent = ({ notifications }) => {
                   <p className='text-center whitespace-nowrap'>
                     Booked on {dayjs(due.created_at).format("MMM DD, YYYY")}
                   </p>
-                  <p className='text-center whitespace-nowrap'>
-                    Due on {dayjs(due.due_date).format("MMM DD, YYYY")}
-                  </p>
+                  {due.due_date && (
+                    <p className='text-center whitespace-nowrap'>
+                      Due on {dayjs(due.due_date).format("MMM DD, YYYY")}
+                    </p>
+                  )}
                 </div>
+
                 <div className='text-red-600 font-medium'>
                   {today === due.due_date && (
                     <p className='text-center'>
                       This job is due for collection today
                     </p>
                   )}
-                  {today === due.two_days_2_due_date && (
+                  {today === due.three_days_2_due_date && (
                     <p className='text-center '>3 more days to due date</p>
                   )}
-                  {today === due.three_days_2_due_date && (
+                  {today === due.two_days_2_due_date && (
                     <p className='text-center'>2 more days to due date</p>
+                  )}
+                  {today === due.one_day_2_due_date && (
+                    <p className='text-center'>1 more day to due date</p>
                   )}
                 </div>
               </div>

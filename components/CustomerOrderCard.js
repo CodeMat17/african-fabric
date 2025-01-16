@@ -18,7 +18,7 @@ const CustomerOrderCard = ({ data }) => {
               key={user.id}
               className='bg-amber-600/5 odd:bg-gradient-to-tr from-[#55c694]/20 to-amber-600/5 rounded-xl overflow-hidden shadow'>
               <div className='w-full flex flex-col items-center justify-center p-6'>
-                {user.avatar &&
+                {user.avatar && (
                   <CldImage
                     width='100'
                     height='100'
@@ -30,18 +30,22 @@ const CustomerOrderCard = ({ data }) => {
                     loading='lazy'
                     className='rounded-full'
                   />
-                }
+                )}
                 <h1 className='font-medium mt-2 text-center w-full'>
                   {user.name}
                 </h1>
                 <p className='text-sm text-center'>{user.email}</p>
                 <p className='text-sm text-center'>{user.tel}</p>
-                <div className='w-full flex flex-col xl:flex-row items-center text-xs text-gray-500 mt-2 capitalize justify-center gap-0 xl:gap-2'>
-                  <span className='w-full text-center'> {user.style}</span>{" "}
-                  <span className='hidden xl:block'>&bull;</span>
-                  <span className='w-full text-center whitespace-nowrap'>
-                    Booked on {dayjs(user.created_at).format("MMM DD, YYYY")}
-                  </span>
+                <div className='w-full flex flex-col  text-xs text-gray-500 mt-2 gap-2'>
+                  <div>
+                    <p className='font-medium'>Description:</p>
+                    <p>{user.style}</p>
+                  </div>
+                  {/* <span className='hidden xl:block'>&bull;</span> */}
+                  <div>
+                    <p className='font-medium'> Booked on:</p>
+                    <p>{dayjs(user.created_at).format("MMM DD, YYYY")}</p>
+                  </div>
                 </div>
                 <div className='mt-3 w-full text-sm flex items-center justify-center'>
                   <LinearProgressBar

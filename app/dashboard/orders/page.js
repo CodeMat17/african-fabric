@@ -42,23 +42,7 @@ const OrdersPage = async ({ searchParams }) => {
 
       <div className='py-8'>
         <CustomerOrderCard data={data} />
-        {/* <div>
-          {data && data.length < 1 ? (
-            <p className='text-center py-unit-12 text-red-500'>
-              Invalid customer name. Try again.
-            </p>
-          ) : (
-            <>
-              <div className='sm:hidden grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-y-3'>
-                {data &&
-                  data.map((user) => <MobileTable key={user.id} {...user} />)}
-              </div>
-              <div className='hidden sm:block max-w-xl mx-auto overflow-x-auto'>
-                <MediumTable data={data} />
-              </div>
-            </>
-          )}
-        </div> */}
+      
         <div className='py-8  mx-auto'>
           <Pagination count={count} />
         </div>
