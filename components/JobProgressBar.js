@@ -38,6 +38,9 @@ const JobProgressBar = async ({
     throw error;
   }
 
+  // const { data: tailors } = await supabaseClient.from('tailors').select('*')
+  // console.log('Tailors: ', tailors);
+
   return (
     <div className='w-full py-6 max-w-sm mx-auto'>
       {/* <pre>{JSON.stringify(data, null, 2)}</pre>

@@ -1,11 +1,27 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 import { supabaseClient } from "@/supabaseClient";
-import { Select, SelectItem } from "@nextui-org/react";
+import { format } from "date-fns";
+import dayjs from "dayjs";
+import { CalendarIcon } from "lucide-react";
 import { CldImage } from "next-cloudinary";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import DatePicker from "react-datepicker";
 import toast from "react-hot-toast";
 import { CgSpinnerAlt } from "react-icons/cg";
 
@@ -16,28 +32,34 @@ const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
   const router = useRouter();
 
   const [tailor, setTailor] = useState("");
-  const handleSelectionChange = (e) => {
-    setTailor(e.target.value);
-  };
-
+  const [tailorBusy, setTailorBusy] = useState(false);
   const [assignedOnDate, setAssignedOnDate] = useState();
   const [finishDate, setFinishDate] = useState();
 
+  // const handleSelectionChange = (e) => {
+  //   setTailor(e.target.value);
+  // };
+
   const assignATailor = async () => {
     try {
+      console.log("Starting...");
       setLoading(true);
 
-      const assignedUtcDate = new Date(
-        assignedOnDate.getTime() - assignedOnDate.getTimezoneOffset() * 60000
-      );
-      const assignedISODate = assignedUtcDate.toISOString().toLocaleString();
+      console.log("Preparing dates");
+      // Convert assigned and finish dates to UTC ISO strings
+      const toUtcIsoString = (date) => {
+        const utcDate = new Date(
+          date.getTime() - date.getTimezoneOffset() * 60000
+        );
+        return utcDate.toISOString();
+      };
 
-      const finishUtcDate = new Date(
-        finishDate.getTime() - finishDate.getTimezoneOffset() * 60000
-      );
-      const finishISODate = finishUtcDate.toISOString().toLocaleString();
+      const assignedISODate = toUtcIsoString(assignedOnDate);
+      const finishISODate = toUtcIsoString(finishDate);
 
-      const { error } = await supabaseClient
+      console.log("Dates prepared...");
+
+      const { error: customerError } = await supabaseClient
         .from("customers")
         .update({
           tailor,
@@ -47,37 +69,40 @@ const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
         .eq("id", id)
         .select();
 
-      if (error) {
-        throw new Error(`Something went wrong: ${error.message}`);
+      if (customerError) {
+        throw new Error(`Something went wrong: ${customerError.message}`);
       }
-      if (!error) {
-        const { error: error_2 } = await supabaseClient
-          .from("staffers")
-          .update({
-            busy: true,
-            assigned_on: assignedISODate,
-            to_finish_on: finishISODate,
-          })
-          .eq("name", tailor)
-          .select();
+      console.log("Done updating Customers data...");
+      console.log("Preparing to update tailors data...");
+      // if (!error) {
+      const { error: tailorError } = await supabaseClient
+        .from("tailors")
+        .update({
+          busy: true,
+          assigned_on: assignedISODate,
+          to_finish_on: finishISODate,
+        })
+        .eq("name", tailor)
+        .select();
 
-        if (error_2) {
-          throw new Error(`Something went wrong: ${error.message}`);
-        }
-
-        if (!error_2) {
-          toast.success(
-            `This job has been assigned to ${tailor} successfully`,
-            {
-              duration: 5000,
-              position: "top-center",
-            }
-          );
-
-          router.refresh();
-          router.back();
-        }
+      if (tailorError) {
+        throw new Error(`Something went wrong: ${tailorError.message}`);
       }
+      console.log("Done updating tailors data...");
+      console.log("Run toast...");
+      // if (!error_2) {
+      toast.success(`This job has been assigned to ${tailor} successfully`, {
+        duration: 5000,
+        position: "top-center",
+      });
+      console.log("Toast done...");
+      console.log("refresh...");
+      router.refresh();
+      console.log("Refreshed...");
+      console.log("Back...");
+      router.back();
+      // }
+      // }
     } catch (error) {
       console.log("Error Msg: ", error.message);
     } finally {
@@ -85,110 +110,113 @@ const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
     }
   };
 
+  const handleSelect = (id) => {
+    const selectedTailor = tailors.find((t) => t.id.toString() === id);
+    if (selectedTailor) {
+      setTailor(selectedTailor.name);
+      setTailorBusy(selectedTailor.busy);
+    } else {
+      setTailor("");
+      setTailorBusy(false);
+    }
+  };
+
   return (
-    <div className='pt-8 w-full lg:max-w-3xl mx-auto flex flex-col items-center sm:flex-row sm:justify-around gap-8'>
-      <div className='w-full sm:w-[70%] mt-4 text-sm flex flex-col gap-4'>
-        <div>
-          <Select
-            items={tailors}
-            label='Select a tailor'
-            className=''
-            variant='bordered'
-            onChange={handleSelectionChange}
-            classNames={{
-              label: "group-data-[filled=true]:-translate-y-5",
-              trigger: "min-h-unit-16",
-              listboxWrapper: "max-h-[400px]",
-            }}
-            listboxProps={{
-              itemClasses: {
-                base: [
-                  "rounded-md",
-                  "text-default-500",
-                  "transition-opacity",
-                  "data-[hover=true]:text-foreground",
-                  "data-[hover=true]:bg-default-100",
-                  "dark:data-[hover=true]:bg-default-50",
-                  "data-[selectable=true]:focus:bg-default-50",
-                  "data-[pressed=true]:opacity-70",
-                  "data-[focus-visible=true]:ring-default-500",
-                ],
-              },
-            }}
-            popoverProps={{
-              classNames: {
-                base: "before:bg-default-200",
-                content: "p-0 border-small border-divider bg-background",
-              },
-            }}
-            renderValue={(items) => {
-              return items.map((item) => (
-                <div key={item.key} className='flex items-center gap-2'>
-                  <div className='flex flex-col'>
-                    <span>{item.data.name}</span>
-                    {item.data.busy && (
-                      <span className='text-red-500 text-tiny'>
-                        has a job already
-                      </span>
+    <div className='pt-8 w-full lg:max-w-3xl mx-auto flex flex-col lg:flex-row items-center gap-8'>
+      <div className='w-full flex flex-col gap-4'>
+        <Select onValueChange={handleSelect}>
+          <SelectTrigger className='w-full py-3'>
+            <SelectValue placeholder='Select tailors' />
+          </SelectTrigger>
+          <SelectContent>
+            {tailors.map((tailor) => (
+              <SelectItem key={tailor.id} value={tailor.id.toString()}>
+                <section>
+                  <p>
+                    {tailor.name}{" "}
+                    {tailor.busy ? (
+                      <span className='text-red-500'>(Busy)</span>
+                    ) : (
+                      "(Available)"
                     )}
-                  </div>
-                </div>
-              ));
-            }}>
-            {(user) => (
-              <SelectItem key={user.name} textValue={user.name}>
-                {/* <div className='flex gap-2 items-center'> */}
-                <div className='flex flex-col'>
-                  <span className='text-small'>{user.name}</span>
-                  {user.busy && (
-                    <span className='text-red-500 text-tiny'>
-                      has a job already
-                    </span>
+                  </p>
+                  {tailor.busy && (
+                    <p className='flex gap-2 text-sm text-gray-400'>
+                      {dayjs(tailor.assigned_on).format("MMM DD, YYYY")} -
+                      {dayjs(tailor.to_finish_on).format("MMM DD, YYYY")}
+                    </p>
                   )}
-                </div>
-                {/* </div> */}
+                </section>
               </SelectItem>
-            )}
-          </Select>
-          {/* <p>Selected: {value}</p> */}
+            ))}
+          </SelectContent>
+        </Select>
+        <div>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant={"outline"}
+                className={cn(
+                  "w-full justify-start text-left font-normal bg-inherit",
+                  (!assignedOnDate || tailorBusy) && "text-muted-foreground"
+                )}
+                disabled={tailorBusy}>
+                <CalendarIcon size={16} />
+                {assignedOnDate ? (
+                  format(assignedOnDate, "MMM dd, yyyy")
+                ) : (
+                  <span>Start date</span>
+                )}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className='w-auto p-0' align='start'>
+              <Calendar
+                mode='single'
+                selected={assignedOnDate}
+                onSelect={setAssignedOnDate}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
         </div>
 
         <div>
-          <label className='text-sm'>Assigned on</label>
-          <p className='border-2 py-4 px-3 mt-1 rounded-xl text-gray-500'>
-            <DatePicker
-              // showIcon
-              placeholderText='Click to add assigned on date'
-              selected={assignedOnDate}
-              onChange={(date) => setAssignedOnDate(date)}
-              dateFormat='MMM dd, yyyy'
-              className='bg-inherit outline-none text-gray-500'
-            />
-          </p>
-        </div>
-
-        <div>
-          <label className='text-sm'>To complete on</label>
-          <div className='border-2 py-4 px-3 mt-1 rounded-xl text-gray-500'>
-            <DatePicker
-              // showIcon
-              placeholderText='Click to add finish date'
-              selected={finishDate}
-              onChange={(date) => setFinishDate(date)}
-              dateFormat='MMM dd, yyyy'
-              className='bg-inherit outline-none text-gray-500'
-            />
-          </div>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant={"outline"}
+                className={cn(
+                  "w-full justify-start text-left font-normal bg-inherit",
+                  (!finishDate || tailorBusy) && "text-muted-foreground"
+                )}
+                disabled={tailorBusy}>
+                <CalendarIcon size={16} />
+                {finishDate ? (
+                  format(finishDate, "MMM dd, yyyy")
+                ) : (
+                  <span>End date</span>
+                )}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className='w-auto p-0' align='start'>
+              <Calendar
+                mode='single'
+                selected={finishDate}
+                onSelect={setFinishDate}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
         </div>
         <div>
           <button
-            disabled={finishDate === undefined || !tailor}
+            disabled={finishDate === undefined || tailorBusy || !tailor}
             onClick={assignATailor}
             className='bg-[#55c694] text-white textsm font-medium tracking-wider py-3 rounded-xl w-full disabled:bg-[#55c694]/20 disabled:text-gray-400 disabled:cursor-not-allowed'>
             {loading ? (
               <div className='flex items-center justify-center gap-x-4'>
                 <CgSpinnerAlt className='text-xl animate-spin' />
-                <span>Assigning</span>
+                <span>Assigning...</span>
               </div>
             ) : (
               "Assign"

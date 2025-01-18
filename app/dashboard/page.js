@@ -1,4 +1,5 @@
 import AgentsFolders from "@/components/AgentsFolders";
+import CollectionNotification from "@/components/CollectionNotification/page";
 import RecentOrders from "@/components/RecentOrders";
 import Statistics from "@/components/Statistics";
 import { supabaseClient } from "@/supabaseClient";
@@ -45,7 +46,7 @@ const Dashboard = async () => {
     <div className='p-4 bg-[#f8f9fa]'>
       <p className='text-lg font-medium'>OVERVIEW</p>
 
-      <div className='lg:flex lg:justify-evenly'>
+      <div className='lg:flex lg:justify-evenly mb-12'>
         <Statistics total={total} ready={ready} />
         {/* <pre>{JSON.stringify(noOfConsultants, null, 2)}</pre> */}
         {/* <pre>{JSON.stringify(noOfTailors, null, 2)}</pre> */}
@@ -57,7 +58,8 @@ const Dashboard = async () => {
           noOfTailors={noOfTailors}
         />
       </div>
-      <RecentOrders recent={recent} />
+    <CollectionNotification />
+      {/* <RecentOrders recent={recent} /> */}
     </div>
   );
 };
