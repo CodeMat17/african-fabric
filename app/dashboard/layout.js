@@ -27,9 +27,7 @@ export default async function DashboardLayout({ children }) {
     .select("is_admin")
     .eq("id", user?.id)
     .single();
-  
-  console.log('Data: ', data);
-  
+    
    if (error || !data) {
      return (
        <p className='text-center text-red-600 py-32'>
