@@ -98,7 +98,11 @@ const TailorModal = ({
   return (
     <>
       <button
-        disabled={staff_admin !== "Sales" && staff_admin !== "Manager"}
+        disabled={
+          staff_admin !== "Sales" &&
+          staff_admin !== "Manager" &&
+          staff_admin !== "Consultant"
+        }
         type='button'
         onClick={openModal}
         className={`relative ${

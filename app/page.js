@@ -2,7 +2,6 @@
 
 import MagicSignup from "@/components/MagicSignup";
 import SigninComponent from "@/components/SigninComponent";
-import ResetPasswordModal from "@/components/modals/ResetPasswordModal";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 

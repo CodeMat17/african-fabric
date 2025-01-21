@@ -64,7 +64,11 @@ const QualityControlModal = ({ id, beading, q_c, staff_admin }) => {
   return (
     <>
       <button
-        disabled={staff_admin !== "Sales" && staff_admin !== "Manager"}
+        disabled={
+          staff_admin !== "Sales" &&
+          staff_admin !== "Manager" &&
+          staff_admin !== "Qc"
+        }
         type='button'
         onClick={openModal}
         className={`relative whitespace-nowrap ${

@@ -71,6 +71,9 @@ const CollectionNotification = async () => {
                         {today === due.one_day_2_due_date && (
                           <p className="text-red-500">1 more day to due date</p>
                         )}
+                        {dayjs(today).isAfter(dayjs(due.due_date)) && (
+                          <p className="text-red-500">This job is overdue for collection.</p>
+                        )}
                       </div>
                     </div>
 

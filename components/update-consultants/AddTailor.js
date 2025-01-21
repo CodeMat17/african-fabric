@@ -5,7 +5,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useRouter } from "next/navigation";
 import { Fragment, useState } from "react";
 import toast from "react-hot-toast";
-import { BsPersonAdd } from "react-icons/bs";
 import { CgSpinnerAlt } from "react-icons/cg";
 
 const AddTailor = () => {
@@ -66,7 +65,7 @@ const AddTailor = () => {
           type='button'
           onClick={openModal}
           className='flex items-center justify-center gap-3 rounded-xl text-[#55c694] bg-black/5 px-4 py-2 text-sm font-medium hover:bg-black/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75'>
-          <BsPersonAdd className='text-2xl' /> <span>Add Tailor</span>
+          Add Tailor
         </button>
       </div>
 
@@ -134,8 +133,8 @@ const AddTailor = () => {
                       type='button'
                       disabled={!name || !tel}
                       className='rounded-xl border border-transparent bg-[#55c694] px-6 py-2.5 tracking-wide text-sm font-medium text-white hover:bg-[#55c694]/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 disabled:bg-[#55c694]/20 disabled:text-gray-400 disabled:cursor-not-allowed flex items-center justify-center'>
-                      {loading ? (  <CgSpinnerAlt className='text-2xl animate-spin' />
-                     
+                      {loading ? (
+                        <CgSpinnerAlt className='text-2xl animate-spin' />
                       ) : (
                         "Add"
                       )}

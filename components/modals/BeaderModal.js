@@ -128,7 +128,11 @@ const BeaderModal = ({ id, beader, beading, beaders, tailoring, qc_admin, staff_
   return (
     <>
       <button
-        disabled={staff_admin !== "Sales" && staff_admin !== "Manager"}
+        disabled={
+          staff_admin !== "Sales" &&
+          staff_admin !== "Manager" &&
+          staff_admin !== "Beader"
+        }
         type='button'
         onClick={openModal}
         className={`relative ${

@@ -60,7 +60,7 @@ const StaffList = async () => {
   return (
     <div className='px-2 py-8'>
       <p className='text-xl font-medium text-center'>Staff</p>
-      <div className='flex justify-center py-2'>
+      <div className='flex gap-4 justify-center py-2'>
         <AddTailor />
       </div>
 
