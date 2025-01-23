@@ -3,7 +3,7 @@
 import { Spinner } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 
-const AssignToTailorButton = ({id, name, fabric}) => {
+const AssignToTailorButton = ({id, name, fabric, style}) => {
 const router = useRouter()
 
   return (
@@ -13,9 +13,9 @@ const router = useRouter()
         Waiting to be assigned to a tailor
       </p>
    
-      <button onClick={() => router.push(`/dashboard/orders/assign-to-tailor?id=${id}&name=${name}&fabric=${fabric}`)}
+      <button onClick={() => router.push(`/dashboard/orders/assign-to-tailor?id=${id}&name=${name}&fabric=${fabric}&style=${style}`)}
         className='mt-3 text-sm font-medium bg-[#55c694] text-white px-4 py-1.5 sm:px-6 sm:py-2 rounded-xl'>
-        Assign
+        Assign 
       </button>
     </>
   );

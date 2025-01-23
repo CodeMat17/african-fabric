@@ -27,7 +27,7 @@ import { CgSpinnerAlt } from "react-icons/cg";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
+const AssignToTailorComponent = ({ tailors, id, name, fabric, style }) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -36,16 +36,12 @@ const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
   const [assignedOnDate, setAssignedOnDate] = useState();
   const [finishDate, setFinishDate] = useState();
 
-  // const handleSelectionChange = (e) => {
-  //   setTailor(e.target.value);
-  // };
+  console.log("Style: " + style);
 
   const assignATailor = async () => {
     try {
-      console.log("Starting...");
       setLoading(true);
 
-      console.log("Preparing dates");
       // Convert assigned and finish dates to UTC ISO strings
       const toUtcIsoString = (date) => {
         const utcDate = new Date(
@@ -56,8 +52,6 @@ const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
 
       const assignedISODate = toUtcIsoString(assignedOnDate);
       const finishISODate = toUtcIsoString(finishDate);
-
-      console.log("Dates prepared...");
 
       const { error: customerError } = await supabaseClient
         .from("customers")
@@ -72,8 +66,7 @@ const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
       if (customerError) {
         throw new Error(`Something went wrong: ${customerError.message}`);
       }
-      console.log("Done updating Customers data...");
-      console.log("Preparing to update tailors data...");
+
       // if (!error) {
       const { error: tailorError } = await supabaseClient
         .from("tailors")
@@ -81,6 +74,9 @@ const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
           busy: true,
           assigned_on: assignedISODate,
           to_finish_on: finishISODate,
+          client: name,
+          style: style,
+          clientId: id,
         })
         .eq("name", tailor)
         .select();
@@ -88,18 +84,13 @@ const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
       if (tailorError) {
         throw new Error(`Something went wrong: ${tailorError.message}`);
       }
-      console.log("Done updating tailors data...");
-      console.log("Run toast...");
       // if (!error_2) {
       toast.success(`This job has been assigned to ${tailor} successfully`, {
         duration: 5000,
         position: "top-center",
       });
-      console.log("Toast done...");
-      console.log("refresh...");
       router.refresh();
-      console.log("Refreshed...");
-      console.log("Back...");
+
       router.back();
       // }
       // }
@@ -123,32 +114,39 @@ const AssignToTailorComponent = ({ tailors, id, name, fabric }) => {
 
   return (
     <div className='pt-8 w-full lg:max-w-3xl mx-auto flex flex-col lg:flex-row items-center gap-8'>
-      <div className='w-full flex flex-col gap-4'>
+      <div className='w-full flex flex-col gap-4 mb-12'>
         <Select onValueChange={handleSelect}>
           <SelectTrigger className='w-full py-3'>
             <SelectValue placeholder='Select tailors' />
           </SelectTrigger>
           <SelectContent>
-            {tailors.map((tailor) => (
-              <SelectItem key={tailor.id} value={tailor.id.toString()}>
-                <section>
-                  <p>
-                    {tailor.name}{" "}
-                    {tailor.busy ? (
-                      <span className='text-red-500'>(Busy)</span>
-                    ) : (
-                      "(Available)"
-                    )}
-                  </p>
-                  {tailor.busy && (
-                    <p className='flex gap-2 text-sm text-gray-400'>
-                      {dayjs(tailor.assigned_on).format("MMM DD, YYYY")} -
-                      {dayjs(tailor.to_finish_on).format("MMM DD, YYYY")}
+            <section className="my-6">
+              {tailors.map((tailor) => (
+                <SelectItem key={tailor.id} value={tailor.id.toString()}>
+                  <section>
+                    <p>
+                      {tailor.name}{" "}
+                      {tailor.busy ? (
+                        <span className='text-red-500'>(Busy)</span>
+                      ) : (
+                        "(Available)"
+                      )}
                     </p>
-                  )}
-                </section>
-              </SelectItem>
-            ))}
+                    {tailor.busy && (
+                      <section className='text-sm text-gray-400'>
+                        <p className='flex gap-2 '>
+                          {dayjs(tailor.assigned_on).format("MMM DD, YYYY")} -
+                          {dayjs(tailor.to_finish_on).format("MMM DD, YYYY")}
+                        </p>
+                        <p>
+                          Client: {tailor.client} | {tailor.style}
+                        </p>
+                      </section>
+                    )}
+                  </section>
+                </SelectItem>
+              ))}
+            </section>
           </SelectContent>
         </Select>
         <div>

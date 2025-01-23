@@ -1,3 +1,7 @@
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import dayjs from "dayjs";
+import { cookies } from "next/headers";
+import { notFound } from "next/navigation";
 import AssignToTailorButton from "../../../../components/AssignToTailorButton";
 import CdImageComponent from "../../../../components/CdImageComponent";
 import Gallery from "../../../../components/Gallery";
@@ -7,10 +11,6 @@ import MeasurementWomen from "../../../../components/MeasurementWomen";
 import SketchScreenshotComponent from "../../../../components/SketchScreenshotComponent";
 import UploadGalleryPhotos from "../../../../components/UploadGalleryPhotos";
 import { supabaseClient } from "../../../../supabaseClient";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import dayjs from "dayjs";
-import { cookies } from "next/headers";
-import { notFound } from "next/navigation";
 
 export const revalidate = 0;
 
@@ -97,6 +97,7 @@ const OrderDetailsPage = async ({ params: { id } }) => {
                 id={customer.id}
                 name={customer.name}
                 fabric={customer.fabric}
+                style={customer.style}
               />
             </div>
           )}

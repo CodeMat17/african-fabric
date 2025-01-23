@@ -13,7 +13,7 @@ const Tailors = async () => {
     // .eq("position", "Tailor");
 
   if (error) {
-    throw new Error(`Somethingwent wrong: ${error.message}`);
+    throw new Error(`Something went wrong: ${error.message}`);
   }
 
   return (

@@ -57,6 +57,10 @@ const ReadyModal = ({
       }
       if (!error) {
         if (enabled) {
+          const { error } = await supabaseClient.from("tailors").update({
+            busy: false,
+          }).eq('clientId', id)
+
           toast.success(`Job is done and confirmed successfully`, {
             duration: 5000,
             position: "top-center",
