@@ -36,61 +36,46 @@ const TailorModal = ({
   const confirmTailoring = async () => {
     setLoading(true);
     try {
-      const { error } = await supabaseClient
+      const { error: customerError } = await supabaseClient
         .from("customers")
         .update({ tailoring: enabled })
         .eq("id", id)
         .select();
 
-      if (error) {
+      if (customerError) {
         throw new Error(`Something went wrong: ${error.message}`);
       }
-      if (!error) {
+
+      if (!customerError) {
         if (enabled) {
-          const { error: error_2 } = await supabaseClient
-            .from("staffers")
-            .update({ busy: false, assigned_on: null, to_finish_on: null })
-            .eq("name", tailor)
-            .select();
-
-          if (error_2) {
-            throw new Error(`Something went wrong: ${error.message}`);
-          }
-
-          if (!error_2) {
-            toast.success(`Tailoring done and confirmed`, {
-              duration: 5000,
-              position: "top-center",
-            });
-          }
-        } else {
-          const { error: error_3 } = await supabaseClient
-            .from("staffers")
+          // Update the staffer assigned to the tailoring
+          await supabaseClient
+            .from("tailors")
             .update({
-              busy: true,
-              assigned_on: assigned_on,
-              to_finish_on: finished_on,
+              busy: false,
             })
-            .eq("name", tailor)
-            .select();
+            .eq("clientId", id);
 
-          if (error_3) {
-            throw new Error(`Something went wrong: ${error.message}`);
-          }
-
-          if (!error_3) {
-            toast.error(`You just confirmed that tailoring is not done yet.`, {
-              duration: 6000,
-              position: "top-center",
-            });
-          }
+          toast.success("Tailoring done and confirmed", {
+            duration: 5000,
+            position: "top-center",
+          });
+        } else {
+          toast.error("You just confirmed that tailoring is not done yet.", {
+            duration: 6000,
+            position: "top-center",
+          });
         }
       }
     } catch (error) {
-      console.log("Error Msg: ", error.message);
+      console.error("Error confirming tailoring:", error.message);
+      toast.error(`An error occurred: ${error.message}`, {
+        duration: 5000,
+        position: "top-center",
+      });
     } finally {
-      router.refresh();
       setLoading(false);
+      router.refresh();
       closeModal();
     }
   };

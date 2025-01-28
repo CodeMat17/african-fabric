@@ -55,23 +55,6 @@ const ReadyModal = ({
       if (error) {
         throw new Error(`Something went wrong: ${error.message}`);
       }
-      if (!error) {
-        if (enabled) {
-          const { error } = await supabaseClient.from("tailors").update({
-            busy: false,
-          }).eq('clientId', id)
-
-          toast.success(`Job is done and confirmed successfully`, {
-            duration: 5000,
-            position: "top-center",
-          });
-        } else {
-          toast.error(`You just confirmed that the job is not done yet.`, {
-            duration: 6000,
-            position: "top-center",
-          });
-        }
-      }
     } catch (error) {
       console.log("Error Msg: ", error.message);
     } finally {
